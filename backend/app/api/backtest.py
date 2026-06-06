@@ -1,4 +1,4 @@
-"""Backtest API"""
+"""Backtest API - 支持新旧两种引擎"""
 import json, random
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException
@@ -7,13 +7,14 @@ from ..core.database import get_db
 from ..models.models import BacktestReport, MarketData
 from ..schemas.schemas import BacktestRequest, BacktestResponse, BacktestMetrics
 from ..backtest_engine.core.bar import Bar
-from ..backtest_engine.engine import BacktestEngine
+from ..data_engine.manager import DataManager
+from ..strategy_engine.strategies.moving_average.strategy import MovingAverageStrategy
+from ..backtest_engine.event_engine import EventDrivenBacktestEngine
 
 router = APIRouter(prefix="/api/backtest", tags=["Backtest"])
 
 
 def _generate_synthetic_bars(symbol: str, days: int) -> list:
-    """生成合成数据（无真实数据时使用）"""
     random.seed(hash(symbol) % 10000)
     bars = []
     price = 100.0
@@ -32,7 +33,8 @@ def _generate_synthetic_bars(symbol: str, days: int) -> list:
 
 @router.post("/run", response_model=BacktestResponse)
 def run_backtest(req: BacktestRequest, db: Session = Depends(get_db)):
-    # 尝试从数据库加载真实数据
+    # 加载数据
+    dm = DataManager()
     rows = db.query(MarketData).filter(MarketData.symbol == req.symbol)\
         .order_by(MarketData.trade_date).limit(req.days).all()
 
@@ -46,29 +48,29 @@ def run_backtest(req: BacktestRequest, db: Session = Depends(get_db)):
         bars = _generate_synthetic_bars(req.symbol, req.days)
         data_source = "synthetic"
 
+    dm.load_bars(req.symbol, bars)
+
     # 加载策略
-    strategy_name = req.strategy
-    if strategy_name == "moving_average":
-        from strategies.moving_average.strategy import MovingAverageStrategy
+    if req.strategy == "moving_average":
         strategy = MovingAverageStrategy(
             symbol=req.symbol,
             short_window=req.params.get("short_window", 5),
             long_window=req.params.get("long_window", 20),
         )
-    elif strategy_name == "etf_rotation":
-        from strategies.etf_rotation.strategy import ETFRotationStrategy
-        strategy = ETFRotationStrategy(symbols=[req.symbol])
     else:
-        raise HTTPException(400, f"未知策略: {strategy_name}")
+        raise HTTPException(400, f"未知策略: {req.strategy}")
 
-    # 运行回测
-    engine = BacktestEngine(strategy=strategy, data={req.symbol: bars}, cash=req.cash)
+    # 运行事件驱动回测
+    engine = EventDrivenBacktestEngine()
+    engine.set_data(dm)
+    engine.set_strategy(strategy)
+    engine.set_cash(req.cash)
     result = engine.run()
 
     # 保存报告
     report = BacktestReport(
         strategy_id=1,
-        config=json.dumps({"strategy": strategy_name, "symbol": req.symbol, "data_source": data_source}),
+        config=json.dumps({"strategy": req.strategy, "symbol": req.symbol, "data_source": data_source, "engine": "event_driven"}),
         **result['metrics'],
         equity_curve=json.dumps(result['equity_curve'][-100:], ensure_ascii=False),
         drawdown_curve=json.dumps(result['drawdown_curve'][-100:], ensure_ascii=False),
