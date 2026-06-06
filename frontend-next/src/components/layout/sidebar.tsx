@@ -18,7 +18,7 @@ const menus = [
   { icon: Home, label: "工作台", href: "/" },
   { icon: Bot, label: "AI研究", href: "/ai-lab" },
   { icon: Zap, label: "Workflow", href: "/workflow" },
-  { icon: FlaskConical, label: "策略实验室", href: "#" },
+  { icon: FlaskConical, label: "策略实验室", href: "/strategy-lab" },
   { icon: BarChart3, label: "回测中心", href: "#" },
   { icon: PieChart, label: "投资组合", href: "#" },
   { icon: Shield, label: "风险中心", href: "#" },
