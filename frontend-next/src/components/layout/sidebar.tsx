@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Home,
   Bot,
@@ -13,14 +14,14 @@ import {
 import { useState } from "react";
 
 const menus = [
-  { icon: Home, label: "工作台" },
-  { icon: Bot, label: "AI研究" },
-  { icon: FlaskConical, label: "策略实验室" },
-  { icon: BarChart3, label: "回测中心" },
-  { icon: PieChart, label: "投资组合" },
-  { icon: Shield, label: "风险中心" },
-  { icon: CandlestickChart, label: "交易执行" },
-  { icon: Database, label: "数据中心" },
+  { icon: Home, label: "工作台", href: "/" },
+  { icon: Bot, label: "AI研究", href: "/ai-lab" },
+  { icon: FlaskConical, label: "策略实验室", href: "#" },
+  { icon: BarChart3, label: "回测中心", href: "#" },
+  { icon: PieChart, label: "投资组合", href: "#" },
+  { icon: Shield, label: "风险中心", href: "#" },
+  { icon: CandlestickChart, label: "交易执行", href: "#" },
+  { icon: Database, label: "数据中心", href: "#" },
 ];
 
 export default function Sidebar() {
@@ -37,17 +38,21 @@ export default function Sidebar() {
           <div
             key={item.label}
             onClick={() => setActive(idx)}
-            className={`
-              h-16 flex flex-col items-center justify-center cursor-pointer
-              transition-colors duration-150
-              ${active === idx
-                ? "bg-slate-800/60 text-blue-400"
-                : "text-slate-500 hover:bg-slate-900 hover:text-slate-300"
-              }
-            `}
           >
-            <item.icon size={18} />
-            <span className="text-[10px] mt-1.5 leading-none">{item.label}</span>
+            <Link
+              href={item.href}
+              className={`
+                h-16 flex flex-col items-center justify-center
+                transition-colors duration-150
+                ${active === idx
+                  ? "bg-slate-800/60 text-blue-400"
+                  : "text-slate-500 hover:bg-slate-900 hover:text-slate-300"
+                }
+              `}
+            >
+              <item.icon size={18} />
+              <span className="text-[10px] mt-1.5 leading-none">{item.label}</span>
+            </Link>
           </div>
         ))}
       </nav>
