@@ -42,6 +42,7 @@ class Order:
     side: OrderSide     # 买/卖
     quantity: float     # 数量
     price: float        # 价格（市价单为0）
+    asset_type: str = "STOCK"  # STOCK/ETF/FUTURE/OPTION/CRYPTO
     order_type: OrderType = OrderType.MARKET
     order_id: str = ""
     status: OrderStatus = OrderStatus.PENDING
