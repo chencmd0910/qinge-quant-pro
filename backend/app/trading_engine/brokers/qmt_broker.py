@@ -1,30 +1,34 @@
-"""币安券商适配器 - 数字货币交易"""
-from .broker_base import BrokerBase
+"""QMT券商适配器 - A股实盘
+
+QMT (Quick Market Trading) 是迅投的量化交易客户端。
+依赖: xtquant
+"""
+from ..broker_base import BrokerBase
 from typing import Optional
-from ..event_engine.core.event import OrderEvent, FillEvent
+from ...event_engine.core.event import OrderEvent, FillEvent
 
 
-class BinanceBroker(BrokerBase):
-    """币安(Binance)适配器
+class QMTBroker(BrokerBase):
+    """QMT实盘券商
 
-    TODO: 实现Binance API接口
-    依赖: python-binance
+    TODO: 实现QMT接口
+    依赖: pip install xtquant
     """
 
-    def __init__(self, api_key: str = "", api_secret: str = "", testnet: bool = True):
-        self.api_key = api_key
-        self.api_secret = api_secret
-        self.testnet = testnet
+    def __init__(self, path: str = "", account: str = ""):
+        self.path = path      # QMT安装路径
+        self.account = account  # 交易账号
         self._connected = False
 
     def connect(self) -> bool:
-        # TODO: 连接Binance API
+        # TODO: 连接QMT
         return False
 
     def disconnect(self):
         self._connected = False
 
     def send_order(self, order: OrderEvent) -> Optional[FillEvent]:
+        # TODO: QMT下单
         return None
 
     def cancel_order(self, order_id: str) -> bool:
