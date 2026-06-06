@@ -26,7 +26,7 @@ const menus = [
   { icon: Store, label: "Marketplace", href: "/marketplace" },
   { icon: PieChart, label: "投资组合", href: "/portfolio" },
   { icon: Shield, label: "风险中心", href: "/risk" },
-  { icon: CandlestickChart, label: "交易执行", href: "#" },
+  { icon: CandlestickChart, label: "模拟交易", href: "/paper-trading" },
   { icon: Database, label: "数据中心", href: "#" },
 ];
 
