@@ -22,7 +22,7 @@ class RiskConfig:
     max_daily_loss_pct: float = 0.03    # 日内最大亏损比例
     stop_loss_pct: float = 0.08         # 单笔止损比例
     min_volume: int = 100_000           # 最小成交量（流动性检查）
-    max_orders_per_day: int = 50        # 日内最大下单数
+    max_orders_per_day: int = 200       # 日内最大下单数
     max_drawdown_pct: float = 0.20      # 最大回撤限制
     max_volatility_pct: float = 0.05    # 单日最大波动率（涨跌停保护）
 

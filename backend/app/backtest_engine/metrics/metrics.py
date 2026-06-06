@@ -42,14 +42,20 @@ def calmar_ratio(values, td=252):
     mdd = max_drawdown(values)
     return ar / mdd if mdd > 0 else 0
 
+def _get_trade_side(t):
+    return t.side if hasattr(t, 'side') else t.get('side', '')
+
+def _get_trade_pnl(t):
+    return t.pnl if hasattr(t, 'pnl') else t.get('pnl', 0)
+
 def win_rate(trades):
-    sells = [t for t in trades if t.get('side') == 'SELL']
-    return sum(1 for t in sells if t.get('pnl', 0) > 0) / len(sells) if sells else 0
+    sells = [t for t in trades if _get_trade_side(t) == 'SELL']
+    return sum(1 for t in sells if _get_trade_pnl(t) > 0) / len(sells) if sells else 0
 
 def profit_loss_ratio(trades):
-    sells = [t for t in trades if t.get('side') == 'SELL']
-    profits = [t['pnl'] for t in sells if t.get('pnl', 0) > 0]
-    losses = [abs(t['pnl']) for t in sells if t.get('pnl', 0) < 0]
+    sells = [t for t in trades if _get_trade_side(t) == 'SELL']
+    profits = [_get_trade_pnl(t) for t in sells if _get_trade_pnl(t) > 0]
+    losses = [abs(_get_trade_pnl(t)) for t in sells if _get_trade_pnl(t) < 0]
     if not profits or not losses: return 0
     return (sum(profits) / len(profits)) / (sum(losses) / len(losses))
 
@@ -63,5 +69,5 @@ def calc_all_metrics(values, trades):
         'calmar_ratio': round(calmar_ratio(values), 2),
         'win_rate': round(win_rate(trades) * 100, 2),
         'profit_loss_ratio': round(profit_loss_ratio(trades), 2),
-        'total_trades': len([t for t in trades if t.get('side') == 'SELL']),
+        'total_trades': len([t for t in trades if _get_trade_side(t) == 'SELL']),
     }
