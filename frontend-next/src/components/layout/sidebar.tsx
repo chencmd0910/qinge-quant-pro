@@ -24,7 +24,7 @@ const menus = [
   { icon: BarChart3, label: "回测中心", href: "#" },
   { icon: Factory, label: "Alpha Factory", href: "/alpha-factory" },
   { icon: Store, label: "Marketplace", href: "/marketplace" },
-  { icon: PieChart, label: "投资组合", href: "#" },
+  { icon: PieChart, label: "投资组合", href: "/portfolio" },
   { icon: Shield, label: "风险中心", href: "#" },
   { icon: CandlestickChart, label: "交易执行", href: "#" },
   { icon: Database, label: "数据中心", href: "#" },
