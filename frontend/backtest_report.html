@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青鳄量化 - 回测报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; }
+        .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 24px 32px; border-bottom: 1px solid #333; }
+        .header h1 { font-size: 24px; color: #00d4aa; }
+        .header .subtitle { color: #888; margin-top: 4px; font-size: 14px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .metric-card { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; }
+        .metric-card .label { color: #888; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; }
+        .metric-card .value { font-size: 28px; font-weight: 700; }
+        .metric-card .value.positive { color: #00d4aa; }
+        .metric-card .value.negative { color: #ff4757; }
+        .metric-card .value.neutral { color: #ffa502; }
+        .chart-container { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+        .chart-container h3 { color: #ccc; margin-bottom: 16px; font-size: 16px; }
+        .chart-wrapper { position: relative; height: 300px; }
+        .params { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+        .params h3 { color: #ccc; margin-bottom: 12px; }
+        .params table { width: 100%; }
+        .params td { padding: 6px 12px; border-bottom: 1px solid #222; }
+        .params td:first-child { color: #888; width: 120px; }
+        .trades-table { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; }
+        .trades-table h3 { color: #ccc; margin-bottom: 12px; }
+        table.full { width: 100%; border-collapse: collapse; }
+        table.full th { text-align: left; padding: 8px 12px; color: #888; border-bottom: 1px solid #333; font-size: 12px; }
+        table.full td { padding: 8px 12px; border-bottom: 1px solid #222; font-size: 13px; }
+        table.full tr:hover { background: #222; }
+        .buy { color: #00d4aa; }
+        .sell { color: #ff4757; }
+        .loading { text-align: center; padding: 60px; color: #888; }
+        .annual-table { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+        .annual-table h3 { color: #ccc; margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐊 青鳄量化 - ETF Rotation V1 回测报告</h1>
+        <div class="subtitle" id="period">Loading...</div>
+    </div>
+    <div class="container">
+        <div class="metrics-grid" id="metrics">
+            <div class="metric-card"><div class="label">年化收益</div><div class="value" id="m-annual">--</div></div>
+            <div class="metric-card"><div class="label">最大回撤</div><div class="value" id="m-dd">--</div></div>
+            <div class="metric-card"><div class="label">夏普比率</div><div class="value" id="m-sharpe">--</div></div>
+            <div class="metric-card"><div class="label">胜率</div><div class="value" id="m-winrate">--</div></div>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card"><div class="label">总收益</div><div class="value" id="m-total">--</div></div>
+            <div class="metric-card"><div class="label">最终净值</div><div class="value" id="m-final">--</div></div>
+            <div class="metric-card"><div class="label">调仓次数</div><div class="value neutral" id="m-trades">--</div></div>
+            <div class="metric-card"><div class="label">回测年数</div><div class="value neutral" id="m-years">--</div></div>
+        </div>
+        <div class="params">
+            <h3>回测参数</h3>
+            <table id="params-table"></table>
+        </div>
+        <div class="annual-table">
+            <h3>年度收益</h3>
+            <table class="full" id="annual-table">
+                <thead><tr><th>年份</th><th>收益率</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="chart-container">
+            <h3>权益曲线</h3>
+            <div class="chart-wrapper"><canvas id="equityChart"></canvas></div>
+        </div>
+        <div class="chart-container">
+            <h3>回撤曲线</h3>
+            <div class="chart-wrapper"><canvas id="drawdownChart"></canvas></div>
+        </div>
+        <div class="trades-table">
+            <h3>调仓记录 (<span id="trade-count">0</span> 笔)</h3>
+            <table class="full" id="trades-table">
+                <thead><tr><th>日期</th><th>方向</th><th>标的</th><th>数量</th><th>价格</th><th>手续费</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    fetch('/api/backtest/result/latest')
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('period').textContent = `${data.period} | 手续费: ${data.commission*10000}/10000 | 滑点: ${data.slippage*100}% | 回看: ${data.lookback}天`;
+
+            const m = data;
+            const setVal = (id, val, cls) => { const el = document.getElementById(id); el.textContent = val; el.className = 'value ' + cls; };
+            setVal('m-annual', m.annual_return, parseFloat(m.annual_return) >= 0 ? 'positive' : 'negative');
+            setVal('m-dd', m.max_drawdown, 'negative');
+            setVal('m-sharpe', m.sharpe_ratio, m.sharpe_ratio >= 1 ? 'positive' : m.sharpe_ratio >= 0.5 ? 'neutral' : 'negative');
+            setVal('m-winrate', m.win_rate, parseFloat(m.win_rate) >= 50 ? 'positive' : 'neutral');
+            setVal('m-total', m.total_return, parseFloat(m.total_return) >= 0 ? 'positive' : 'negative');
+            setVal('m-final', '¥' + m.final_value.toLocaleString(), 'neutral');
+            setVal('m-trades', m.trade_count, 'neutral');
+            setVal('m-years', m.years + '年', 'neutral');
+
+            // Params
+            const pt = document.getElementById('params-table');
+            [['标的', m.symbols.join(', ')], ['回测区间', m.period], ['手续费', (m.commission*10000) + '/10000'], ['滑点', (m.slippage*100)+'%'], ['回看天数', m.lookback], ['初始资金', '¥1,000,000'], ['生成时间', m.generated_at]].forEach(([k,v]) => {
+                pt.innerHTML += `<tr><td>${k}</td><td>${v}</td></tr>`;
+            });
+
+            // Annual returns
+            const at = document.querySelector('#annual-table tbody');
+            Object.entries(m.annual_returns || {}).forEach(([year, ret]) => {
+                const cls = ret >= 0 ? 'positive' : 'negative';
+                at.innerHTML += `<tr><td>${year}</td><td class="${cls}" style="color:${ret>=0?'#00d4aa':'#ff4757'}">${ret>=0?'+':''}${ret}%</td></tr>`;
+            });
+
+            // Equity chart
+            const eq = m.equity_curve || [];
+            new Chart(document.getElementById('equityChart'), {
+                type: 'line',
+                data: { labels: eq.map(e => e.date), datasets: [{ label: '净值', data: eq.map(e => e.total), borderColor: '#00d4aa', borderWidth: 1.5, pointRadius: 0, fill: false }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: true, ticks: { maxTicksLimit: 10, color: '#666' }, grid: { color: '#222' } }, y: { ticks: { color: '#666', callback: v => '¥'+v.toLocaleString() }, grid: { color: '#222' } } } }
+            });
+
+            // Drawdown chart
+            const dd = m.drawdown_curve || [];
+            new Chart(document.getElementById('drawdownChart'), {
+                type: 'line',
+                data: { labels: dd.map(e => e.date), datasets: [{ label: '回撤%', data: dd.map(e => -e.dd), borderColor: '#ff4757', borderWidth: 1.5, pointRadius: 0, fill: { target: 'origin', above: 'rgba(255,71,87,0.1)' } }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: true, ticks: { maxTicksLimit: 10, color: '#666' }, grid: { color: '#222' } }, y: { ticks: { color: '#666', callback: v => v+'%' }, grid: { color: '#222' } } } }
+            });
+
+            // Trades table
+            const tb = document.querySelector('#trades-table tbody');
+            document.getElementById('trade-count').textContent = m.trades.length;
+            m.trades.forEach(t => {
+                const cls = t.side === 'BUY' ? 'buy' : 'sell';
+                tb.innerHTML += `<tr><td>${t.date}</td><td class="${cls}">${t.side}</td><td>${t.symbol}</td><td>${t.quantity}</td><td>${t.price.toFixed(4)}</td><td>${t.commission.toFixed(2)}</td></tr>`;
+            });
+        })
+        .catch(e => { document.querySelector('.container').innerHTML = '<div class="loading">Error loading data: ' + e.message + '</div>'; });
+    </script>
+</body>
+</html>

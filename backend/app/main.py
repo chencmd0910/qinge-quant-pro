@@ -17,6 +17,7 @@ from app.api.strategy import router as strategy_router
 from app.api.backtest import router as backtest_router
 from app.api.market import router as market_router
 from app.api.agent_gateway import router as agent_router
+from app.api.backtest_report import get_backtest_result, format_report
 from app.websocket.market_ws import market_websocket
 
 settings = get_settings()
@@ -51,6 +52,14 @@ async def ws_market(websocket):
 @app.get("/")
 def root():
     return {"name": settings.APP_NAME, "version": settings.APP_VERSION, "status": "running"}
+
+
+@app.get("/api/backtest/result/{result_id}")
+def backtest_result(result_id: str = "latest"):
+    result = get_backtest_result(result_id)
+    if not result:
+        return {"error": "No backtest result found. Run backtest first."}
+    return format_report(result)
 
 
 @app.get("/api/health")

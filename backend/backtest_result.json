@@ -1,0 +1,3214 @@
+{
+  "strategy": "ETF Rotation V1",
+  "symbols": [
+    "510300.SH",
+    "510500.SH",
+    "159915.SZ",
+    "515080.SH"
+  ],
+  "period": "2018-01-01 to 2026-06-06",
+  "commission": 0.0003,
+  "slippage": 0.001,
+  "lookback": 60,
+  "metrics": {
+    "initial_cash": 1000000,
+    "final_value": 1207769.52,
+    "total_return": 20.78,
+    "annual_return": 2.36,
+    "max_drawdown": 59.16,
+    "sharpe_ratio": 0.22,
+    "win_rate": 100.0,
+    "trade_count": 108,
+    "trading_days": 2042,
+    "years": 8.1
+  },
+  "equity_curve_sample": [
+    {
+      "date": "2018-01-02",
+      "cash": 1000000,
+      "invested": 0,
+      "total": 1000000,
+      "held": null,
+      "positions": 0
+    },
+    {
+      "date": "2018-01-30",
+      "cash": 1000000,
+      "invested": 0,
+      "total": 1000000,
+      "held": null,
+      "positions": 0
+    },
+    {
+      "date": "2018-03-06",
+      "cash": 1000000,
+      "invested": 0,
+      "total": 1000000,
+      "held": null,
+      "positions": 0
+    },
+    {
+      "date": "2018-04-03",
+      "cash": 1000000,
+      "invested": 0,
+      "total": 1000000,
+      "held": null,
+      "positions": 0
+    },
+    {
+      "date": "2018-05-07",
+      "cash": 283.31,
+      "invested": 1005817.91,
+      "total": 1006101.22,
+      "held": "159915.SZ",
+      "positions": 543
+    },
+    {
+      "date": "2018-06-04",
+      "cash": 283.31,
+      "invested": 924690.45,
+      "total": 924973.76,
+      "held": "159915.SZ",
+      "positions": 543
+    },
+    {
+      "date": "2018-07-03",
+      "cash": 65.77,
+      "invested": 825045.76,
+      "total": 825111.53,
+      "held": "510300.SH",
+      "positions": 242
+    },
+    {
+      "date": "2018-07-31",
+      "cash": 65.77,
+      "invested": 851272.75,
+      "total": 851338.52,
+      "held": "510300.SH",
+      "positions": 242
+    },
+    {
+      "date": "2018-08-28",
+      "cash": 65.77,
+      "invested": 822841.14,
+      "total": 822906.91,
+      "held": "510300.SH",
+      "positions": 242
+    },
+    {
+      "date": "2018-09-26",
+      "cash": 1252.45,
+      "invested": 799634.39,
+      "total": 800886.85,
+      "held": "510300.SH",
+      "positions": 234
+    },
+    {
+      "date": "2018-10-31",
+      "cash": 1252.45,
+      "invested": 737994.58,
+      "total": 739247.03,
+      "held": "510300.SH",
+      "positions": 234
+    },
+    {
+      "date": "2018-11-28",
+      "cash": 1252.45,
+      "invested": 743870.09,
+      "total": 745122.54,
+      "held": "510300.SH",
+      "positions": 234
+    },
+    {
+      "date": "2018-12-26",
+      "cash": 3808.93,
+      "invested": 696647.04,
+      "total": 700455.97,
+      "held": "515080.SH",
+      "positions": 155
+    },
+    {
+      "date": "2019-01-25",
+      "cash": 3776.57,
+      "invested": 705015.43,
+      "total": 708792.0,
+      "held": "515080.SH",
+      "positions": 153
+    },
+    {
+      "date": "2019-03-01",
+      "cash": -35.75,
+      "invested": 802438.8,
+      "total": 802403.04,
+      "held": "510300.SH",
+      "positions": 214
+    },
+    {
+      "date": "2019-03-29",
+      "cash": 1315.05,
+      "invested": 779031.62,
+      "total": 780346.67,
+      "held": "159915.SZ",
+      "positions": 460
+    },
+    {
+      "date": "2019-04-29",
+      "cash": 757.42,
+      "invested": 728642.82,
+      "total": 729400.23,
+      "held": "159915.SZ",
+      "positions": 451
+    },
+    {
+      "date": "2019-05-30",
+      "cash": 1177.87,
+      "invested": 667747.5,
+      "total": 668925.37,
+      "held": "515080.SH",
+      "positions": 125
+    },
+    {
+      "date": "2019-06-28",
+      "cash": 2596.0,
+      "invested": 688605.66,
+      "total": 691201.66,
+      "held": "510300.SH",
+      "positions": 180
+    },
+    {
+      "date": "2019-07-26",
+      "cash": 2596.0,
+      "invested": 694542.24,
+      "total": 697138.24,
+      "held": "510300.SH",
+      "positions": 180
+    },
+    {
+      "date": "2019-08-23",
+      "cash": 817.62,
+      "invested": 675303.66,
+      "total": 676121.28,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2019-09-23",
+      "cash": 817.62,
+      "invested": 704047.01,
+      "total": 704864.64,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2019-10-28",
+      "cash": 817.62,
+      "invested": 712445.89,
+      "total": 713263.51,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2019-11-25",
+      "cash": 817.62,
+      "invested": 694621.53,
+      "total": 695439.15,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2019-12-23",
+      "cash": 817.62,
+      "invested": 725908.83,
+      "total": 726726.45,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2020-01-21",
+      "cash": 817.62,
+      "invested": 822216.87,
+      "total": 823034.49,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2020-02-26",
+      "cash": 817.62,
+      "invested": 911533.02,
+      "total": 912350.64,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2020-03-25",
+      "cash": 817.62,
+      "invested": 810023.22,
+      "total": 810840.84,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2020-04-23",
+      "cash": 817.62,
+      "invested": 848341.2,
+      "total": 849158.82,
+      "held": "159915.SZ",
+      "positions": 418
+    },
+    {
+      "date": "2020-05-26",
+      "cash": 2004.64,
+      "invested": 859754.96,
+      "total": 861759.6,
+      "held": "510300.SH",
+      "positions": 222
+    },
+    {
+      "date": "2020-06-23",
+      "cash": 796.29,
+      "invested": 971875.3,
+      "total": 972671.59,
+      "held": "159915.SZ",
+      "positions": 408
+    },
+    {
+      "date": "2020-07-23",
+      "cash": 796.29,
+      "invested": 1142266.79,
+      "total": 1143063.07,
+      "held": "159915.SZ",
+      "positions": 408
+    },
+    {
+      "date": "2020-08-20",
+      "cash": 796.29,
+      "invested": 1055847.45,
+      "total": 1056643.74,
+      "held": "159915.SZ",
+      "positions": 408
+    },
+    {
+      "date": "2020-09-17",
+      "cash": 1206.23,
+      "invested": 1042360.7,
+      "total": 1043566.93,
+      "held": "510300.SH",
+      "positions": 225
+    },
+    {
+      "date": "2020-10-23",
+      "cash": 2404.85,
+      "invested": 1104126.22,
+      "total": 1106531.06,
+      "held": "510300.SH",
+      "positions": 234
+    },
+    {
+      "date": "2020-11-20",
+      "cash": 2404.85,
+      "invested": 1156729.44,
+      "total": 1159134.29,
+      "held": "510300.SH",
+      "positions": 234
+    },
+    {
+      "date": "2020-12-18",
+      "cash": 803.53,
+      "invested": 1176248.87,
+      "total": 1177052.4,
+      "held": "159915.SZ",
+      "positions": 423
+    },
+    {
+      "date": "2021-01-18",
+      "cash": 5016.85,
+      "invested": 1324444.92,
+      "total": 1329461.77,
+      "held": "510300.SH",
+      "positions": 240
+    },
+    {
+      "date": "2021-02-22",
+      "cash": 2923.17,
+      "invested": 1261746.26,
+      "total": 1264669.43,
+      "held": "159915.SZ",
+      "positions": 402
+    },
+    {
+      "date": "2021-03-22",
+      "cash": 554.34,
+      "invested": 1067059.07,
+      "total": 1067613.41,
+      "held": "510300.SH",
+      "positions": 211
+    },
+    {
+      "date": "2021-04-20",
+      "cash": 794.03,
+      "invested": 1092851.99,
+      "total": 1093646.02,
+      "held": "510500.SH",
+      "positions": 170
+    },
+    {
+      "date": "2021-05-21",
+      "cash": 2283.02,
+      "invested": 1121104.72,
+      "total": 1123387.74,
+      "held": "515080.SH",
+      "positions": 173
+    },
+    {
+      "date": "2021-06-21",
+      "cash": 105.68,
+      "invested": 1177407.68,
+      "total": 1177513.36,
+      "held": "159915.SZ",
+      "positions": 360
+    },
+    {
+      "date": "2021-07-19",
+      "cash": 105.68,
+      "invested": 1241829.47,
+      "total": 1241935.14,
+      "held": "159915.SZ",
+      "positions": 360
+    },
+    {
+      "date": "2021-08-16",
+      "cash": 2637.9,
+      "invested": 1248742.67,
+      "total": 1251380.58,
+      "held": "515080.SH",
+      "positions": 165
+    },
+    {
+      "date": "2021-09-13",
+      "cash": 2637.9,
+      "invested": 1311334.4,
+      "total": 1313972.3,
+      "held": "515080.SH",
+      "positions": 165
+    },
+    {
+      "date": "2021-10-20",
+      "cash": -21.7,
+      "invested": 1226340.51,
+      "total": 1226318.81,
+      "held": "515080.SH",
+      "positions": 163
+    },
+    {
+      "date": "2021-11-17",
+      "cash": 119.19,
+      "invested": 1221414.42,
+      "total": 1221533.61,
+      "held": "159915.SZ",
+      "positions": 357
+    },
+    {
+      "date": "2021-12-15",
+      "cash": 2675.4,
+      "invested": 1236918.5,
+      "total": 1239593.9,
+      "held": "159915.SZ",
+      "positions": 357
+    },
+    {
+      "date": "2022-01-13",
+      "cash": 1269.75,
+      "invested": 1154362.88,
+      "total": 1155632.63,
+      "held": "515080.SH",
+      "positions": 151
+    },
+    {
+      "date": "2022-02-17",
+      "cash": 5401.52,
+      "invested": 1049162.26,
+      "total": 1054563.78,
+      "held": "510500.SH",
+      "positions": 155
+    },
+    {
+      "date": "2022-03-17",
+      "cash": 3914.06,
+      "invested": 954596.27,
+      "total": 958510.34,
+      "held": "515080.SH",
+      "positions": 140
+    },
+    {
+      "date": "2022-04-18",
+      "cash": 2913.68,
+      "invested": 933270.11,
+      "total": 936183.78,
+      "held": "510300.SH",
+      "positions": 224
+    },
+    {
+      "date": "2022-05-19",
+      "cash": 990.86,
+      "invested": 903909.24,
+      "total": 904900.1,
+      "held": "510300.SH",
+      "positions": 226
+    },
+    {
+      "date": "2022-06-17",
+      "cash": 990.86,
+      "invested": 973844.03,
+      "total": 974834.89,
+      "held": "510300.SH",
+      "positions": 226
+    },
+    {
+      "date": "2022-07-15",
+      "cash": 1882.55,
+      "invested": 963413.98,
+      "total": 965296.52,
+      "held": "159915.SZ",
+      "positions": 349
+    },
+    {
+      "date": "2022-08-12",
+      "cash": 5358.9,
+      "invested": 975892.66,
+      "total": 981251.56,
+      "held": "515080.SH",
+      "positions": 135
+    },
+    {
+      "date": "2022-09-09",
+      "cash": 4801.6,
+      "invested": 912592.43,
+      "total": 917394.03,
+      "held": "515080.SH",
+      "positions": 132
+    },
+    {
+      "date": "2022-10-17",
+      "cash": 5054.18,
+      "invested": 836167.89,
+      "total": 841222.06,
+      "held": "510500.SH",
+      "positions": 139
+    },
+    {
+      "date": "2022-11-14",
+      "cash": 5054.18,
+      "invested": 852002.29,
+      "total": 857056.47,
+      "held": "510500.SH",
+      "positions": 139
+    },
+    {
+      "date": "2022-12-12",
+      "cash": 5054.18,
+      "invested": 855518.48,
+      "total": 860572.66,
+      "held": "510500.SH",
+      "positions": 139
+    },
+    {
+      "date": "2023-01-10",
+      "cash": -133.26,
+      "invested": 835634.53,
+      "total": 835501.27,
+      "held": "510300.SH",
+      "positions": 208
+    },
+    {
+      "date": "2023-02-14",
+      "cash": 50.11,
+      "invested": 856761.7,
+      "total": 856811.82,
+      "held": "159915.SZ",
+      "positions": 334
+    },
+    {
+      "date": "2023-03-14",
+      "cash": 24.63,
+      "invested": 792072.34,
+      "total": 792096.98,
+      "held": "515080.SH",
+      "positions": 117
+    },
+    {
+      "date": "2023-04-12",
+      "cash": 2667.11,
+      "invested": 814437.89,
+      "total": 817105.0,
+      "held": "515080.SH",
+      "positions": 116
+    },
+    {
+      "date": "2023-05-15",
+      "cash": 5246.34,
+      "invested": 763764.21,
+      "total": 769010.55,
+      "held": "510500.SH",
+      "positions": 124
+    },
+    {
+      "date": "2023-06-12",
+      "cash": 3928.11,
+      "invested": 753464.03,
+      "total": 757392.13,
+      "held": "510500.SH",
+      "positions": 125
+    },
+    {
+      "date": "2023-07-12",
+      "cash": 5107.66,
+      "invested": 739060.48,
+      "total": 744168.14,
+      "held": "515080.SH",
+      "positions": 114
+    },
+    {
+      "date": "2023-08-09",
+      "cash": 3566.92,
+      "invested": 761772.52,
+      "total": 765339.43,
+      "held": "510300.SH",
+      "positions": 192
+    },
+    {
+      "date": "2023-09-06",
+      "cash": 2024.84,
+      "invested": 728097.41,
+      "total": 730122.25,
+      "held": "510300.SH",
+      "positions": 191
+    },
+    {
+      "date": "2023-10-12",
+      "cash": 2024.84,
+      "invested": 707155.04,
+      "total": 709179.88,
+      "held": "510300.SH",
+      "positions": 191
+    },
+    {
+      "date": "2023-11-09",
+      "cash": 3336.24,
+      "invested": 701579.68,
+      "total": 704915.92,
+      "held": "515080.SH",
+      "positions": 115
+    },
+    {
+      "date": "2023-12-07",
+      "cash": 3336.24,
+      "invested": 692395.5,
+      "total": 695731.73,
+      "held": "515080.SH",
+      "positions": 115
+    },
+    {
+      "date": "2024-01-05",
+      "cash": 4112.66,
+      "invested": 654952.02,
+      "total": 659064.68,
+      "held": "510500.SH",
+      "positions": 124
+    },
+    {
+      "date": "2024-02-02",
+      "cash": 2593.92,
+      "invested": 569153.34,
+      "total": 571747.26,
+      "held": "510300.SH",
+      "positions": 179
+    },
+    {
+      "date": "2024-03-11",
+      "cash": 2593.92,
+      "invested": 642478.17,
+      "total": 645072.09,
+      "held": "510300.SH",
+      "positions": 179
+    },
+    {
+      "date": "2024-04-10",
+      "cash": 2593.92,
+      "invested": 627342.84,
+      "total": 629936.76,
+      "held": "510300.SH",
+      "positions": 179
+    },
+    {
+      "date": "2024-05-13",
+      "cash": -108.94,
+      "invested": 656975.65,
+      "total": 656866.72,
+      "held": "515080.SH",
+      "positions": 119
+    },
+    {
+      "date": "2024-06-11",
+      "cash": 1434.04,
+      "invested": 621980.96,
+      "total": 623415.0,
+      "held": "159915.SZ",
+      "positions": 348
+    },
+    {
+      "date": "2024-07-09",
+      "cash": 2451.25,
+      "invested": 608846.56,
+      "total": 611297.82,
+      "held": "510300.SH",
+      "positions": 177
+    },
+    {
+      "date": "2024-08-06",
+      "cash": 2451.25,
+      "invested": 591707.27,
+      "total": 594158.52,
+      "held": "510300.SH",
+      "positions": 177
+    },
+    {
+      "date": "2024-09-03",
+      "cash": 2451.25,
+      "invested": 579396.79,
+      "total": 581848.04,
+      "held": "510300.SH",
+      "positions": 177
+    },
+    {
+      "date": "2024-10-10",
+      "cash": 509.07,
+      "invested": 723621.14,
+      "total": 724130.22,
+      "held": "159915.SZ",
+      "positions": 327
+    },
+    {
+      "date": "2024-11-07",
+      "cash": 509.07,
+      "invested": 768698.49,
+      "total": 769207.56,
+      "held": "159915.SZ",
+      "positions": 327
+    },
+    {
+      "date": "2024-12-05",
+      "cash": 509.07,
+      "invested": 726416.31,
+      "total": 726925.38,
+      "held": "159915.SZ",
+      "positions": 327
+    },
+    {
+      "date": "2025-01-03",
+      "cash": 5614.08,
+      "invested": 635648.62,
+      "total": 641262.7,
+      "held": "515080.SH",
+      "positions": 113
+    },
+    {
+      "date": "2025-02-10",
+      "cash": 5755.72,
+      "invested": 695581.28,
+      "total": 701337.0,
+      "held": "515080.SH",
+      "positions": 112
+    },
+    {
+      "date": "2025-03-10",
+      "cash": 5927.61,
+      "invested": 717306.97,
+      "total": 723234.59,
+      "held": "515080.SH",
+      "positions": 110
+    },
+    {
+      "date": "2025-04-08",
+      "cash": 5927.61,
+      "invested": 608302.08,
+      "total": 614229.69,
+      "held": "515080.SH",
+      "positions": 110
+    },
+    {
+      "date": "2025-05-09",
+      "cash": 2743.69,
+      "invested": 669028.99,
+      "total": 671772.68,
+      "held": "515080.SH",
+      "positions": 110
+    },
+    {
+      "date": "2025-06-09",
+      "cash": 2436.28,
+      "invested": 676032.79,
+      "total": 678469.07,
+      "held": "510300.SH",
+      "positions": 174
+    },
+    {
+      "date": "2025-07-07",
+      "cash": 875.29,
+      "invested": 677399.08,
+      "total": 678274.38,
+      "held": "159915.SZ",
+      "positions": 318
+    },
+    {
+      "date": "2025-08-04",
+      "cash": 875.29,
+      "invested": 742314.71,
+      "total": 743190.01,
+      "held": "159915.SZ",
+      "positions": 318
+    },
+    {
+      "date": "2025-09-01",
+      "cash": 875.29,
+      "invested": 940127.19,
+      "total": 941002.48,
+      "held": "159915.SZ",
+      "positions": 318
+    },
+    {
+      "date": "2025-09-29",
+      "cash": 875.29,
+      "invested": 1029687.78,
+      "total": 1030563.08,
+      "held": "159915.SZ",
+      "positions": 318
+    },
+    {
+      "date": "2025-11-04",
+      "cash": 875.29,
+      "invested": 996640.46,
+      "total": 997515.75,
+      "held": "159915.SZ",
+      "positions": 318
+    },
+    {
+      "date": "2025-12-02",
+      "cash": 875.29,
+      "invested": 976625.29,
+      "total": 977500.58,
+      "held": "159915.SZ",
+      "positions": 318
+    },
+    {
+      "date": "2025-12-30",
+      "cash": 6172.78,
+      "invested": 1014415.3,
+      "total": 1020588.08,
+      "held": "510500.SH",
+      "positions": 136
+    },
+    {
+      "date": "2026-01-29",
+      "cash": 3119.59,
+      "invested": 1132873.11,
+      "total": 1135992.7,
+      "held": "510500.SH",
+      "positions": 133
+    },
+    {
+      "date": "2026-03-06",
+      "cash": 3119.59,
+      "invested": 1111924.52,
+      "total": 1115044.11,
+      "held": "510500.SH",
+      "positions": 133
+    },
+    {
+      "date": "2026-04-03",
+      "cash": 3965.75,
+      "invested": 1002146.75,
+      "total": 1006112.5,
+      "held": "510500.SH",
+      "positions": 133
+    },
+    {
+      "date": "2026-05-07",
+      "cash": 599.35,
+      "invested": 1169082.45,
+      "total": 1169681.79,
+      "held": "159915.SZ",
+      "positions": 305
+    },
+    {
+      "date": "2026-06-04",
+      "cash": 599.35,
+      "invested": 1247109.62,
+      "total": 1247708.97,
+      "held": "159915.SZ",
+      "positions": 305
+    }
+  ],
+  "drawdown_curve_sample": [
+    {
+      "date": "2018-01-02",
+      "dd": 0.0
+    },
+    {
+      "date": "2018-01-30",
+      "dd": 0.0
+    },
+    {
+      "date": "2018-03-06",
+      "dd": 0.0
+    },
+    {
+      "date": "2018-04-03",
+      "dd": 0.0
+    },
+    {
+      "date": "2018-05-07",
+      "dd": 0.0
+    },
+    {
+      "date": "2018-06-04",
+      "dd": 9.22
+    },
+    {
+      "date": "2018-07-03",
+      "dd": 19.02
+    },
+    {
+      "date": "2018-07-31",
+      "dd": 16.45
+    },
+    {
+      "date": "2018-08-28",
+      "dd": 19.24
+    },
+    {
+      "date": "2018-09-26",
+      "dd": 21.4
+    },
+    {
+      "date": "2018-10-31",
+      "dd": 27.45
+    },
+    {
+      "date": "2018-11-28",
+      "dd": 26.87
+    },
+    {
+      "date": "2018-12-26",
+      "dd": 31.26
+    },
+    {
+      "date": "2019-01-25",
+      "dd": 30.44
+    },
+    {
+      "date": "2019-03-01",
+      "dd": 21.25
+    },
+    {
+      "date": "2019-03-29",
+      "dd": 23.42
+    },
+    {
+      "date": "2019-04-29",
+      "dd": 28.42
+    },
+    {
+      "date": "2019-05-30",
+      "dd": 34.35
+    },
+    {
+      "date": "2019-06-28",
+      "dd": 32.17
+    },
+    {
+      "date": "2019-07-26",
+      "dd": 31.58
+    },
+    {
+      "date": "2019-08-23",
+      "dd": 33.65
+    },
+    {
+      "date": "2019-09-23",
+      "dd": 30.82
+    },
+    {
+      "date": "2019-10-28",
+      "dd": 30.0
+    },
+    {
+      "date": "2019-11-25",
+      "dd": 31.75
+    },
+    {
+      "date": "2019-12-23",
+      "dd": 28.68
+    },
+    {
+      "date": "2020-01-21",
+      "dd": 19.23
+    },
+    {
+      "date": "2020-02-26",
+      "dd": 10.46
+    },
+    {
+      "date": "2020-03-25",
+      "dd": 20.42
+    },
+    {
+      "date": "2020-04-23",
+      "dd": 16.66
+    },
+    {
+      "date": "2020-05-26",
+      "dd": 15.43
+    },
+    {
+      "date": "2020-06-23",
+      "dd": 4.54
+    },
+    {
+      "date": "2020-07-23",
+      "dd": 3.1
+    },
+    {
+      "date": "2020-08-20",
+      "dd": 10.43
+    },
+    {
+      "date": "2020-09-17",
+      "dd": 11.54
+    },
+    {
+      "date": "2020-10-23",
+      "dd": 6.2
+    },
+    {
+      "date": "2020-11-20",
+      "dd": 1.74
+    },
+    {
+      "date": "2020-12-18",
+      "dd": 0.93
+    },
+    {
+      "date": "2021-01-18",
+      "dd": 1.24
+    },
+    {
+      "date": "2021-02-22",
+      "dd": 8.04
+    },
+    {
+      "date": "2021-03-22",
+      "dd": 22.37
+    },
+    {
+      "date": "2021-04-20",
+      "dd": 20.48
+    },
+    {
+      "date": "2021-05-21",
+      "dd": 18.32
+    },
+    {
+      "date": "2021-06-21",
+      "dd": 14.38
+    },
+    {
+      "date": "2021-07-19",
+      "dd": 9.7
+    },
+    {
+      "date": "2021-08-16",
+      "dd": 9.01
+    },
+    {
+      "date": "2021-09-13",
+      "dd": 4.46
+    },
+    {
+      "date": "2021-10-20",
+      "dd": 10.83
+    },
+    {
+      "date": "2021-11-17",
+      "dd": 11.18
+    },
+    {
+      "date": "2021-12-15",
+      "dd": 9.87
+    },
+    {
+      "date": "2022-01-13",
+      "dd": 15.97
+    },
+    {
+      "date": "2022-02-17",
+      "dd": 23.32
+    },
+    {
+      "date": "2022-03-17",
+      "dd": 30.3
+    },
+    {
+      "date": "2022-04-18",
+      "dd": 31.93
+    },
+    {
+      "date": "2022-05-19",
+      "dd": 34.2
+    },
+    {
+      "date": "2022-06-17",
+      "dd": 29.12
+    },
+    {
+      "date": "2022-07-15",
+      "dd": 29.81
+    },
+    {
+      "date": "2022-08-12",
+      "dd": 28.65
+    },
+    {
+      "date": "2022-09-09",
+      "dd": 33.29
+    },
+    {
+      "date": "2022-10-17",
+      "dd": 38.83
+    },
+    {
+      "date": "2022-11-14",
+      "dd": 37.68
+    },
+    {
+      "date": "2022-12-12",
+      "dd": 37.43
+    },
+    {
+      "date": "2023-01-10",
+      "dd": 39.25
+    },
+    {
+      "date": "2023-02-14",
+      "dd": 37.7
+    },
+    {
+      "date": "2023-03-14",
+      "dd": 42.4
+    },
+    {
+      "date": "2023-04-12",
+      "dd": 40.59
+    },
+    {
+      "date": "2023-05-15",
+      "dd": 44.08
+    },
+    {
+      "date": "2023-06-12",
+      "dd": 44.93
+    },
+    {
+      "date": "2023-07-12",
+      "dd": 45.89
+    },
+    {
+      "date": "2023-08-09",
+      "dd": 44.35
+    },
+    {
+      "date": "2023-09-06",
+      "dd": 46.91
+    },
+    {
+      "date": "2023-10-12",
+      "dd": 48.43
+    },
+    {
+      "date": "2023-11-09",
+      "dd": 48.74
+    },
+    {
+      "date": "2023-12-07",
+      "dd": 49.41
+    },
+    {
+      "date": "2024-01-05",
+      "dd": 52.08
+    },
+    {
+      "date": "2024-02-02",
+      "dd": 58.43
+    },
+    {
+      "date": "2024-03-11",
+      "dd": 53.1
+    },
+    {
+      "date": "2024-04-10",
+      "dd": 54.2
+    },
+    {
+      "date": "2024-05-13",
+      "dd": 52.24
+    },
+    {
+      "date": "2024-06-11",
+      "dd": 54.67
+    },
+    {
+      "date": "2024-07-09",
+      "dd": 55.55
+    },
+    {
+      "date": "2024-08-06",
+      "dd": 56.8
+    },
+    {
+      "date": "2024-09-03",
+      "dd": 57.69
+    },
+    {
+      "date": "2024-10-10",
+      "dd": 47.35
+    },
+    {
+      "date": "2024-11-07",
+      "dd": 44.07
+    },
+    {
+      "date": "2024-12-05",
+      "dd": 47.14
+    },
+    {
+      "date": "2025-01-03",
+      "dd": 53.37
+    },
+    {
+      "date": "2025-02-10",
+      "dd": 49.0
+    },
+    {
+      "date": "2025-03-10",
+      "dd": 47.41
+    },
+    {
+      "date": "2025-04-08",
+      "dd": 55.34
+    },
+    {
+      "date": "2025-05-09",
+      "dd": 51.15
+    },
+    {
+      "date": "2025-06-09",
+      "dd": 50.67
+    },
+    {
+      "date": "2025-07-07",
+      "dd": 50.68
+    },
+    {
+      "date": "2025-08-04",
+      "dd": 45.96
+    },
+    {
+      "date": "2025-09-01",
+      "dd": 31.58
+    },
+    {
+      "date": "2025-09-29",
+      "dd": 25.06
+    },
+    {
+      "date": "2025-11-04",
+      "dd": 27.47
+    },
+    {
+      "date": "2025-12-02",
+      "dd": 28.92
+    },
+    {
+      "date": "2025-12-30",
+      "dd": 25.79
+    },
+    {
+      "date": "2026-01-29",
+      "dd": 17.4
+    },
+    {
+      "date": "2026-03-06",
+      "dd": 18.92
+    },
+    {
+      "date": "2026-04-03",
+      "dd": 26.84
+    },
+    {
+      "date": "2026-05-07",
+      "dd": 14.95
+    },
+    {
+      "date": "2026-06-04",
+      "dd": 9.28
+    }
+  ],
+  "trades": [
+    {
+      "date": "2018-04-16",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 543,
+      "price": 1840.5467,
+      "commission": 299.83,
+      "cost": 999716.69
+    },
+    {
+      "date": "2018-06-11",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 543,
+      "price": 1686.9284,
+      "commission": 274.8,
+      "proceeds": 915727.31
+    },
+    {
+      "date": "2018-06-11",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 242,
+      "price": 3783.761,
+      "commission": 274.7,
+      "cost": 915944.86
+    },
+    {
+      "date": "2018-09-10",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 242,
+      "price": 3226.8379,
+      "commission": 234.27,
+      "proceeds": 780660.51
+    },
+    {
+      "date": "2018-09-10",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 165,
+      "price": 4709.5829,
+      "commission": 233.12,
+      "cost": 777314.3
+    },
+    {
+      "date": "2018-09-25",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 165,
+      "price": 4787.7575,
+      "commission": 236.99,
+      "proceeds": 789742.99
+    },
+    {
+      "date": "2018-09-25",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 234,
+      "price": 3383.1838,
+      "commission": 237.5,
+      "cost": 791902.51
+    },
+    {
+      "date": "2018-12-24",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 234,
+      "price": 3035.1598,
+      "commission": 213.07,
+      "proceeds": 710014.33
+    },
+    {
+      "date": "2018-12-24",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 155,
+      "price": 4562.8753,
+      "commission": 212.17,
+      "cost": 707457.85
+    },
+    {
+      "date": "2019-01-02",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 155,
+      "price": 4404.1165,
+      "commission": 204.79,
+      "proceeds": 682433.26
+    },
+    {
+      "date": "2019-01-02",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 557,
+      "price": 1229.9948,
+      "commission": 205.53,
+      "cost": 685312.62
+    },
+    {
+      "date": "2019-01-07",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 557,
+      "price": 1266.7899,
+      "commission": 211.68,
+      "proceeds": 705390.32
+    },
+    {
+      "date": "2019-01-07",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 153,
+      "price": 4598.7421,
+      "commission": 211.08,
+      "cost": 703818.63
+    },
+    {
+      "date": "2019-01-14",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 153,
+      "price": 4589.5958,
+      "commission": 210.66,
+      "proceeds": 701997.5
+    },
+    {
+      "date": "2019-01-14",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 164,
+      "price": 4290.8335,
+      "commission": 211.11,
+      "cost": 703907.81
+    },
+    {
+      "date": "2019-01-21",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 164,
+      "price": 4369.2594,
+      "commission": 214.97,
+      "proceeds": 716343.57
+    },
+    {
+      "date": "2019-01-21",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 153,
+      "price": 4659.7651,
+      "commission": 213.88,
+      "cost": 713157.95
+    },
+    {
+      "date": "2019-02-11",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 153,
+      "price": 4607.2172,
+      "commission": 211.47,
+      "proceeds": 704692.76
+    },
+    {
+      "date": "2019-02-11",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 214,
+      "price": 3309.7785,
+      "commission": 212.49,
+      "cost": 708505.08
+    },
+    {
+      "date": "2019-03-11",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 214,
+      "price": 3726.224,
+      "commission": 239.22,
+      "proceeds": 797172.72
+    },
+    {
+      "date": "2019-03-11",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 460,
+      "price": 1729.5288,
+      "commission": 238.67,
+      "cost": 795821.92
+    },
+    {
+      "date": "2019-04-01",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 460,
+      "price": 1759.1311,
+      "commission": 242.76,
+      "proceeds": 808957.55
+    },
+    {
+      "date": "2019-04-01",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 140,
+      "price": 5763.5948,
+      "commission": 242.07,
+      "cost": 807145.35
+    },
+    {
+      "date": "2019-04-15",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 140,
+      "price": 5650.326,
+      "commission": 237.31,
+      "proceeds": 790808.33
+    },
+    {
+      "date": "2019-04-15",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 475,
+      "price": 1668.5639,
+      "commission": 237.77,
+      "cost": 792805.62
+    },
+    {
+      "date": "2019-04-22",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 475,
+      "price": 1695.8145,
+      "commission": 241.65,
+      "proceeds": 805270.23
+    },
+    {
+      "date": "2019-04-22",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 130,
+      "price": 6198.3361,
+      "commission": 241.74,
+      "cost": 806025.43
+    },
+    {
+      "date": "2019-04-29",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 130,
+      "price": 5616.8615,
+      "commission": 219.06,
+      "proceeds": 729972.94
+    },
+    {
+      "date": "2019-04-29",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 451,
+      "price": 1617.2316,
+      "commission": 218.81,
+      "cost": 729590.27
+    },
+    {
+      "date": "2019-05-13",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 451,
+      "price": 1501.5609,
+      "commission": 203.16,
+      "proceeds": 677000.82
+    },
+    {
+      "date": "2019-05-13",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 125,
+      "price": 5411.0196,
+      "commission": 202.91,
+      "cost": 676580.36
+    },
+    {
+      "date": "2019-06-03",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 125,
+      "price": 5249.8179,
+      "commission": 196.87,
+      "proceeds": 656030.37
+    },
+    {
+      "date": "2019-06-03",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 180,
+      "price": 3635.644,
+      "commission": 196.32,
+      "cost": 654612.25
+    },
+    {
+      "date": "2019-08-05",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 180,
+      "price": 3672.0123,
+      "commission": 198.29,
+      "proceeds": 660763.93
+    },
+    {
+      "date": "2019-08-05",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 432,
+      "price": 1532.9034,
+      "commission": 198.66,
+      "cost": 662412.92
+    },
+    {
+      "date": "2019-08-12",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 432,
+      "price": 1538.3731,
+      "commission": 199.37,
+      "proceeds": 664377.8
+    },
+    {
+      "date": "2019-08-12",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 179,
+      "price": 3702.8031,
+      "commission": 198.84,
+      "cost": 663000.6
+    },
+    {
+      "date": "2019-08-19",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 179,
+      "price": 3787.3029,
+      "commission": 203.38,
+      "proceeds": 677723.84
+    },
+    {
+      "date": "2019-08-19",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 418,
+      "price": 1624.4658,
+      "commission": 203.71,
+      "cost": 679230.43
+    },
+    {
+      "date": "2020-05-18",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 418,
+      "price": 2112.7433,
+      "commission": 264.94,
+      "proceeds": 882861.78
+    },
+    {
+      "date": "2020-05-18",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 150,
+      "price": 5865.9027,
+      "commission": 263.97,
+      "cost": 880149.38
+    },
+    {
+      "date": "2020-05-25",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 150,
+      "price": 5666.3002,
+      "commission": 254.98,
+      "proceeds": 849690.05
+    },
+    {
+      "date": "2020-05-25",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 222,
+      "price": 3833.1538,
+      "commission": 255.29,
+      "cost": 851215.44
+    },
+    {
+      "date": "2020-06-01",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 222,
+      "price": 3967.3689,
+      "commission": 264.23,
+      "proceeds": 880491.66
+    },
+    {
+      "date": "2020-06-01",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 408,
+      "price": 2160.3813,
+      "commission": 264.43,
+      "cost": 881700.01
+    },
+    {
+      "date": "2020-09-14",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 408,
+      "price": 2570.0286,
+      "commission": 314.57,
+      "proceeds": 1048257.1
+    },
+    {
+      "date": "2020-09-14",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 225,
+      "price": 4655.7018,
+      "commission": 314.26,
+      "cost": 1047847.15
+    },
+    {
+      "date": "2020-09-28",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 225,
+      "price": 4577.3266,
+      "commission": 308.97,
+      "proceeds": 1029589.51
+    },
+    {
+      "date": "2020-09-28",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 408,
+      "price": 2523.7672,
+      "commission": 308.91,
+      "cost": 1030005.95
+    },
+    {
+      "date": "2020-10-12",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 408,
+      "price": 2774.6106,
+      "commission": 339.61,
+      "proceeds": 1131701.52
+    },
+    {
+      "date": "2020-10-12",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 234,
+      "price": 4827.981,
+      "commission": 338.92,
+      "cost": 1130086.47
+    },
+    {
+      "date": "2020-12-14",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 234,
+      "price": 4929.9004,
+      "commission": 346.08,
+      "proceeds": 1153250.61
+    },
+    {
+      "date": "2020-12-14",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 423,
+      "price": 2729.3276,
+      "commission": 346.35,
+      "cost": 1154851.93
+    },
+    {
+      "date": "2021-01-18",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 423,
+      "price": 3146.0512,
+      "commission": 399.23,
+      "proceeds": 1330380.42
+    },
+    {
+      "date": "2021-01-18",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 240,
+      "price": 5524.039,
+      "commission": 397.73,
+      "cost": 1326167.1
+    },
+    {
+      "date": "2021-01-25",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 240,
+      "price": 5620.2973,
+      "commission": 404.66,
+      "proceeds": 1348466.69
+    },
+    {
+      "date": "2021-01-25",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 402,
+      "price": 3358.5953,
+      "commission": 405.05,
+      "cost": 1350560.37
+    },
+    {
+      "date": "2021-03-15",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 402,
+      "price": 2641.3709,
+      "commission": 318.55,
+      "proceeds": 1061512.55
+    },
+    {
+      "date": "2021-03-15",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 211,
+      "price": 5040.5796,
+      "commission": 319.07,
+      "cost": 1063881.37
+    },
+    {
+      "date": "2021-04-06",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 211,
+      "price": 5135.2015,
+      "commission": 325.06,
+      "proceeds": 1083202.45
+    },
+    {
+      "date": "2021-04-06",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 170,
+      "price": 6349.4393,
+      "commission": 323.82,
+      "cost": 1079728.5
+    },
+    {
+      "date": "2021-04-12",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 170,
+      "price": 6220.1918,
+      "commission": 317.23,
+      "proceeds": 1057115.37
+    },
+    {
+      "date": "2021-04-12",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 169,
+      "price": 6269.6625,
+      "commission": 317.87,
+      "cost": 1059890.83
+    },
+    {
+      "date": "2021-04-19",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 169,
+      "price": 6470.9106,
+      "commission": 328.08,
+      "proceeds": 1093255.82
+    },
+    {
+      "date": "2021-04-19",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 170,
+      "price": 6431.6859,
+      "commission": 328.02,
+      "cost": 1093714.61
+    },
+    {
+      "date": "2021-05-10",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 170,
+      "price": 6469.5178,
+      "commission": 329.95,
+      "proceeds": 1099488.08
+    },
+    {
+      "date": "2021-05-10",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 173,
+      "price": 6344.9121,
+      "commission": 329.3,
+      "cost": 1097999.09
+    },
+    {
+      "date": "2021-05-24",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 173,
+      "price": 6531.3192,
+      "commission": 338.98,
+      "proceeds": 1129579.25
+    },
+    {
+      "date": "2021-05-24",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 360,
+      "price": 3142.8255,
+      "commission": 339.43,
+      "cost": 1131756.6
+    },
+    {
+      "date": "2021-08-09",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 360,
+      "price": 3453.2901,
+      "commission": 372.96,
+      "proceeds": 1242811.46
+    },
+    {
+      "date": "2021-08-09",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 165,
+      "price": 7514.5895,
+      "commission": 371.97,
+      "cost": 1240279.24
+    },
+    {
+      "date": "2021-10-11",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 165,
+      "price": 7377.4588,
+      "commission": 365.18,
+      "proceeds": 1216915.51
+    },
+    {
+      "date": "2021-10-11",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 171,
+      "price": 7097.5578,
+      "commission": 364.1,
+      "cost": 1214046.48
+    },
+    {
+      "date": "2021-10-18",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 171,
+      "price": 7061.0367,
+      "commission": 362.23,
+      "proceeds": 1207075.04
+    },
+    {
+      "date": "2021-10-18",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 163,
+      "price": 7437.0552,
+      "commission": 363.67,
+      "cost": 1212603.67
+    },
+    {
+      "date": "2021-10-25",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 163,
+      "price": 7524.8402,
+      "commission": 367.96,
+      "proceeds": 1226180.99
+    },
+    {
+      "date": "2021-10-25",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 172,
+      "price": 7111.0896,
+      "commission": 366.93,
+      "cost": 1223474.34
+    },
+    {
+      "date": "2021-11-01",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 172,
+      "price": 7053.6952,
+      "commission": 363.97,
+      "proceeds": 1212871.61
+    },
+    {
+      "date": "2021-11-01",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 162,
+      "price": 7463.0661,
+      "commission": 362.71,
+      "cost": 1209379.41
+    },
+    {
+      "date": "2021-11-08",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 162,
+      "price": 7415.4838,
+      "commission": 360.39,
+      "proceeds": 1200947.98
+    },
+    {
+      "date": "2021-11-08",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 171,
+      "price": 7033.9985,
+      "commission": 360.84,
+      "cost": 1203174.58
+    },
+    {
+      "date": "2021-11-15",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 171,
+      "price": 7091.1147,
+      "commission": 363.77,
+      "proceeds": 1212216.84
+    },
+    {
+      "date": "2021-11-15",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 357,
+      "price": 3405.2759,
+      "commission": 364.71,
+      "cost": 1216048.19
+    },
+    {
+      "date": "2021-11-22",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 357,
+      "price": 3502.2211,
+      "commission": 375.09,
+      "proceeds": 1249917.84
+    },
+    {
+      "date": "2021-11-22",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 157,
+      "price": 7955.3191,
+      "commission": 374.7,
+      "cost": 1249359.79
+    },
+    {
+      "date": "2021-11-29",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 157,
+      "price": 7991.8333,
+      "commission": 376.42,
+      "proceeds": 1254341.41
+    },
+    {
+      "date": "2021-11-29",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 357,
+      "price": 3506.9122,
+      "commission": 375.59,
+      "cost": 1252343.25
+    },
+    {
+      "date": "2021-12-27",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 357,
+      "price": 3290.5175,
+      "commission": 352.41,
+      "proceeds": 1174362.33
+    },
+    {
+      "date": "2021-12-27",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 151,
+      "price": 7784.2076,
+      "commission": 352.62,
+      "cost": 1175767.98
+    },
+    {
+      "date": "2022-02-07",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 151,
+      "price": 7054.5588,
+      "commission": 319.57,
+      "proceeds": 1064918.8
+    },
+    {
+      "date": "2022-02-07",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 229,
+      "price": 4638.724,
+      "commission": 318.68,
+      "cost": 1062586.47
+    },
+    {
+      "date": "2022-02-14",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 229,
+      "price": 4547.1361,
+      "commission": 312.39,
+      "proceeds": 1040981.78
+    },
+    {
+      "date": "2022-02-14",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 155,
+      "price": 6702.3915,
+      "commission": 311.66,
+      "cost": 1039182.34
+    },
+    {
+      "date": "2022-02-28",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 155,
+      "price": 6846.4548,
+      "commission": 318.36,
+      "proceeds": 1060882.13
+    },
+    {
+      "date": "2022-02-28",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 232,
+      "price": 4586.2275,
+      "commission": 319.2,
+      "cost": 1064323.99
+    },
+    {
+      "date": "2022-03-07",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 232,
+      "price": 4348.4247,
+      "commission": 302.65,
+      "proceeds": 1008531.89
+    },
+    {
+      "date": "2022-03-07",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 151,
+      "price": 6666.0496,
+      "commission": 301.97,
+      "cost": 1006875.46
+    },
+    {
+      "date": "2022-03-14",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 151,
+      "price": 6317.2543,
+      "commission": 286.17,
+      "proceeds": 953619.23
+    },
+    {
+      "date": "2022-03-14",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 140,
+      "price": 6807.3953,
+      "commission": 285.91,
+      "cost": 953321.25
+    },
+    {
+      "date": "2022-03-21",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 140,
+      "price": 6947.4512,
+      "commission": 291.79,
+      "proceeds": 972351.37
+    },
+    {
+      "date": "2022-03-21",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 153,
+      "price": 6365.3019,
+      "commission": 292.17,
+      "cost": 974183.36
+    },
+    {
+      "date": "2022-03-28",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 153,
+      "price": 6276.9981,
+      "commission": 288.11,
+      "proceeds": 960092.6
+    },
+    {
+      "date": "2022-03-28",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 142,
+      "price": 6774.0186,
+      "commission": 288.57,
+      "cost": 962199.21
+    },
+    {
+      "date": "2022-04-06",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 142,
+      "price": 6757.524,
+      "commission": 287.87,
+      "proceeds": 959280.54
+    },
+    {
+      "date": "2022-04-06",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 224,
+      "price": 4268.1049,
+      "commission": 286.82,
+      "cost": 956342.32
+    },
+    {
+      "date": "2022-05-09",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 224,
+      "price": 3873.559,
+      "commission": 260.3,
+      "proceeds": 867416.9
+    },
+    {
+      "date": "2022-05-09",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 155,
+      "price": 5614.1247,
+      "commission": 261.06,
+      "cost": 870450.39
+    },
+    {
+      "date": "2022-05-16",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 155,
+      "price": 5785.2898,
+      "commission": 269.02,
+      "proceeds": 896450.91
+    },
+    {
+      "date": "2022-05-16",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 226,
+      "price": 3960.4943,
+      "commission": 268.52,
+      "cost": 895340.24
+    },
+    {
+      "date": "2022-06-27",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 226,
+      "price": 4439.8196,
+      "commission": 301.02,
+      "proceeds": 1003098.22
+    },
+    {
+      "date": "2022-06-27",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 354,
+      "price": 2833.4277,
+      "commission": 300.91,
+      "cost": 1003334.31
+    },
+    {
+      "date": "2022-07-04",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 354,
+      "price": 2831.8544,
+      "commission": 300.74,
+      "proceeds": 1002175.72
+    },
+    {
+      "date": "2022-07-04",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 222,
+      "price": 4500.5263,
+      "commission": 299.74,
+      "cost": 999416.58
+    },
+    {
+      "date": "2022-07-11",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 222,
+      "price": 4350.2621,
+      "commission": 289.73,
+      "proceeds": 965468.46
+    },
+    {
+      "date": "2022-07-11",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 349,
+      "price": 2770.2286,
+      "commission": 290.04,
+      "cost": 967099.81
+    },
+    {
+      "date": "2022-07-25",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 349,
+      "price": 2702.2401,
+      "commission": 282.92,
+      "proceeds": 942798.85
+    },
+    {
+      "date": "2022-07-25",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 135,
+      "price": 6955.8577,
+      "commission": 281.71,
+      "cost": 939322.5
+    },
+    {
+      "date": "2022-08-22",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 135,
+      "price": 7281.288,
+      "commission": 294.89,
+      "proceeds": 982678.99
+    },
+    {
+      "date": "2022-08-22",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 355,
+      "price": 2781.7945,
+      "commission": 296.26,
+      "cost": 987833.31
+    },
+    {
+      "date": "2022-08-29",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 355,
+      "price": 2627.8749,
+      "commission": 279.87,
+      "proceeds": 932615.72
+    },
+    {
+      "date": "2022-08-29",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 132,
+      "price": 7028.3361,
+      "commission": 278.32,
+      "cost": 928018.69
+    },
+    {
+      "date": "2022-09-19",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 132,
+      "price": 6393.4016,
+      "commission": 253.18,
+      "proceeds": 843675.83
+    },
+    {
+      "date": "2022-09-19",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 143,
+      "price": 5919.0624,
+      "commission": 253.93,
+      "cost": 846679.86
+    },
+    {
+      "date": "2022-09-26",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 143,
+      "price": 5800.5118,
+      "commission": 248.84,
+      "proceeds": 829224.34
+    },
+    {
+      "date": "2022-09-26",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 132,
+      "price": 6289.8761,
+      "commission": 249.08,
+      "cost": 830512.72
+    },
+    {
+      "date": "2022-10-10",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 132,
+      "price": 5978.5163,
+      "commission": 236.75,
+      "proceeds": 788927.4
+    },
+    {
+      "date": "2022-10-10",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 139,
+      "price": 5641.3466,
+      "commission": 235.24,
+      "cost": 784382.42
+    },
+    {
+      "date": "2022-12-26",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 139,
+      "price": 5837.4122,
+      "commission": 243.42,
+      "proceeds": 811156.88
+    },
+    {
+      "date": "2022-12-26",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 212,
+      "price": 3847.3322,
+      "commission": 244.69,
+      "cost": 815879.11
+    },
+    {
+      "date": "2023-01-03",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 212,
+      "price": 3884.0113,
+      "commission": 247.02,
+      "proceeds": 823163.37
+    },
+    {
+      "date": "2023-01-03",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 128,
+      "price": 6430.125,
+      "commission": 246.92,
+      "cost": 823302.92
+    },
+    {
+      "date": "2023-01-09",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 128,
+      "price": 6529.2136,
+      "commission": 250.72,
+      "proceeds": 835488.61
+    },
+    {
+      "date": "2023-01-09",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 208,
+      "price": 4017.1327,
+      "commission": 250.67,
+      "cost": 835814.27
+    },
+    {
+      "date": "2023-02-13",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 208,
+      "price": 4139.4304,
+      "commission": 258.3,
+      "proceeds": 860743.23
+    },
+    {
+      "date": "2023-02-13",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 334,
+      "price": 2575.7538,
+      "commission": 258.09,
+      "cost": 860559.85
+    },
+    {
+      "date": "2023-02-20",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 334,
+      "price": 2478.3134,
+      "commission": 248.33,
+      "proceeds": 827508.35
+    },
+    {
+      "date": "2023-02-20",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 200,
+      "price": 4137.6231,
+      "commission": 248.26,
+      "cost": 827772.88
+    },
+    {
+      "date": "2023-03-13",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 200,
+      "price": 4004.6773,
+      "commission": 240.28,
+      "proceeds": 800695.18
+    },
+    {
+      "date": "2023-03-13",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 117,
+      "price": 6839.4536,
+      "commission": 240.06,
+      "cost": 800456.14
+    },
+    {
+      "date": "2023-03-20",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 117,
+      "price": 6714.733,
+      "commission": 235.69,
+      "proceeds": 785388.08
+    },
+    {
+      "date": "2023-03-20",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 127,
+      "price": 6166.5145,
+      "commission": 234.94,
+      "cost": 783382.28
+    },
+    {
+      "date": "2023-03-27",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 127,
+      "price": 6305.2882,
+      "commission": 240.23,
+      "proceeds": 800531.37
+    },
+    {
+      "date": "2023-03-27",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 116,
+      "price": 6893.5758,
+      "commission": 239.9,
+      "cost": 799894.69
+    },
+    {
+      "date": "2023-05-04",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 116,
+      "price": 6727.2354,
+      "commission": 234.11,
+      "proceeds": 780125.2
+    },
+    {
+      "date": "2023-05-04",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 124,
+      "price": 6268.6515,
+      "commission": 233.19,
+      "cost": 777545.98
+    },
+    {
+      "date": "2023-06-05",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 124,
+      "price": 6091.0088,
+      "commission": 226.59,
+      "proceeds": 755058.5
+    },
+    {
+      "date": "2023-06-05",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 197,
+      "price": 3848.0934,
+      "commission": 227.42,
+      "cost": 758301.83
+    },
+    {
+      "date": "2023-06-12",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 197,
+      "price": 3840.588,
+      "commission": 226.98,
+      "proceeds": 756368.85
+    },
+    {
+      "date": "2023-06-12",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 125,
+      "price": 6033.7399,
+      "commission": 226.27,
+      "cost": 754443.75
+    },
+    {
+      "date": "2023-06-19",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 125,
+      "price": 6125.2535,
+      "commission": 229.7,
+      "proceeds": 765426.99
+    },
+    {
+      "date": "2023-06-19",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 195,
+      "price": 3934.8388,
+      "commission": 230.19,
+      "cost": 767523.76
+    },
+    {
+      "date": "2023-07-03",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 195,
+      "price": 3888.9892,
+      "commission": 227.51,
+      "proceeds": 758125.39
+    },
+    {
+      "date": "2023-07-03",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 114,
+      "price": 6619.4973,
+      "commission": 226.39,
+      "cost": 754849.08
+    },
+    {
+      "date": "2023-07-17",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 114,
+      "price": 6510.0434,
+      "commission": 222.64,
+      "proceeds": 741922.31
+    },
+    {
+      "date": "2023-07-17",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 192,
+      "price": 3871.0421,
+      "commission": 222.97,
+      "cost": 743463.05
+    },
+    {
+      "date": "2023-08-14",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 192,
+      "price": 3852.0502,
+      "commission": 221.88,
+      "proceeds": 739371.76
+    },
+    {
+      "date": "2023-08-14",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 125,
+      "price": 5922.7197,
+      "commission": 222.1,
+      "cost": 740562.06
+    },
+    {
+      "date": "2023-08-21",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 125,
+      "price": 5705.0675,
+      "commission": 213.94,
+      "proceeds": 712919.5
+    },
+    {
+      "date": "2023-08-21",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 191,
+      "price": 3733.2846,
+      "commission": 213.92,
+      "cost": 713271.27
+    },
+    {
+      "date": "2023-10-23",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 191,
+      "price": 3470.7696,
+      "commission": 198.88,
+      "proceeds": 662718.11
+    },
+    {
+      "date": "2023-10-23",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 125,
+      "price": 5295.6246,
+      "commission": 198.59,
+      "cost": 662151.67
+    },
+    {
+      "date": "2023-10-30",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 125,
+      "price": 5540.8417,
+      "commission": 207.78,
+      "proceeds": 692397.43
+    },
+    {
+      "date": "2023-10-30",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 115,
+      "price": 6012.5657,
+      "commission": 207.43,
+      "cost": 691652.48
+    },
+    {
+      "date": "2024-01-02",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 115,
+      "price": 5848.8947,
+      "commission": 201.79,
+      "proceeds": 672421.1
+    },
+    {
+      "date": "2024-01-02",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 124,
+      "price": 5414.8649,
+      "commission": 201.43,
+      "cost": 671644.68
+    },
+    {
+      "date": "2024-01-08",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 124,
+      "price": 5162.532,
+      "commission": 192.05,
+      "proceeds": 639961.92
+    },
+    {
+      "date": "2024-01-08",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 116,
+      "price": 5549.1181,
+      "commission": 193.11,
+      "cost": 643890.81
+    },
+    {
+      "date": "2024-01-22",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 116,
+      "price": 4995.8328,
+      "commission": 173.85,
+      "proceeds": 579342.75
+    },
+    {
+      "date": "2024-01-22",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 179,
+      "price": 3222.1205,
+      "commission": 173.03,
+      "cost": 576932.6
+    },
+    {
+      "date": "2024-05-13",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 179,
+      "price": 3661.026,
+      "commission": 196.6,
+      "proceeds": 655127.06
+    },
+    {
+      "date": "2024-05-13",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 119,
+      "price": 5526.3246,
+      "commission": 197.29,
+      "cost": 657829.92
+    },
+    {
+      "date": "2024-05-27",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 119,
+      "price": 5399.2112,
+      "commission": 192.75,
+      "proceeds": 642313.38
+    },
+    {
+      "date": "2024-05-27",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 176,
+      "price": 3639.3436,
+      "commission": 192.16,
+      "cost": 640716.63
+    },
+    {
+      "date": "2024-06-11",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 176,
+      "price": 3539.3342,
+      "commission": 186.88,
+      "proceeds": 622735.95
+    },
+    {
+      "date": "2024-06-11",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 348,
+      "price": 1789.0889,
+      "commission": 186.78,
+      "cost": 622789.72
+    },
+    {
+      "date": "2024-06-17",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 348,
+      "price": 1804.3868,
+      "commission": 188.38,
+      "proceeds": 627738.23
+    },
+    {
+      "date": "2024-06-17",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 177,
+      "price": 3539.7348,
+      "commission": 187.96,
+      "cost": 626721.02
+    },
+    {
+      "date": "2024-09-30",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 177,
+      "price": 4013.8366,
+      "commission": 213.13,
+      "proceeds": 710235.95
+    },
+    {
+      "date": "2024-09-30",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 327,
+      "price": 2177.2616,
+      "commission": 213.59,
+      "cost": 712178.13
+    },
+    {
+      "date": "2024-12-16",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 327,
+      "price": 2199.3309,
+      "commission": 215.75,
+      "proceeds": 718965.44
+    },
+    {
+      "date": "2024-12-16",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 114,
+      "price": 6283.7937,
+      "commission": 214.91,
+      "cost": 716567.39
+    },
+    {
+      "date": "2024-12-23",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 114,
+      "price": 6090.2849,
+      "commission": 208.29,
+      "proceeds": 694084.19
+    },
+    {
+      "date": "2024-12-23",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 318,
+      "price": 2190.1327,
+      "commission": 208.94,
+      "cost": 696671.15
+    },
+    {
+      "date": "2024-12-30",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 318,
+      "price": 2204.0789,
+      "commission": 210.27,
+      "proceeds": 700686.83
+    },
+    {
+      "date": "2024-12-30",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 113,
+      "price": 6152.0739,
+      "commission": 208.56,
+      "cost": 695392.91
+    },
+    {
+      "date": "2025-01-27",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 113,
+      "price": 5840.2225,
+      "commission": 197.98,
+      "proceeds": 659747.16
+    },
+    {
+      "date": "2025-01-27",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 322,
+      "price": 2065.8837,
+      "commission": 199.56,
+      "cost": 665414.12
+    },
+    {
+      "date": "2025-02-10",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 322,
+      "price": 2181.6928,
+      "commission": 210.75,
+      "proceeds": 702294.34
+    },
+    {
+      "date": "2025-02-10",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 112,
+      "price": 6216.7576,
+      "commission": 208.88,
+      "cost": 696485.74
+    },
+    {
+      "date": "2025-02-17",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 112,
+      "price": 6275.2842,
+      "commission": 210.85,
+      "proceeds": 702620.98
+    },
+    {
+      "date": "2025-02-17",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 118,
+      "price": 5954.6684,
+      "commission": 210.8,
+      "cost": 702861.67
+    },
+    {
+      "date": "2025-02-24",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 118,
+      "price": 6038.928,
+      "commission": 213.78,
+      "proceeds": 712379.73
+    },
+    {
+      "date": "2025-02-24",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 110,
+      "price": 6470.4875,
+      "commission": 213.53,
+      "cost": 711967.15
+    },
+    {
+      "date": "2025-04-14",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 110,
+      "price": 5932.5877,
+      "commission": 195.78,
+      "proceeds": 652388.87
+    },
+    {
+      "date": "2025-04-14",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 116,
+      "price": 5632.7646,
+      "commission": 196.02,
+      "cost": 653596.72
+    },
+    {
+      "date": "2025-04-21",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 116,
+      "price": 5636.7381,
+      "commission": 196.16,
+      "proceeds": 653665.46
+    },
+    {
+      "date": "2025-04-21",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 110,
+      "price": 5958.59,
+      "commission": 196.63,
+      "cost": 655641.54
+    },
+    {
+      "date": "2025-05-12",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 110,
+      "price": 6161.2931,
+      "commission": 203.32,
+      "proceeds": 677538.92
+    },
+    {
+      "date": "2025-05-12",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 174,
+      "price": 3894.5002,
+      "commission": 203.29,
+      "cost": 677846.33
+    },
+    {
+      "date": "2025-06-30",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 174,
+      "price": 3932.143,
+      "commission": 205.26,
+      "proceeds": 683987.63
+    },
+    {
+      "date": "2025-06-30",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 318,
+      "price": 2155.1667,
+      "commission": 205.6,
+      "cost": 685548.62
+    },
+    {
+      "date": "2025-12-22",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 318,
+      "price": 3188.7929,
+      "commission": 304.21,
+      "proceeds": 1013731.94
+    },
+    {
+      "date": "2025-12-22",
+      "symbol": "510300.SH",
+      "side": "BUY",
+      "quantity": 219,
+      "price": 4616.2351,
+      "commission": 303.29,
+      "cost": 1011258.78
+    },
+    {
+      "date": "2025-12-29",
+      "symbol": "510300.SH",
+      "side": "SELL",
+      "quantity": 219,
+      "price": 4634.7327,
+      "commission": 304.5,
+      "proceeds": 1014701.97
+    },
+    {
+      "date": "2025-12-29",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 136,
+      "price": 7438.0453,
+      "commission": 303.47,
+      "cost": 1011877.64
+    },
+    {
+      "date": "2026-01-12",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 136,
+      "price": 8240.8784,
+      "commission": 336.23,
+      "proceeds": 1120423.23
+    },
+    {
+      "date": "2026-01-12",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 332,
+      "price": 3391.729,
+      "commission": 337.82,
+      "cost": 1126391.86
+    },
+    {
+      "date": "2026-01-19",
+      "symbol": "159915.SZ",
+      "side": "SELL",
+      "quantity": 332,
+      "price": 3334.2705,
+      "commission": 332.09,
+      "proceeds": 1106645.71
+    },
+    {
+      "date": "2026-01-19",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 133,
+      "price": 8296.2349,
+      "commission": 331.02,
+      "cost": 1103730.27
+    },
+    {
+      "date": "2026-03-23",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 133,
+      "price": 7433.3044,
+      "commission": 296.59,
+      "proceeds": 988332.89
+    },
+    {
+      "date": "2026-03-23",
+      "symbol": "515080.SH",
+      "side": "BUY",
+      "quantity": 133,
+      "price": 7416.5159,
+      "commission": 295.92,
+      "cost": 986692.53
+    },
+    {
+      "date": "2026-03-30",
+      "symbol": "515080.SH",
+      "side": "SELL",
+      "quantity": 133,
+      "price": 7760.1622,
+      "commission": 309.63,
+      "proceeds": 1031791.94
+    },
+    {
+      "date": "2026-03-30",
+      "symbol": "510500.SH",
+      "side": "BUY",
+      "quantity": 133,
+      "price": 7761.4771,
+      "commission": 309.68,
+      "cost": 1032586.14
+    },
+    {
+      "date": "2026-04-13",
+      "symbol": "510500.SH",
+      "side": "SELL",
+      "quantity": 133,
+      "price": 7959.7293,
+      "commission": 317.59,
+      "proceeds": 1058326.4
+    },
+    {
+      "date": "2026-04-13",
+      "symbol": "159915.SZ",
+      "side": "BUY",
+      "quantity": 305,
+      "price": 3479.916,
+      "commission": 318.41,
+      "cost": 1061692.8
+    }
+  ],
+  "annual_returns": {
+    "2018": -30.95,
+    "2019": 8.97,
+    "2020": 66.86,
+    "2021": -3.56,
+    "2022": -32.19,
+    "2023": -17.14,
+    "2024": -0.23,
+    "2025": 50.48,
+    "2026": 18.24
+  },
+  "generated_at": "2026-06-06T16:33:46.122005"
+}
