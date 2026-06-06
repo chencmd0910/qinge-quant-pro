@@ -7,6 +7,10 @@ from .lifecycle import StrategyLifecycle, StrategyStatus, PromotionRules
 from .generator import StrategyGenerator, GeneratedStrategy
 from .database import ResearchDatabase
 from .lab import AIResearchLab
+from .reality_check import (
+    RealityCheck, OutOfSampleTest, MonteCarloTest,
+    FactorAttributor, StrategyClusterer,
+)
 
 __all__ = [
     "ResearchEngine", "StrategyRegistry", "StrategyRecord",
@@ -15,4 +19,6 @@ __all__ = [
     "StrategyLifecycle", "StrategyStatus", "PromotionRules",
     "StrategyGenerator", "GeneratedStrategy",
     "ResearchDatabase", "AIResearchLab",
+    "RealityCheck", "OutOfSampleTest", "MonteCarloTest",
+    "FactorAttributor", "StrategyClusterer",
 ]
