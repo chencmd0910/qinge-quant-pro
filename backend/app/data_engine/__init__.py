@@ -1,5 +1,5 @@
-"""数据引擎 - 统一数据管理"""
+# Data Engine
 from .service import DataEngine
-from .providers.provider_base import MarketDataProvider, BarData, TickData
+from .providers import MarketDataProvider, Market, Bar, Tick
 
-__all__ = ["DataEngine", "MarketDataProvider", "BarData", "TickData"]
+__all__ = ["DataEngine", "MarketDataProvider", "Market", "Bar", "Tick"]

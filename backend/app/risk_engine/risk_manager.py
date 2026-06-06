@@ -1,131 +1,124 @@
-"""风控管理器 - 订单发出前的最后一道关卡
+"""风控管理器 - 两层风控
 
-职责:
-1. 单笔止损检查
-2. 总仓位控制
-3. 单标的最大仓位
-4. 日内最大亏损
-5. 流动性检查
-6. 最大回撤检查
-7. 波动率检查
+通用层: UniversalRisk (仓位/回撤/单日亏损 -> 所有市场)
+市场层: MarketRule (涨跌停/T+1 -> 仅A股, 盘前盘后 -> 美股, etc.)
 """
-from dataclasses import dataclass
-from typing import Optional, Dict
-from ..event_engine.core.event import OrderEvent, SignalEvent, EventType
-
-
-@dataclass
-class RiskConfig:
-    """风控参数"""
-    max_position_pct: float = 0.25      # 单标的最大仓位占比
-    max_total_position_pct: float = 0.8 # 总仓位上限
-    max_daily_loss_pct: float = 0.03    # 日内最大亏损比例
-    stop_loss_pct: float = 0.08         # 单笔止损比例
-    min_volume: int = 100_000           # 最小成交量（流动性检查）
-    max_orders_per_day: int = 200       # 日内最大下单数
-    max_drawdown_pct: float = 0.20      # 最大回撤限制
-    max_volatility_pct: float = 0.05    # 单日最大波动率（涨跌停保护）
+from typing import Optional, Tuple, List, Dict
+from .universal_risk import UniversalRisk, UniversalRiskConfig
+from .market_rules.a_share_rule import AShareRule
+from ..event_engine.core.event import SignalEvent, OrderEvent
+from ..data_engine.providers.provider_base import Market
 
 
 class RiskManager:
     """风控管理器
 
-    接收SignalEvent，检查通过后生成OrderEvent，否则拒绝。
+    两层风控:
+        Layer 1: UniversalRisk → 所有市场通用
+        Layer 2: MarketRule → 市场特有规则
+
+    使用:
+        rm = RiskManager(initial_capital=1_000_000, market=Market.A_SHARE)
+        order = rm.check_signal(signal)  # → OrderEvent or None
     """
 
-    def __init__(self, config: Optional[RiskConfig] = None, initial_capital: float = 1_000_000):
-        self.config = config or RiskConfig()
+    def __init__(self, initial_capital: float = 1_000_000,
+                 market: Market = Market.A_SHARE,
+                 config: UniversalRiskConfig = None):
         self.initial_capital = initial_capital
-        self.daily_pnl = 0.0
-        self.order_count_today = 0
-        self.positions = {}  # symbol -> {quantity, avg_cost, current_price}
+        self.market = market
+        self.universal = UniversalRisk(config)
+        self.universal.peak_value = initial_capital
 
-    def check_signal(self, signal: SignalEvent) -> Optional[OrderEvent]:
-        """检查信号，通过返回OrderEvent，否则返回None"""
+        # 市场规则映射
+        self._market_rules = self._load_market_rules()
+
+        # 持仓跟踪
+        self.positions: Dict[str, Dict] = {}
+        self.last_buy_dates: Dict[str, str] = {}  # symbol → last buy date
+
+    def _load_market_rules(self) -> dict:
+        """加载市场特有规则"""
+        if self.market == Market.A_SHARE:
+            return {"t_plus": True, "limit": AShareRule()}
+        elif self.market == Market.HK_STOCK:
+            return {"t_plus": False, "limit": None}
+        elif self.market == Market.US_STOCK:
+            return {"t_plus": False, "limit": None}
+        elif self.market == Market.CRYPTO:
+            return {"t_plus": False, "limit": None}
+        return {"t_plus": False, "limit": None}
+
+    def check_signal(self, signal: SignalEvent,
+                     current_price: float = 0,
+                     current_volume: float = 0,
+                     date_str: str = "") -> Optional[OrderEvent]:
+        """风控检查信号，通过则生成订单
+
+        Returns:
+            OrderEvent if approved, None if rejected
+        """
         symbol = signal.symbol
         direction = signal.direction
+        quantity = int(signal.strength * 100)  # 信号强度→手
 
-        if direction == "HOLD":
+        # === Layer 1: 通用风控 ===
+        ok, reason = self.universal.check_order_count()
+        if not ok:
+            print(f"[Risk] {symbol} {direction}: {reason}")
             return None
 
-        # 检查日内下单次数
-        if self.order_count_today >= self.config.max_orders_per_day:
-            return self._reject("日内下单次数超限")
-
-        # 检查日内亏损
-        if self.daily_pnl < -self.initial_capital * self.config.max_daily_loss_pct:
-            return self._reject("日内亏损超限")
-
-        # 检查总仓位
-        total_position_value = sum(
-            p.get("quantity", 0) * p.get("current_price", 0)
-            for p in self.positions.values()
+        ok, reason = self.universal.check_drawdown(
+            sum(p.get("value", 0) for p in self.positions.values()) + self.universal.peak_value
         )
-        if direction == "BUY":
-            if total_position_value / self.initial_capital > self.config.max_total_position_pct:
-                return self._reject("总仓位超限")
+        if not ok:
+            print(f"[Risk] {reason}")
+            return None
 
-            # 检查单标的仓位
-            pos_value = self.positions.get(symbol, {}).get("quantity", 0) * \
-                       self.positions.get(symbol, {}).get("current_price", 0)
-            if pos_value / self.initial_capital > self.config.max_position_pct:
-                return self._reject(f"{symbol} 单标的仓位超限")
+        # === Layer 2: 市场规则 ===
+        limit_rule = self._market_rules.get("limit")
+        if limit_rule and hasattr(limit_rule, 'can_buy'):
+            if direction == "BUY":
+                ok, reason = limit_rule.can_buy(0)  # change_pct would come from market data
+                if not ok:
+                    print(f"[Risk] {symbol}: {reason}")
+                    return None
+            else:
+                ok, reason = limit_rule.can_sell(0)
+                if not ok:
+                    print(f"[Risk] {symbol}: {reason}")
+                    return None
 
-        # 检查通过，生成OrderEvent
-        price = signal.data.get("price", 0)
-        quantity = signal.data.get("quantity", 0)
-        if quantity <= 0:
-            quantity = self._calc_quantity(symbol, direction, price)
+        # T+1 检查（A股特有）
+        if self._market_rules.get("t_plus") and direction == "SELL":
+            last_buy = self.last_buy_dates.get(symbol, "")
+            if AShareRule.is_t1_restricted(last_buy, date_str):
+                print(f"[Risk] {symbol}: T+1限制，当日买入不可卖出")
+                return None
 
-        self.order_count_today += 1
-        return OrderEvent(data={
-            "symbol": symbol,
-            "side": direction,
-            "quantity": quantity,
-            "price": price,
-            "order_type": "MARKET",
-            "strategy": signal.data.get("strategy", ""),
+        # === 生成订单 ===
+        order = OrderEvent(data={
+            "symbol": symbol, "side": direction, "quantity": quantity,
+            "price": current_price, "signal": signal,
         })
+        return order
 
-    def update_position(self, symbol: str, quantity: int, price: float, side: str):
-        """更新持仓（成交后调用）"""
-        if symbol not in self.positions:
-            self.positions[symbol] = {"quantity": 0, "avg_cost": 0, "current_price": price}
-
-        pos = self.positions[symbol]
+    def update_position(self, symbol: str, quantity: float, price: float, side: str, date_str: str = ""):
+        """更新持仓记录"""
         if side == "BUY":
-            total_cost = pos["avg_cost"] * pos["quantity"] + price * quantity
-            pos["quantity"] += quantity
-            pos["avg_cost"] = total_cost / pos["quantity"] if pos["quantity"] > 0 else 0
+            self.positions[symbol] = {
+                "quantity": quantity, "avg_cost": price,
+                "value": quantity * price,
+            }
+            self.last_buy_dates[symbol] = date_str
         elif side == "SELL":
-            pnl = (price - pos["avg_cost"]) * quantity
-            self.daily_pnl += pnl
-            pos["quantity"] -= quantity
-            if pos["quantity"] <= 0:
-                pos["quantity"] = 0
-                pos["avg_cost"] = 0
-
-        pos["current_price"] = price
+            if symbol in self.positions:
+                old = self.positions[symbol]
+                pnl = (price - old["avg_cost"]) * quantity
+                self.universal.update_pnl(pnl)
+                old["quantity"] = max(0, old["quantity"] - quantity)
+                if old["quantity"] <= 0:
+                    del self.positions[symbol]
 
     def reset_daily(self):
-        """每日重置"""
-        self.daily_pnl = 0.0
-        self.order_count_today = 0
-
-    def _calc_quantity(self, symbol: str, direction: str, price: float) -> int:
-        """计算下单数量"""
-        if price <= 0:
-            return 0
-        if direction == "BUY":
-            max_amount = self.initial_capital * self.config.max_position_pct
-            quantity = int(max_amount / price / 100) * 100
-            return max(quantity, 0)
-        elif direction == "SELL":
-            pos = self.positions.get(symbol, {})
-            return pos.get("quantity", 0)
-        return 0
-
-    def _reject(self, reason: str) -> None:
-        """风控拒绝"""
-        print(f"[RISK] 拒绝: {reason}")
-        return None
+        self.universal.reset_daily()

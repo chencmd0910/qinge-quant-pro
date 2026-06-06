@@ -1,102 +1,106 @@
-"""PaperBroker - 模拟券商
+"""PaperBroker - 模拟券商（A股）
 
-最基础的模拟交易实现。
-无延迟、无滑点模拟，用于策略验证。
+最基础的模拟交易，无延迟无滑点。
+用于策略验证和模拟盘。
 """
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
-from ..broker_base import BrokerBase
-from ...event_engine.core.event import OrderEvent, FillEvent
+from ..broker_base import BrokerBase, Order, OrderSide, OrderType, OrderStatus, Position, Account
+from ...data_engine.providers.provider_base import Market
 
 
 class PaperBroker(BrokerBase):
-    """模拟券商
-
-    用于策略验证和模拟盘。
-    所有订单立即以指定价格成交。
-    """
+    """模拟券商 - A股"""
 
     def __init__(self, initial_cash: float = 1_000_000):
-        self.cash = initial_cash
-        self.positions = {}   # symbol -> {quantity, avg_cost}
-        self.orders = []      # 历史订单
-        self.connected = False
+        self._cash = initial_cash
+        self._positions: dict = {}  # symbol -> {quantity, avg_cost}
+        self._orders: List[Order] = []
+        self._connected = False
+
+    @property
+    def name(self) -> str:
+        return "paper"
+
+    @property
+    def market(self) -> Market:
+        return Market.A_SHARE
+
+    @property
+    def currency(self) -> str:
+        return "CNY"
 
     def connect(self) -> bool:
-        self.connected = True
+        self._connected = True
         return True
 
     def disconnect(self):
-        self.connected = False
+        self._connected = False
 
-    def send_order(self, order: OrderEvent) -> Optional[FillEvent]:
-        """发送订单 - 立即成交"""
-        if not self.connected:
-            return None
+    def send_order(self, order: Order) -> Optional[Order]:
+        if not self._connected:
+            order.status = OrderStatus.REJECTED
+            order.reason = "未连接"
+            return order
 
-        symbol = order.data.get("symbol", "")
-        side = order.data.get("side", "")
-        quantity = order.data.get("quantity", 0)
-        price = order.data.get("price", 0)
+        symbol = order.symbol
+        price = order.price
+        quantity = order.quantity
 
-        if side == "BUY":
+        if order.side == OrderSide.BUY:
             cost = price * quantity
-            if cost > self.cash:
-                return None  # 资金不足
-            self.cash -= cost
-            if symbol not in self.positions:
-                self.positions[symbol] = {"quantity": 0, "avg_cost": 0}
-            pos = self.positions[symbol]
+            if cost > self._cash:
+                order.status = OrderStatus.REJECTED
+                order.reason = f"资金不足: need {cost:.2f}, have {self._cash:.2f}"
+                return order
+            self._cash -= cost
+            if symbol not in self._positions:
+                self._positions[symbol] = {"quantity": 0, "avg_cost": 0}
+            pos = self._positions[symbol]
             total = pos["avg_cost"] * pos["quantity"] + price * quantity
             pos["quantity"] += quantity
             pos["avg_cost"] = total / pos["quantity"]
 
-        elif side == "SELL":
-            pos = self.positions.get(symbol)
+        elif order.side == OrderSide.SELL:
+            pos = self._positions.get(symbol)
             if not pos or pos["quantity"] < quantity:
-                return None  # 持仓不足
-            pnl = (price - pos["avg_cost"]) * quantity
+                order.status = OrderStatus.REJECTED
+                order.reason = "持仓不足"
+                return order
             pos["quantity"] -= quantity
-            self.cash += price * quantity
+            self._cash += price * quantity
             if pos["quantity"] == 0:
-                del self.positions[symbol]
+                del self._positions[symbol]
 
-        fill = FillEvent(data={
-            "symbol": symbol,
-            "side": side,
-            "quantity": quantity,
-            "price": price,
-            "commission": 0,
-            "slippage": 0,
-        })
-        self.orders.append({
-            "timestamp": datetime.now().isoformat(),
-            "symbol": symbol, "side": side,
-            "quantity": quantity, "price": price,
-        })
-        return fill
+        order.status = OrderStatus.FILLED
+        order.filled_quantity = quantity
+        order.filled_price = price
+        order.timestamp = datetime.now().isoformat()
+        self._orders.append(order)
+        return order
 
     def cancel_order(self, order_id: str) -> bool:
-        return False  # PaperBroker 立即成交，无法撤销
+        return False  # 立即成交，无法撤销
 
-    def get_position(self, symbol: str) -> dict:
-        return self.positions.get(symbol, {"quantity": 0, "avg_cost": 0})
+    def get_positions(self) -> List[Position]:
+        return [
+            Position(
+                symbol=sym, market=Market.A_SHARE,
+                quantity=d["quantity"], avg_cost=d["avg_cost"],
+                current_price=d["avg_cost"],  # Paper没有实时价格
+                market_value=d["quantity"] * d["avg_cost"],
+            )
+            for sym, d in self._positions.items()
+            if d["quantity"] > 0
+        ]
 
-    def get_account(self) -> dict:
-        invested = sum(p["quantity"] * p["avg_cost"] for p in self.positions.values())
-        return {
-            "cash": round(self.cash, 2),
-            "invested": round(invested, 2),
-            "total": round(self.cash + invested, 2),
-        }
+    def get_account(self) -> Account:
+        invested = sum(d["quantity"] * d["avg_cost"] for d in self._positions.values())
+        return Account(
+            account_id="PAPER_A", market=Market.A_SHARE,
+            broker="paper", currency="CNY",
+            cash=self._cash, invested=invested, total=self._cash + invested,
+        )
 
     def get_market_price(self, symbol: str) -> float:
-        return 0.0  # PaperBroker 不提供行情
-
-    def get_summary(self) -> dict:
-        account = self.get_account()
-        return {
-            **account,
-            "position_count": len(self.positions),
-            "order_count": len(self.orders),
-        }
+        return 0.0  # Paper不提供行情

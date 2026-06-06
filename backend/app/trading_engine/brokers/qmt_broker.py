@@ -1,24 +1,35 @@
-"""QMT券商适配器 - A股实盘
+"""QMT券商 - A股实盘（占位）
 
-QMT (Quick Market Trading) 是迅投的量化交易客户端。
+QMT (Quick Market Trading) 迅投量化客户端。
 依赖: xtquant
 """
-from ..broker_base import BrokerBase
-from typing import Optional
-from ...event_engine.core.event import OrderEvent, FillEvent
+from typing import Optional, List
+from ..broker_base import BrokerBase, Order, OrderSide, OrderType, OrderStatus, Position, Account
+from ...data_engine.providers.provider_base import Market
 
 
 class QMTBroker(BrokerBase):
-    """QMT实盘券商
+    """QMT实盘券商 - A股
 
     TODO: 实现QMT接口
-    依赖: pip install xtquant
     """
 
     def __init__(self, path: str = "", account: str = ""):
-        self.path = path      # QMT安装路径
-        self.account = account  # 交易账号
+        self._path = path
+        self._account = account
         self._connected = False
+
+    @property
+    def name(self) -> str:
+        return "qmt"
+
+    @property
+    def market(self) -> Market:
+        return Market.A_SHARE
+
+    @property
+    def currency(self) -> str:
+        return "CNY"
 
     def connect(self) -> bool:
         # TODO: 连接QMT
@@ -27,18 +38,20 @@ class QMTBroker(BrokerBase):
     def disconnect(self):
         self._connected = False
 
-    def send_order(self, order: OrderEvent) -> Optional[FillEvent]:
+    def send_order(self, order: Order) -> Optional[Order]:
         # TODO: QMT下单
-        return None
+        order.status = OrderStatus.REJECTED
+        order.reason = "QMT未实现"
+        return order
 
     def cancel_order(self, order_id: str) -> bool:
         return False
 
-    def get_position(self, symbol: str) -> dict:
-        return {}
+    def get_positions(self) -> List[Position]:
+        return []
 
-    def get_account(self) -> dict:
-        return {}
+    def get_account(self) -> Account:
+        return Account(account_id="QMT_A", market=Market.A_SHARE, broker="qmt", currency="CNY")
 
     def get_market_price(self, symbol: str) -> float:
         return 0.0

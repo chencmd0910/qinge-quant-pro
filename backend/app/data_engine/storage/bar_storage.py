@@ -3,8 +3,7 @@
 将获取的历史K线持久化到数据库，避免重复下载。
 """
 from typing import List, Optional
-from datetime import datetime
-from ..providers.provider_base import BarData
+from ..providers.provider_base import Bar
 
 
 class BarStorage:
@@ -16,12 +15,8 @@ class BarStorage:
     def __init__(self, db_session=None):
         self._db = db_session
 
-    def save_bars(self, bars: List[BarData]) -> int:
-        """保存K线到数据库
-
-        Returns:
-            新增条数
-        """
+    def save_bars(self, bars: List[Bar]) -> int:
+        """保存K线到数据库"""
         if not self._db or not bars:
             return 0
         from ...models.models import MarketData
@@ -42,7 +37,7 @@ class BarStorage:
             self._db.commit()
         return saved
 
-    def load_bars(self, symbol: str, start_date: str, end_date: str) -> List[BarData]:
+    def load_bars(self, symbol: str, start_date: str, end_date: str) -> List[Bar]:
         """从数据库加载K线"""
         if not self._db:
             return []
@@ -53,8 +48,8 @@ class BarStorage:
             MarketData.trade_date <= end_date,
         ).order_by(MarketData.trade_date).all()
         return [
-            BarData(
-                symbol=r.symbol, date=r.trade_date,
+            Bar(
+                symbol=r.symbol, market=None, date=r.trade_date,
                 open=r.open, high=r.high, low=r.low, close=r.close,
                 volume=r.volume or 0, amount=r.amount or 0, change_pct=r.change_pct or 0,
             )

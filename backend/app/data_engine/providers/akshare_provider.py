@@ -1,27 +1,18 @@
-"""AkShare数据提供者 - A股数据
+"""AkShare数据提供者 - A股市场
 
-依赖: pip install akshare
+支持: A股/ETF/可转债
+数据源: 东方财富（通过AkShare）
 """
 from typing import List, Optional
 from datetime import datetime, timedelta
-from .provider_base import MarketDataProvider, BarData, TickData
+from .provider_base import MarketDataProvider, Market, Bar, Tick
 
 
 class AkShareProvider(MarketDataProvider):
-    """AkShare A股数据提供者
-
-    支持：
-    - A股日K线（前复权）
-    - ETF日K线
-    - 实时行情
-    - 标的列表
-    """
+    """AkShare A股数据提供者"""
 
     def __init__(self):
         self._ak = None
-        self._load_akshare()
-
-    def _load_akshare(self):
         try:
             import akshare
             self._ak = akshare
@@ -32,24 +23,31 @@ class AkShareProvider(MarketDataProvider):
     def name(self) -> str:
         return "akshare"
 
+    @property
+    def market(self) -> Market:
+        return Market.A_SHARE
+
     def is_available(self) -> bool:
         return self._ak is not None
 
     def get_bars(self, symbol: str, start_date: str, end_date: str,
-                 period: str = "daily") -> List[BarData]:
+                 period: str = "daily") -> List[Bar]:
         if not self.is_available():
             return []
         try:
+            # 统一代码格式: 600519.SH -> 600519
+            code = symbol.split('.')[0] if '.' in symbol else symbol
             df = self._ak.stock_zh_a_hist(
-                symbol=symbol, period=period,
+                symbol=code, period=period,
                 start_date=start_date.replace("-", ""),
                 end_date=end_date.replace("-", ""),
                 adjust="qfq"
             )
             bars = []
             for _, row in df.iterrows():
-                bars.append(BarData(
+                bars.append(Bar(
                     symbol=symbol,
+                    market=Market.A_SHARE,
                     date=str(row['日期']),
                     open=float(row['开盘']),
                     high=float(row['最高']),
@@ -65,17 +63,18 @@ class AkShareProvider(MarketDataProvider):
             print(f"[AkShare] Error: {e}")
             return []
 
-    def get_latest(self, symbol: str) -> Optional[TickData]:
+    def get_latest(self, symbol: str) -> Optional[Tick]:
         if not self.is_available():
             return None
         try:
+            code = symbol.split('.')[0] if '.' in symbol else symbol
             df = self._ak.stock_zh_a_spot_em()
-            row = df[df['代码'] == symbol]
+            row = df[df['代码'] == code]
             if row.empty:
                 return None
             r = row.iloc[0]
-            return TickData(
-                symbol=symbol,
+            return Tick(
+                symbol=symbol, market=Market.A_SHARE,
                 name=str(r.get('名称', '')),
                 price=float(r.get('最新价', 0)),
                 change_pct=float(r.get('涨跌幅', 0)),
@@ -91,11 +90,19 @@ class AkShareProvider(MarketDataProvider):
             print(f"[AkShare] Latest error: {e}")
             return None
 
-    def get_symbols(self, market: str = "A股") -> List[str]:
+    def get_symbols(self, **filters) -> List[str]:
         if not self.is_available():
             return []
         try:
             df = self._ak.stock_zh_a_spot_em()
-            return df['代码'].tolist()
+            codes = df['代码'].tolist()
+            # 标准化为 600519.SH 格式
+            result = []
+            for code in codes:
+                if code.startswith('6'):
+                    result.append(f"{code}.SH")
+                else:
+                    result.append(f"{code}.SZ")
+            return result
         except:
             return []
