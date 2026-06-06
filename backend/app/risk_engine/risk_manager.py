@@ -6,9 +6,11 @@
 3. 单标的最大仓位
 4. 日内最大亏损
 5. 流动性检查
+6. 最大回撤检查
+7. 波动率检查
 """
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Dict
 from ..event_engine.core.event import OrderEvent, SignalEvent, EventType
 
 
@@ -21,6 +23,8 @@ class RiskConfig:
     stop_loss_pct: float = 0.08         # 单笔止损比例
     min_volume: int = 100_000           # 最小成交量（流动性检查）
     max_orders_per_day: int = 50        # 日内最大下单数
+    max_drawdown_pct: float = 0.20      # 最大回撤限制
+    max_volatility_pct: float = 0.05    # 单日最大波动率（涨跌停保护）
 
 
 class RiskManager:

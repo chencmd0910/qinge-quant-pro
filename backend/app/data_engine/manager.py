@@ -5,9 +5,10 @@
 2. 数据缓存（避免重复加载）
 3. 数据标准化（统一Bar格式）
 4. 为回测和实盘提供统一数据接口
+5. 数据采集调度（AkShare/Tushare/东方财富）
 """
-from typing import Dict, List, Optional
-from datetime import datetime
+from typing import Dict, List, Optional, Callable
+from datetime import datetime, timedelta
 from ..backtest_engine.core.bar import Bar
 
 

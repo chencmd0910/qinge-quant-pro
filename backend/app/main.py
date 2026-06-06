@@ -16,6 +16,7 @@ from app.api.portfolio import router as portfolio_router
 from app.api.strategy import router as strategy_router
 from app.api.backtest import router as backtest_router
 from app.api.market import router as market_router
+from app.api.agent_gateway import router as agent_router
 from app.websocket.market_ws import market_websocket
 
 settings = get_settings()
@@ -39,6 +40,7 @@ app.include_router(portfolio_router)
 app.include_router(strategy_router)
 app.include_router(backtest_router)
 app.include_router(market_router)
+app.include_router(agent_router)
 
 
 @app.websocket("/ws/market")
