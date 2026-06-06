@@ -25,7 +25,7 @@ const menus = [
   { icon: Factory, label: "Alpha Factory", href: "/alpha-factory" },
   { icon: Store, label: "Marketplace", href: "/marketplace" },
   { icon: PieChart, label: "投资组合", href: "/portfolio" },
-  { icon: Shield, label: "风险中心", href: "#" },
+  { icon: Shield, label: "风险中心", href: "/risk" },
   { icon: CandlestickChart, label: "交易执行", href: "#" },
   { icon: Database, label: "数据中心", href: "#" },
 ];
