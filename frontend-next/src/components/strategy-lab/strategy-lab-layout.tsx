@@ -300,7 +300,8 @@ class Strategy:
         steps.push(`[OF] 样本外夏普: ${overfit.oos_metrics?.sharpe_ratio ?? "-"}`);
         steps.push(`[OF] 夏普衰减: ${overfit.sharpe_decay_pct}%`);
         steps.push(`[OF] 回撤比(OOS/IS): ${overfit.maxdd_ratio}`);
-        const riskLabel = {LOW:"🟢 低风险",MODERATE:"🟡 中度风险",HIGH:"🟠 高风险",SEVERE:"🔴 严重过拟合"}[overfit.overfit_risk] || overfit.overfit_risk;
+        const riskMap: Record<string, string> = {LOW:"🟢 低风险",MODERATE:"🟡 中度风险",HIGH:"🟠 高风险",SEVERE:"🔴 严重过拟合"};
+        const riskLabel = riskMap[overfit.overfit_risk] || overfit.overfit_risk;
         steps.push(`[OF] 过拟合风险: ${riskLabel}`);
       }
 

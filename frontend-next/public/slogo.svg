@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">青鳄量化盾标</title>
+  <desc id="desc">Qinge Quant alligator shield mark</desc>
+  <defs>
+    <linearGradient id="shieldStroke" x1="16" y1="8" x2="84" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="0.52" stop-color="#00E676"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="gatorBody" x1="18" y1="16" x2="78" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2AF07C"/>
+      <stop offset="0.45" stop-color="#10C868"/>
+      <stop offset="0.75" stop-color="#09AEB8"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="gatorDark" x1="24" y1="28" x2="72" y2="68" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#064E3B"/>
+      <stop offset="1" stop-color="#0F3D5C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield background -->
+  <path d="M48 7L81 19V43C81 65.5 67.4 81.4 48 89C28.6 81.4 15 65.5 15 43V19L48 7Z" fill="#07111F" stroke="url(#shieldStroke)" stroke-width="4"/>
+  
+  <!-- Shield inner subtle glow ring -->
+  <path d="M48 11L77 22V43C77 63.5 64.8 77.8 48 84.5C31.2 77.8 19 63.5 19 43V22L48 11Z" fill="none" stroke="#00E676" stroke-width="0.6" opacity="0.25"/>
+
+  <!-- Alligator head - main shape (facing right) -->
+  <!-- Long snout -->
+  <path d="M30 52 L56 46 L70 44 L76 46 L74 52 L68 55 L56 56 L44 58 L30 56 Z" fill="url(#gatorBody)" />
+
+  <!-- Upper jaw -->
+  <path d="M56 46 L72 43 L78 44 L76 47 L68 50 L56 50 Z" fill="url(#gatorBody)" opacity="0.7"/>
+
+  <!-- Lower jaw -->
+  <path d="M56 53 L68 52 L74 50 L72 54 L66 55 L56 54 Z" fill="url(#gatorDark)" opacity="0.8"/>
+
+  <!-- Teeth - upper -->
+  <path d="M57 45L59 40L61 45 M63 44L65 39L67 44 M69 43L71 38L73 43" fill="#B9FBD1" opacity="0.9"/>
+
+  <!-- Teeth - lower -->
+  <path d="M58 53L60 56L62 53 M64 52L66 55L68 52 M70 50L72 53L74 50" fill="#B9FBD1" opacity="0.7"/>
+
+  <!-- Eye -->
+  <ellipse cx="52" cy="38" rx="3.5" ry="3.8" fill="#34D399"/>
+  <ellipse cx="52" cy="38" rx="2" ry="2.2" fill="#07111F"/>
+  <circle cx="52.8" cy="37.2" r="0.9" fill="#00E676" opacity="0.8"/>
+
+  <!-- Eye ridge / brow -->
+  <path d="M47 34 L52 32 L58 34" stroke="#064E3B" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+  <!-- Head top ridge / crest -->
+  <path d="M42 32 L48 27 L54 29 L60 31" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+  <!-- Head back / neck -->
+  <path d="M30 52 Q24 54 22 60 Q20 64 24 66 Q30 68 34 64 Q38 60 30 56" fill="url(#gatorBody)" opacity="0.6"/>
+
+  <!-- Scales - back of head -->
+  <path d="M28 46 Q30 42 34 44" stroke="#064E3B" stroke-width="1.2" fill="none" opacity="0.5"/>
+  <path d="M26 48 Q28 44 32 46" stroke="#064E3B" stroke-width="1.2" fill="none" opacity="0.5"/>
+
+  <!-- Body scales along bottom -->
+  <path d="M36 58 Q40 54 44 56" stroke="#064E3B" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M40 60 Q44 56 48 58" stroke="#064E3B" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M44 62 Q48 58 52 60" stroke="#064E3B" stroke-width="1" fill="none" opacity="0.4"/>
+
+  <!-- Nostril -->
+  <ellipse cx="73" cy="43" rx="1" ry="0.8" fill="#064E3B"/>
+
+  <!-- Mouth line -->
+  <path d="M56 49 L66 48 L75 45" stroke="#064E3B" stroke-width="0.8" fill="none" opacity="0.7"/>
+
+  <!-- Bottom shield accent - tail hint -->
+  <path d="M36 68 Q40 78 48 84 Q56 78 60 68" stroke="#06B6D4" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+  <!-- Shield corner accents -->
+  <path d="M25 23 L29 23 L29 27" stroke="#00E676" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M71 23 L67 23 L67 27" stroke="#00E676" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>
