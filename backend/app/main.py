@@ -17,6 +17,12 @@ from app.api.strategy import router as strategy_router
 from app.api.backtest import router as backtest_router
 from app.api.market import router as market_router
 from app.api.agent_gateway import router as agent_router
+from app.api.alpha_factory_api import router as alpha_factory_router
+from app.api.ai_chat import router as ai_chat_router
+from app.api.paper_trading_api import router as paper_trading_router
+from app.api.strategy_lab_api import router as strategy_lab_router
+from app.api.risk_api import router as risk_router
+from app.api.research_api import router as research_router
 from app.api.backtest_report import get_backtest_result, format_report
 from app.websocket.market_ws import market_websocket
 
@@ -42,7 +48,12 @@ app.include_router(strategy_router)
 app.include_router(backtest_router)
 app.include_router(market_router)
 app.include_router(agent_router)
-
+app.include_router(alpha_factory_router)
+app.include_router(ai_chat_router)
+app.include_router(paper_trading_router)
+app.include_router(strategy_lab_router)
+app.include_router(risk_router)
+app.include_router(research_router)
 
 @app.websocket("/ws/market")
 async def ws_market(websocket):
