@@ -39,7 +39,7 @@ export default function Sidebar() {
     >
       {/* 品牌区: 盾标 + 青鳄量化（横向，对齐右侧 header） */}
       <div
-        className="h-14 flex items-center gap-2.5 px-4 border-b"
+        className="h-16 flex items-center gap-2.5 px-4 border-b"
         style={{ borderColor: "var(--border-color)" }}
       >
         <div
@@ -49,14 +49,22 @@ export default function Sidebar() {
             boxShadow: "0 0 16px rgba(0,230,118,0.08)",
           }}
         >
-          <img src="/slogo.svg" alt="青鳄量化" className="w-6 h-6" />
+          <img src="/slogo.svg" alt="青鳄量化" className="w-7 h-7" />
         </div>
-        <span
-          className="text-sm font-bold tracking-wider whitespace-nowrap"
-          style={{ color: "#E5E7EB" }}
-        >
-          青鳄量化
-        </span>
+        <div className="flex flex-col leading-tight">
+          <span
+            className="text-sm font-bold tracking-wider whitespace-nowrap"
+            style={{ color: "#E5E7EB" }}
+          >
+            青鳄量化
+          </span>
+          <span
+            className="text-[9px] font-bold tracking-[2px]"
+            style={{ color: "#64748B", fontFamily: "'JetBrains Mono', Consolas, monospace" }}
+          >
+            QINGE QUANT
+          </span>
+        </div>
       </div>
 
       {/* 导航菜单 */}

@@ -1,36 +1,33 @@
 "use client";
 
-import { Bell, Search, Settings } from "lucide-react";
+import { usePathname } from "next/navigation";
+
+const pageTitles: Record<string, string> = {
+  "/": "工作台",
+  "/ai-lab": "AI 研究",
+  "/strategy-lab": "策略实验室",
+  "/alpha-factory": "Alpha 工厂",
+  "/portfolio": "投资组合",
+  "/risk": "风险中心",
+  "/backtest": "回测中心",
+  "/paper-trading": "模拟交易",
+};
 
 export default function Header() {
+  const pathname = usePathname();
+  const title = pageTitles[pathname] ?? "青鳄量化 Pro";
+
   return (
-    <header className="h-16 border-b border-slate-800 flex items-center justify-between px-6 bg-slate-950/80 backdrop-blur-sm">
-      <div className="flex items-center gap-4">
-        <h1 className="text-lg font-semibold tracking-tight">青鳄量化 Pro</h1>
-        <span className="text-xs text-slate-500 bg-slate-800/60 px-2 py-0.5 rounded">
-          Mission Control
+    <header className="h-16 border-b flex items-center justify-between px-5 flex-shrink-0"
+      style={{ borderColor: "var(--border-color)", backgroundColor: "var(--bg-sidebar)" }}>
+      <div className="flex items-center gap-2">
+        <h1 className="text-sm font-semibold tracking-tight" style={{ color: "var(--text-primary)" }}>
+          {title}
+        </h1>
+        <span className="text-[10px] px-1.5 py-0.5 rounded-sm"
+          style={{ backgroundColor: "rgba(34,197,94,0.1)", color: "var(--accent)" }}>
+          A股
         </span>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5">
-          <Search size={14} className="text-slate-500" />
-          <span className="text-xs text-slate-500">搜索策略、标的...</span>
-        </div>
-
-        <button className="relative p-2 rounded-lg hover:bg-slate-800 transition-colors">
-          <Bell size={16} className="text-slate-400" />
-          <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
-        </button>
-
-        <button className="p-2 rounded-lg hover:bg-slate-800 transition-colors">
-          <Settings size={16} className="text-slate-400" />
-        </button>
-
-        <div className="ml-2 flex items-center gap-2">
-          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-          <span className="text-xs text-emerald-400">系统运行中</span>
-        </div>
       </div>
     </header>
   );
