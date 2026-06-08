@@ -1,19 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import { Activity, Play, Pause } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Activity } from "lucide-react";
+import api from "@/lib/axios";
 
-const strategies = [
-  { id: "etf-v6f", name: "ETF Rotation V6F", status: "running", pnl: "+8.2%", positions: 1 },
-  { id: "mf-v25", name: "Multi-Factor V25", status: "running", pnl: "+4.1%", positions: 5 },
-  { id: "nb-alpha", name: "Northbound Alpha", status: "paused", pnl: "+0.8%", positions: 0 },
-];
+interface Strategy {
+  id: string;
+  name: string;
+  status: string;
+  pnl_pct: number;
+  positions: number;
+}
 
 export default function StrategySwitch() {
-  const [selected, setSelected] = useState("etf-v6f");
+  const [strategies, setStrategies] = useState<Strategy[]>([]);
+  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    api.get("/api/paper-trading/strategies")
+      .then(({ data }) => {
+        const list = data.strategies || [];
+        setStrategies(list);
+        if (list.length > 0 && !selected) setSelected(list[0].id);
+      })
+      .catch(() => {});
+  }, []);
+
+  if (!strategies.length) return null;
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 flex-wrap">
       {strategies.map((s) => (
         <button
           key={s.id}
@@ -26,10 +42,10 @@ export default function StrategySwitch() {
         >
           <div className={`w-2 h-2 rounded-full ${s.status === "running" ? "bg-emerald-400" : "bg-amber-400"}`} />
           <span className="text-xs font-medium">{s.name}</span>
-          <span className={`text-[10px] font-mono ${s.pnl.startsWith("+") ? "text-emerald-400" : "text-red-400"}`}>
-            {s.pnl}
+          <span className={`text-[10px] font-mono ${s.pnl_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+            {s.pnl_pct >= 0 ? "+" : ""}{s.pnl_pct}%
           </span>
-          <span className="text-[9px] text-slate-500">{s.positions} pos</span>
+          <span className="text-[9px] text-slate-500">{s.positions} 仓</span>
         </button>
       ))}
     </div>

@@ -1,22 +1,39 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
+import api from "@/lib/axios";
+
+interface EquityPoint {
+  date: string;
+  value: number;
+}
 
 export default function EquityChart() {
-  // Generate realistic equity curve data
-  const dates: string[] = [];
-  const values: number[] = [];
-  let val = 1000000;
-  const start = new Date(2025, 0, 1);
+  const [points, setPoints] = useState<EquityPoint[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [range, setRange] = useState("全部");
 
-  for (let i = 0; i < 150; i++) {
-    const d = new Date(start);
-    d.setDate(d.getDate() + i);
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
-    dates.push(d.toISOString().slice(5, 10));
-    val += val * (Math.random() * 0.008 - 0.003);
-    values.push(Math.round(val));
-  }
+  useEffect(() => {
+    api.get("/api/dashboard/summary")
+      .then(({ data }) => {
+        if (data.equity_curve?.length) {
+          setPoints(data.equity_curve);
+        }
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const displayed = (() => {
+    const map: Record<string, number> = { "1月": 20, "3月": 60, "6月": 120 };
+    const take = map[range];
+    if (!take || take >= points.length) return points;
+    return points.slice(points.length - take);
+  })();
+
+  const dates = displayed.map((p) => p.date.slice(5));
+  const values = displayed.map((p) => p.value);
 
   const option = {
     backgroundColor: "transparent",
@@ -72,19 +89,45 @@ export default function EquityChart() {
     ],
   };
 
+  if (loading) {
+    return (
+      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 animate-pulse">
+        <div className="h-4 w-24 bg-slate-800 rounded mb-4" />
+        <div className="h-[360px] bg-slate-800/50 rounded" />
+      </div>
+    );
+  }
+
+  if (!points.length) {
+    return (
+      <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-sm font-semibold">权益曲线</h3>
+        </div>
+        <div className="h-[360px] flex items-center justify-center text-slate-500 text-sm">
+          📊 暂无数据 — 运行回测后将显示权益曲线
+        </div>
+      </div>
+    );
+  }
+
+  const startDate = displayed[0]?.date ?? "";
+  const endDate = displayed[displayed.length - 1]?.date ?? "";
+
   return (
     <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-sm font-semibold">权益曲线</h3>
-          <p className="text-xs text-slate-500 mt-0.5">2025-01 ~ 2026-06</p>
+          <p className="text-xs text-slate-500 mt-0.5">{startDate} ~ {endDate}</p>
         </div>
         <div className="flex gap-1">
-          {["1M", "3M", "6M", "1Y", "ALL"].map((t) => (
+          {["1月", "3月", "6月", "全部"].map((t) => (
             <button
               key={t}
+              onClick={() => setRange(t)}
               className={`px-2.5 py-1 text-[10px] rounded-md transition-colors ${
-                t === "ALL"
+                range === t
                   ? "bg-blue-500/20 text-blue-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}

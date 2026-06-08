@@ -1,16 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Clock, AlertTriangle, CheckCircle2, Bell } from "lucide-react";
+import api from "@/lib/axios";
 
-const events = [
-  { time: "14:32", type: "info", message: "Risk score updated: 82/100" },
-  { time: "14:15", type: "warn", message: "MF V25 concentration 40%" },
-  { time: "13:45", type: "ok", message: "VIX returned to normal range" },
-  { time: "12:20", type: "alert", message: "Breakout V3 alpha decay" },
-  { time: "11:00", type: "ok", message: "All strategies within limits" },
-  { time: "10:30", type: "info", message: "Morning risk check passed" },
-  { time: "09:30", type: "info", message: "Market open - risk monitor active" },
-];
+interface Event {
+  time: string;
+  type: string;
+  message: string;
+}
 
 const typeIcons: Record<string, any> = {
   info: Bell,
@@ -27,16 +25,26 @@ const typeColors: Record<string, string> = {
 };
 
 export default function RiskTimeline() {
+  const [events, setEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    api.get("/api/risk/timeline")
+      .then(({ data }) => setEvents(data.events || []))
+      .catch(() => {});
+  }, []);
+
+  if (!events.length) return null;
+
   return (
     <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
         <Clock size={14} className="text-slate-400" />
-        <span className="text-xs font-semibold">Risk Timeline</span>
+        <span className="text-xs font-semibold">风险时间线</span>
       </div>
 
       <div className="space-y-2 max-h-[200px] overflow-auto">
         {events.map((event, idx) => {
-          const Icon = typeIcons[event.type];
+          const Icon = typeIcons[event.type] || Bell;
           return (
             <div key={idx} className="flex items-start gap-2 py-1.5">
               <div className="text-[10px] text-slate-600 w-10 flex-shrink-0 pt-0.5">{event.time}</div>

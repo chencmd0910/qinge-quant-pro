@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "qinge-quant": {
+      "type": "streamable-http",
+      "url": "http://localhost:8001/mcp",
+      "description": "青鳄量化 Pro MCP - A股量化工具集"
+    }
+  }
+}
