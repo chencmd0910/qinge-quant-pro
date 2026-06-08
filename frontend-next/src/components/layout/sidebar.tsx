@@ -37,34 +37,26 @@ export default function Sidebar() {
       className="w-44 border-r flex flex-col flex-shrink-0"
       style={{ borderColor: "var(--border-color)", backgroundColor: "var(--bg-sidebar)" }}
     >
-      {/* 品牌区: 盾标 + 青鳄量化 */}
+      {/* 品牌区: 盾标 + 青鳄量化（横向，对齐右侧 header） */}
       <div
-        className="flex flex-col items-center justify-center gap-2 py-5 border-b"
+        className="h-14 flex items-center gap-2.5 px-4 border-b"
         style={{ borderColor: "var(--border-color)" }}
       >
         <div
-          className="rounded-xl bg-[#07111F] border p-2 flex items-center justify-center"
+          className="rounded-lg bg-[#07111F] border p-1 flex items-center justify-center flex-shrink-0"
           style={{
             borderColor: "rgba(0,230,118,0.25)",
-            boxShadow: "0 0 24px rgba(0,230,118,0.08)",
+            boxShadow: "0 0 16px rgba(0,230,118,0.08)",
           }}
         >
-          <img src="/slogo.svg" alt="青鳄量化" className="w-11 h-11" />
+          <img src="/slogo.svg" alt="青鳄量化" className="w-6 h-6" />
         </div>
-        <div className="text-center">
-          <div
-            className="text-sm font-bold tracking-wider"
-            style={{ color: "#E5E7EB" }}
-          >
-            青鳄量化
-          </div>
-          <div
-            className="text-[9px] font-bold tracking-[2px] mt-0.5"
-            style={{ color: "#64748B", fontFamily: "'JetBrains Mono', Consolas, monospace" }}
-          >
-            QINGE QUANT
-          </div>
-        </div>
+        <span
+          className="text-sm font-bold tracking-wider whitespace-nowrap"
+          style={{ color: "#E5E7EB" }}
+        >
+          青鳄量化
+        </span>
       </div>
 
       {/* 导航菜单 */}
