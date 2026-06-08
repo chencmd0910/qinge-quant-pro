@@ -20,7 +20,7 @@ export default function MoneyFlow() {
   const [flows, setFlows] = useState<FlowItem[]>(FALLBACK);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/market/overview")
+    fetch("/api/market/overview")
       .then((r) => r.json())
       .then((data) => {
         if (data?.money_flow) setFlows(data.money_flow);

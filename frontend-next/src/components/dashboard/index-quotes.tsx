@@ -24,7 +24,7 @@ export default function IndexQuotes() {
 
   useEffect(() => {
     // TODO: 接入真实行情API /api/market/overview
-    fetch("http://localhost:8000/api/market/overview")
+    fetch("/api/market/overview")
       .then((r) => r.json())
       .then((data) => {
         if (data?.indices) setIndices(data.indices);

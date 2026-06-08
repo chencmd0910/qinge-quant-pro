@@ -24,7 +24,7 @@ export default function SectorHeatmap() {
   const [sectors, setSectors] = useState<SectorItem[]>(FALLBACK_SECTORS);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/market/sectors")
+    fetch("/api/market/sectors")
       .then((r) => r.json())
       .then((data) => {
         if (data?.sectors) setSectors(data.sectors);
