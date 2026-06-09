@@ -273,13 +273,76 @@ def batch_backtest(payload: dict):
     valid = [r for r in results if "error" not in r]
     valid.sort(key=lambda x: x.get("sharpe_ratio", -99), reverse=True)
 
+    # 自动保存所有策略到基因库
+    saved = []
+    registry = _load_registry()
+    gen_id = f"gen_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    
+    for r in results:
+        sid = f"gen_{datetime.now().strftime('%Y%m%d%H%M')}_{len(saved):03d}"
+        s = {
+            "strategy_id": sid,
+            "strategy_name": r.get("name", sid),
+            "strategy_type": payload.get("strategy_type", "multi_factor"),
+            "generation_id": gen_id,
+            "rank": len(saved) + 1,
+            "lifecycle": {"status": "ARCHIVED", "live_days": 0, "decay_status": "NONE"},
+            "metrics": {
+                "total_return": r.get("total_return", 0),
+                "annual_return": r.get("annual_return", 0),
+                "sharpe_ratio": r.get("sharpe_ratio", 0),
+                "max_drawdown": r.get("max_drawdown", 0),
+                "win_rate": r.get("win_rate", 0),
+                "trade_count": r.get("trades", 0),
+            },
+            "backtest_params": r.get("params", {}),
+            "created_at": datetime.now().isoformat(),
+        }
+        if "error" in r:
+            s["lifecycle"]["status"] = "FAILED"
+            s["error"] = r["error"]
+        registry.append(s)
+        saved.append(s)
+        
+        # 保存完整回测文件（如果有数据）
+        if "error" not in r:
+            _save_result(sid, {
+                "strategy_id": sid,
+                "strategy_name": r["name"],
+                "generation_id": gen_id,
+                "metrics": s["metrics"],
+                "params": s["backtest_params"],
+            })
+    
+    _save_registry(registry)
+    
+    # 自动提拔前5名
+    top_n = payload.get("promote_top", 5)
+    promoted = []
+    for i, s in enumerate(saved):
+        if i < top_n and s["lifecycle"]["status"] != "FAILED":
+            # 更新registry中的状态
+            for reg in registry:
+                if reg.get("strategy_id") == s["strategy_id"]:
+                    reg["lifecycle"]["status"] = "ACTIVE"
+                    break
+            s["lifecycle"]["status"] = "ACTIVE"
+            promoted.append(s["strategy_id"])
+    
+    _save_registry(registry)
+
     return {
+        "generation_id": gen_id,
         "total": len(results),
         "succeeded": len(valid),
         "failed": len(results) - len(valid),
+        "promoted_top": top_n,
+        "promoted_ids": promoted,
         "ranked": valid,
         "errors": [r for r in results if "error" in r],
         "best": valid[0] if valid else None,
+        "all_saved": True,
+        "gene_pool_size": len(registry),
     }
 
 
@@ -351,35 +414,242 @@ def compare_strategies(payload: dict):
 
 
 # ═══════════════════════════════════════════════════════════
-# 6. 系统能力清单（供AI了解可用操作）
+# 6. 策略基因库 — 演变/存留/学习
+# ═══════════════════════════════════════════════════════════
+
+@router.get("/genealogy")
+def get_genealogy():
+    """获取策略家族树 — 所有已生成策略的完整DNA，供AI进化学习
+    
+    返回每代所有策略的参数+回测指标，AI可分析：
+    - 哪些参数组合表现好/差
+    - 进化方向建议
+    - 参数与夏普/收益/回撤的相关性
+    """
+    registry = _load_registry()
+    
+    by_gen = {}
+    for s in registry:
+        gen = s.get("generation_id", "legacy")
+        by_gen.setdefault(gen, [])
+        m = s.get("metrics", {})
+        by_gen[gen].append({
+            "strategy_id": s.get("strategy_id"),
+            "strategy_name": s.get("strategy_name"),
+            "status": s.get("lifecycle", {}).get("status", s.get("status", "UNKNOWN")),
+            "rank": s.get("rank"),
+            "params": s.get("backtest_params", {}),
+            "total_return": m.get("total_return", 0),
+            "annual_return": m.get("annual_return", 0),
+            "sharpe_ratio": m.get("sharpe_ratio", 0),
+            "max_drawdown": m.get("max_drawdown", 0),
+            "win_rate": m.get("win_rate", 0),
+            "trade_count": m.get("trade_count", 0),
+        })
+    
+    active_count = sum(1 for s in registry if s.get("lifecycle", {}).get("status") == "ACTIVE")
+    archived_count = sum(1 for s in registry if s.get("lifecycle", {}).get("status") == "ARCHIVED")
+    failed_count = sum(1 for s in registry if s.get("lifecycle", {}).get("status") == "FAILED")
+    
+    # 参数洞察：好策略（夏普>0.3）的通用参数
+    good = [s for s in registry if s.get("metrics", {}).get("sharpe_ratio", 0) > 0.3]
+    param_insights = {}
+    for s in good:
+        for k, v in s.get("backtest_params", {}).items():
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                param_insights.setdefault(k, []).append(v)
+    for k in param_insights:
+        vals = param_insights[k]
+        if len(vals) >= 3:
+            param_insights[k] = {"avg": round(sum(vals)/len(vals), 4), "min": min(vals), "max": max(vals)}
+        else:
+            param_insights[k] = None
+    param_insights = {k: v for k, v in param_insights.items() if v}
+    
+    return {
+        "generations_count": len(by_gen),
+        "total_strategies": len(registry),
+        "active": active_count,
+        "archived": archived_count,
+        "failed": failed_count,
+        "param_insights": param_insights,
+        "by_generation": by_gen,
+    }
+
+
+@router.get("/genealogy/summary")
+def get_genealogy_summary():
+    """基因库速览 — 每代TOP3 + 史上最佳"""
+    registry = _load_registry()
+    by_gen = {}
+    for s in registry:
+        gen = s.get("generation_id", "legacy")
+        by_gen.setdefault(gen, []).append(s)
+    
+    summary = {"total": len(registry), "active_count": 0, "all_time_best": None, "generations": []}
+    for s in registry:
+        if s.get("lifecycle", {}).get("status") == "ACTIVE":
+            summary["active_count"] += 1
+    
+    all_best_sharpe = -99
+    for gen_id, strategies in by_gen.items():
+        ranked = sorted(strategies, key=lambda x: x.get("metrics", {}).get("sharpe_ratio", -99), reverse=True)
+        top3 = ranked[:3]
+        gen_summary = {
+            "generation_id": gen_id,
+            "count": len(strategies),
+            "active": sum(1 for s in strategies if s.get("lifecycle", {}).get("status") == "ACTIVE"),
+            "avg_sharpe": round(sum(s.get("metrics", {}).get("sharpe_ratio", 0) for s in strategies) / max(len(strategies), 1), 3),
+            "top3": [{
+                "id": s["strategy_id"], "name": s["strategy_name"],
+                "sharpe": s.get("metrics", {}).get("sharpe_ratio", 0),
+                "total_return": s.get("metrics", {}).get("total_return", 0),
+                "max_drawdown": s.get("metrics", {}).get("max_drawdown", 0),
+                "params": s.get("backtest_params", {}),
+            } for s in top3],
+        }
+        summary["generations"].append(gen_summary)
+        if top3 and top3[0].get("metrics", {}).get("sharpe_ratio", -99) > all_best_sharpe:
+            all_best_sharpe = top3[0]["metrics"]["sharpe_ratio"]
+            summary["all_time_best"] = {
+                "strategy_id": top3[0]["strategy_id"], "name": top3[0]["strategy_name"],
+                "sharpe": all_best_sharpe, "total_return": top3[0]["metrics"]["total_return"],
+                "params": top3[0].get("backtest_params", {}),
+            }
+    return summary
+
+
+@router.post("/promote")
+def promote_strategies(payload: dict):
+    """批量提拔/淘汰策略
+    {
+        "promote": ["id1", "id2"],    // ACTIVE
+        "retire": ["id3"],            // RETIRED
+        "archive": ["id4"]            // ARCHIVED
+    }"""
+    registry = _load_registry()
+    results = {"promoted": [], "retired": [], "archived": []}
+    for sid in payload.get("promote", []):
+        for s in registry:
+            if s.get("strategy_id") == sid:
+                s.setdefault("lifecycle", {})["status"] = "ACTIVE"
+                s["lifecycle"]["live_days"] = s["lifecycle"].get("live_days", 0) + 1
+                s["updated_at"] = datetime.now().isoformat()
+                results["promoted"].append(sid)
+    for sid in payload.get("retire", []):
+        for s in registry:
+            if s.get("strategy_id") == sid:
+                s.setdefault("lifecycle", {})["status"] = "RETIRED"
+                s["lifecycle"]["decay_status"] = "RETIRED_BY_USER"
+                s["updated_at"] = datetime.now().isoformat()
+                results["retired"].append(sid)
+    for sid in payload.get("archive", []):
+        for s in registry:
+            if s.get("strategy_id") == sid:
+                s.setdefault("lifecycle", {})["status"] = "ARCHIVED"
+                s["updated_at"] = datetime.now().isoformat()
+                results["archived"].append(sid)
+    _save_registry(registry)
+    return results
+
+
+@router.post("/evolve")
+def evolve_next_generation(payload: dict):
+    """基于历史基因库进化下一代策略（自动读取历史+变异+回测+全保存）
+    {
+        "count": 50,
+        "promote_top": 5,
+        "base": {"start": "2024-06-01", "end": "2026-06-09", "rebalance": "monthly"},
+        "explore_params": {"top_n": [10,20,30,40], "stop_loss": [-5,-8,-10,-12]},
+        "inherit_from_best": true
+    }"""
+    from backtest_engine.real_backtest import RealBacktest
+    from data_engine.kline_parquet import get_kline_engine
+    import random
+
+    count = payload.get("count", 30)
+    promote_top = payload.get("promote_top", 5)
+    base = payload.get("base", {})
+    explore = payload.get("explore_params", {
+        "top_n": [10, 20, 30, 40, 50],
+        "stop_loss": [-5, -8, -10, -12, -15],
+        "rebalance": ["monthly", "biweekly"],
+    })
+    inherit = payload.get("inherit_from_best", True)
+
+    engine = get_kline_engine()
+    codes = payload.get("codes") or engine.get_available_stocks()[:300]
+
+    # 读取历史基因库
+    genealogy = get_genealogy()
+    best_params_hint = genealogy.get("param_insights", {})
+
+    # 史上最佳策略
+    best_ever = None
+    for gen in genealogy.get("by_generation", {}).values():
+        for s in gen:
+            if best_ever is None or s.get("sharpe_ratio", -99) > best_ever.get("sharpe_ratio", -99):
+                best_ever = s
+
+    gen_num = len(genealogy.get("by_generation", {})) + 1
+    variations = []
+
+    for i in range(count):
+        var = {"strategy_name": f"Gen{gen_num}_Strategy_{i+1:03d}"}
+        for param_key, options in explore.items():
+            if isinstance(options, list) and options:
+                if inherit and param_key in best_params_hint:
+                    hint = best_params_hint[param_key]
+                    if isinstance(hint, dict) and "avg" in hint:
+                        noise = hint["avg"] * random.uniform(-0.3, 0.3)
+                        var[param_key] = hint["avg"] + noise if isinstance(hint["avg"], float) else int(hint["avg"] + noise)
+                    else:
+                        var[param_key] = random.choice(options)
+                else:
+                    var[param_key] = random.choice(options)
+        variations.append(var)
+
+    # 最佳策略变异体
+    if best_ever and inherit:
+        bp = best_ever.get("params", {})
+        for i in range(min(count // 10, 5)):
+            var = {"strategy_name": f"Gen{gen_num}_BestMutant_{i+1}"}
+            for k, v in bp.items():
+                if isinstance(v, (int, float)) and not isinstance(v, bool):
+                    var[k] = int(v * random.uniform(0.85, 1.15)) if isinstance(v, int) else v * random.uniform(0.85, 1.15)
+                else:
+                    var[k] = v
+            variations.append(var)
+
+    result = batch_backtest({**payload, "variations": variations, "promote_top": promote_top})
+    result["evolved_from_generations"] = len(genealogy.get("by_generation", {}))
+    result["best_ever_inherited"] = best_ever["strategy_name"] if best_ever else None
+    return result
+
+
+# ═══════════════════════════════════════════════════════════
+# 7. 系统能力清单（供AI了解可用操作）
 # ═══════════════════════════════════════════════════════════
 
 @router.get("/capabilities")
 def get_capabilities():
     """AI Lab 完整能力清单"""
     return {
-        "version": "1.0",
+        "version": "2.0",
+        "gene_pool_enabled": True,
         "data": {
             "stocks": "4965只A股（Parquet K线，2024-06 至 2026-06）",
             "engine": "v25 多因子（7因子：mom_5d/10d, ma_dev_20d, consistency, money_flow, vol_20d, boll_pos）",
         },
         "endpoints": [
-            {"method": "POST", "path": "/api/ai/create-and-backtest", "desc": "创建策略+回测+保存，一步到位"},
-            {"method": "POST", "path": "/api/ai/batch-backtest", "desc": "批量回测多组参数，返回排名"},
-            {"method": "GET", "path": "/api/ai/strategies", "desc": "列出所有已创建策略"},
-            {"method": "GET", "path": "/api/ai/backtest-result/{id}", "desc": "完整回测结果（权益曲线+交易明细）"},
-            {"method": "POST", "path": "/api/ai/compare", "desc": "对比多个策略"},
-            {"method": "GET", "path": "/api/backtest/real-run", "desc": "快速回测（GET参数，无需创建策略）"},
+            {"method": "POST", "path": "/api/ai/create-and-backtest", "desc": "创建策略+回测+保存"},
+            {"method": "POST", "path": "/api/ai/batch-backtest", "desc": "批量回测+全保存+自动提优"},
+            {"method": "POST", "path": "/api/ai/evolve", "desc": "基于历史基因库进化下一代"},
+            {"method": "GET", "path": "/api/ai/genealogy", "desc": "策略家族树（全部DNA）"},
+            {"method": "GET", "path": "/api/ai/genealogy/summary", "desc": "基因库速览（每代TOP3）"},
+            {"method": "POST", "path": "/api/ai/promote", "desc": "批量提拔/淘汰/归档策略"},
+            {"method": "GET", "path": "/api/ai/strategies", "desc": "列出所有策略"},
+            {"method": "GET", "path": "/api/ai/backtest-result/{id}", "desc": "完整回测结果"},
+            {"method": "POST", "path": "/api/ai/compare", "desc": "多策略横向对比"},
         ],
-        "example": {
-            "create_and_backtest": {
-                "strategy_name": "我的多因子V1",
-                "strategy_type": "multi_factor",
-                "start": "2025-01-01",
-                "end": "2026-06-09",
-                "top_n": 20,
-                "rebalance": "monthly",
-                "stop_loss": -8,
-            },
-        },
     }
