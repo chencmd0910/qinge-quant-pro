@@ -53,18 +53,18 @@ def get_positions():
     """当前持仓"""
     runner = LivePaperRunner()
     runner.load_state()
-    # 转成前端兼容格式
     positions = []
     for code, pos in runner.positions.items():
+        avg = pos.get("avg_cost", pos.get("current_price", 0))
+        cur = pos.get("current_price", 0)
         positions.append({
             "symbol": code,
             "name": pos.get("name", code),
-            "shares": pos["shares"],
-            "avg_cost": pos.get("avg_cost", pos.get("current_price", 0)),
-            "current": pos.get("current_price", 0),
-            "pnl": round((pos.get("current_price", 0) - pos.get("avg_cost", 0)) * pos["shares"], 0),
+            "qty": pos["shares"],
+            "avg_cost": avg,
+            "current": cur,
+            "pnl": round((cur - avg) * pos["shares"], 0),
             "pnl_pct": round(pos.get("pnl_pct", 0), 1),
-            "strategy": pos.get("assigned_strategy", ""),
         })
     return {"positions": positions}
 
@@ -75,7 +75,18 @@ def get_trades(limit: int = 30):
     runner = LivePaperRunner()
     runner.load_state()
     trades = runner.trades[-limit:] if len(runner.trades) > limit else runner.trades
-    return {"trades": list(reversed(trades))}
+    # 转换为前端兼容格式
+    result = []
+    for t in reversed(trades):
+        result.append({
+            "time": t.get("date", ""),
+            "action": t.get("action", ""),
+            "symbol": t.get("code", ""),
+            "qty": t.get("shares", 0),
+            "price": t.get("price", 0),
+            "amount": round(t.get("price", 0) * t.get("shares", 0), 0),
+        })
+    return {"trades": result}
 
 
 @router.get("/equity")
@@ -101,7 +112,7 @@ def get_strategies():
             "id": s.get("strategy_id", ""),
             "name": s.get("strategy_name", ""),
             "status": "running",
-            "weight": s.get("weight", 0),
+            "pnl_pct": 0,  # 需从历史净值反算，暂留0
             "positions": sum(1 for p in runner.positions.values()
                              if p.get("assigned_strategy") == s.get("strategy_id")),
         })
