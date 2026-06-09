@@ -100,106 +100,97 @@ class RealBacktest:
         rebalance_dates = self._get_rebalance_dates(dates)
         print(f"[RealBacktest] {len(rebalance_dates)} rebalance dates")
 
-        # 3. 逐日模拟
+        # 3. 逐日模拟——资金管理分离
         equity_curve = []
         drawdown_curve = []
         trades = []
         positions_log = []
 
-        nav = self.cash
-        peak = nav
-        holdings = {}  # {code: {shares, cost}}
+        cash = self.cash  # 可用现金
+        peak = cash
+        holdings = {}  # {code: {shares, avg_cost}}
         current_positions = []
 
         for i, date in enumerate(dates):
             date_str = str(date)[:10]
 
-            # 调仓日：重新排名选股
+            # 调仓日：先卖后买
             if date_str in rebalance_dates or i == 0:
+                # ── 卖出不在新持仓中的股票 ──
                 new_positions = self._select_top(date, dates, closes)
 
-                # 卖出不在新持仓中的股票
                 for code in list(holdings.keys()):
                     if code not in new_positions:
                         price = self._get_price(closes, code, date)
                         if price and price > 0:
                             shares = holdings[code]["shares"]
-                            nav += shares * price * (1 - self.slippage) * (1 - self.commission)
+                            sell_amount = shares * price * (1 - self.slippage - self.commission)
+                            cash += sell_amount
                             trades.append({
-                                "date": date_str,
-                                "side": "SELL",
-                                "symbol": code,
-                                "price": round(price, 2),
-                                "quantity": shares,
-                                "amount": round(shares * price, 2),
+                                "date": date_str, "side": "SELL",
+                                "symbol": code, "price": round(price, 2),
+                                "quantity": shares, "amount": round(sell_amount, 2),
                                 "reason": "调仓卖出",
                             })
                         del holdings[code]
 
-                # 等权分配资金买入新持仓
+                # ── 等权买入新持仓 ──
                 if new_positions:
-                    per_stock = nav * 0.95 / len(new_positions)  # 留5%现金
+                    # 总投资额 = 可用现金 × 95%（留5%现金缓冲）
+                    total_invest = cash * 0.95
+                    per_stock = total_invest / len(new_positions)
+
                     for code in new_positions:
                         price = self._get_price(closes, code, date)
                         if price and price > 0:
                             shares = int(per_stock / price / 100) * 100  # 整百股
                             if shares >= 100:
-                                cost = shares * price
-                                nav -= cost * (1 + self.slippage + self.commission)
-                                holdings[code] = {"shares": shares, "cost": cost}
-                                trades.append({
-                                    "date": date_str,
-                                    "side": "BUY",
-                                    "symbol": code,
-                                    "price": round(price, 2),
-                                    "quantity": shares,
-                                    "amount": round(cost, 2),
-                                    "reason": "调仓买入",
-                                })
+                                buy_amount = shares * price * (1 + self.slippage + self.commission)
+                                if buy_amount <= cash:
+                                    cash -= buy_amount
+                                    holdings[code] = {
+                                        "shares": shares,
+                                        "avg_cost": price,  # 建仓成本价
+                                    }
+                                    trades.append({
+                                        "date": date_str, "side": "BUY",
+                                        "symbol": code, "price": round(price, 2),
+                                        "quantity": shares, "amount": round(buy_amount, 2),
+                                        "reason": "调仓买入",
+                                    })
 
                 current_positions = list(holdings.keys())
 
-            # 计算当前持仓市值
+            # ── 计算当日总权益 = 现金 + 持仓市值 ──
             positions_value = 0
             for code, h in holdings.items():
                 price = self._get_price(closes, code, date)
                 if price and price > 0:
                     positions_value += h["shares"] * price
+            nav = cash + positions_value
 
-            nav = positions_value + (nav - sum(h["cost"] for h in holdings.values()))
-
-            # 止损检查（每日）
+            # ── 止损检查（每日）──
             for code in list(holdings.keys()):
                 price = self._get_price(closes, code, date)
-                if price and price > 0:
-                    pnl = (price - holdings[code]["cost"] / holdings[code]["shares"]) / (
-                        holdings[code]["cost"] / holdings[code]["shares"]
-                    )
-                    if pnl <= self.stop_loss:
+                if price and price > 0 and holdings[code]["avg_cost"] > 0:
+                    pnl_pct = (price - holdings[code]["avg_cost"]) / holdings[code]["avg_cost"]
+                    if pnl_pct <= self.stop_loss:
                         shares = holdings[code]["shares"]
-                        nav += shares * price * (1 - self.slippage) * (1 - self.commission)
+                        sell_amount = shares * price * (1 - self.slippage - self.commission)
+                        cash += sell_amount
                         trades.append({
-                            "date": date_str,
-                            "side": "SELL",
-                            "symbol": code,
-                            "price": round(price, 2),
-                            "quantity": shares,
-                            "amount": round(shares * price, 2),
-                            "reason": f"止损 ({pnl*100:.1f}%)",
+                            "date": date_str, "side": "SELL",
+                            "symbol": code, "price": round(price, 2),
+                            "quantity": shares, "amount": round(sell_amount, 2),
+                            "reason": f"止损 ({pnl_pct*100:.1f}%)",
                         })
                         del holdings[code]
 
-            # 记录
+            # ── 记录 ──
             peak = max(peak, nav)
-            dd = (nav - peak) / peak * 100
-            equity_curve.append({
-                "date": date_str,
-                "value": round(nav, 2),
-            })
-            drawdown_curve.append({
-                "date": date_str,
-                "dd": round(dd, 2),
-            })
+            dd = (nav - peak) / peak * 100 if peak > 0 else 0
+            equity_curve.append({"date": date_str, "value": round(nav, 2)})
+            drawdown_curve.append({"date": date_str, "dd": round(dd, 2)})
             positions_log.append({
                 "date": date_str,
                 "symbols": current_positions.copy(),
