@@ -115,7 +115,7 @@ class RealBacktest:
             date_str = str(date)[:10]
 
             # 调仓日：重新排名选股
-            if date in rebalance_dates or i == 0:
+            if date_str in rebalance_dates or i == 0:
                 new_positions = self._select_top(date, dates, closes)
 
                 # 卖出不在新持仓中的股票
