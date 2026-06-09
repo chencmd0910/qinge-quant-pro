@@ -23,6 +23,7 @@ from app.api.paper_trading_api import router as paper_trading_router
 from app.api.strategy_lab_api import router as strategy_lab_router
 from app.api.risk_api import router as risk_router
 from app.api.research_api import router as research_router
+from app.api.ai_lab import router as ai_lab_router
 from app.api.backtest_report import get_backtest_result, format_report
 from app.websocket.market_ws import market_websocket
 
@@ -54,6 +55,7 @@ app.include_router(paper_trading_router)
 app.include_router(strategy_lab_router)
 app.include_router(risk_router)
 app.include_router(research_router)
+app.include_router(ai_lab_router)
 
 @app.websocket("/ws/market")
 async def ws_market(websocket):
