@@ -436,11 +436,29 @@ class LivePaperRunner:
         return True
 
     def _check_stop_loss(self) -> List[str]:
-        """检查持仓是否需要止损"""
+        """检查持仓是否需要止损
+        
+        策略的 stop_loss 参数可能是百分数（-8.0）或小数（-0.08），统一为小数。
+        pnl_pct 来自 _mark_to_market，总是百分数（如 -5.0 表示 -5%），需转为小数。
+        """
+        # 取所有活跃策略中最宽松的止损线
+        stop_thresholds = []
+        for s in self.active_strategies:
+            sl = s.get('backtest_params', {}).get('stop_loss', -0.15)
+            # 如果绝对值 > 1（如 -8.0），转为小数
+            if abs(sl) > 1:
+                sl = sl / 100
+            stop_thresholds.append(sl)
+        # 取最小值（最严格）+ 硬底线
+        min_stop = min(stop_thresholds) if stop_thresholds else -0.15
+        hard_stop = -0.15  # 硬止损 -15%
+        stop_loss = max(min_stop, hard_stop)  # 取宽松的那个（更接近0）
+        
         stop_out = []
         for code, pos in self.positions.items():
-            pnl_pct = pos.pnl_pct / 100 if pos.pnl_pct > 1 else pos.pnl_pct
-            if pnl_pct < -0.15:  # -15% 止损
+            # pnl_pct 是百分数，转小数
+            pnl_dec = pos.pnl_pct / 100.0
+            if pnl_dec <= stop_loss:
                 stop_out.append(code)
         return stop_out
 
