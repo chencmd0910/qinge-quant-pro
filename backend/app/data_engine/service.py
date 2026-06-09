@@ -6,6 +6,7 @@ from typing import List, Optional, Dict
 from datetime import datetime
 from .providers.provider_base import MarketDataProvider, Market, Bar, Tick
 from .providers.akshare_provider import AkShareProvider
+from .providers.parquet_provider import ParquetProvider
 from .storage.bar_storage import BarStorage
 
 
@@ -24,13 +25,16 @@ class DataEngine:
         self._auto_register()
 
     def _auto_register(self):
-        """自动注册可用的数据源"""
-        providers = [
-            AkShareProvider(),
-        ]
-        for p in providers:
-            if p.is_available():
-                self._providers[p.name] = p
+        """自动注册可用的数据源，Parquet优先"""
+        # 本地Parquet数据优先（零延迟）
+        parquet = ParquetProvider()
+        if parquet.is_available():
+            self._providers["parquet"] = parquet
+            self._providers["akshare"] = AkShareProvider()  # 备用
+        else:
+            akshare = AkShareProvider()
+            if akshare.is_available():
+                self._providers["akshare"] = akshare
 
     def add_provider(self, provider: MarketDataProvider):
         """手动注册数据源"""

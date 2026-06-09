@@ -284,3 +284,117 @@ def get_report(report_id: str):
     if not os.path.exists(path):
         raise HTTPException(404, "回测报告不存在")
     return _load_json(path)
+
+
+# ═══════════════════════════════════════════════════════════
+# 真实回测端点 — 使用本地Parquet K线数据
+# ═══════════════════════════════════════════════════════════
+
+@router.post("/run-real")
+def run_real_backtest(payload: dict):
+    """运行真实K线回测（基于本地Parquet数据）
+
+    请求体:
+    {
+        "codes": ["000001", "600519", ...],  // 股票池，默认沪深前300只
+        "start": "2024-06-01",
+        "end": "2026-06-09",
+        "cash": 1000000,
+        "top_n": 20,          // 持仓数量
+        "rebalance": "monthly",  // monthly/biweekly/weekly
+        "stop_loss": -0.08,   // 止损线
+        "commission": 0.0003, // 手续费
+        "slippage": 0.0002    // 滑点
+    }
+    """
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from backtest_engine.real_backtest import RealBacktest
+    from data_engine.kline_parquet import get_kline_engine
+
+    # 解析参数
+    codes = payload.get("codes")
+    if not codes:
+        # 默认：前300只（近似沪深300）
+        engine = get_kline_engine()
+        codes = engine.get_available_stocks()[:300]
+
+    start = payload.get("start", "2024-06-01")
+    end = payload.get("end", "2026-06-09")
+    cash = payload.get("cash", 1_000_000)
+    top_n = payload.get("top_n", 20)
+    rebalance = payload.get("rebalance", "monthly")
+    stop_loss = payload.get("stop_loss", -0.08)
+    commission = payload.get("commission", 0.0003)
+    slippage = payload.get("slippage", 0.0002)
+
+    strategy_id = payload.get("strategy_id", "real-backtest")
+
+    # 运行回测
+    bt = RealBacktest(
+        codes=codes,
+        start=start,
+        end=end,
+        cash=cash,
+        top_n=top_n,
+        rebalance=rebalance,
+        commission=commission,
+        slippage=slippage,
+        stop_loss=stop_loss,
+    )
+    result = bt.run()
+
+    if "error" in result:
+        raise HTTPException(500, result["error"])
+
+    # 保存结果
+    result["strategy_id"] = strategy_id
+    result["created_at"] = datetime.now().isoformat()
+    _ensure_dir(RESULTS_DIR)
+    _save_json(os.path.join(RESULTS_DIR, f"{strategy_id}.json"), result)
+
+    return result
+
+
+@router.get("/real-run")
+def run_real_backtest_quick(
+    start: str = "2024-06-01",
+    end: str = "2026-06-09",
+    cash: float = 1_000_000,
+    top_n: int = 20,
+    rebalance: str = "monthly",
+):
+    """快速真实回测（GET方法，适合浏览器直接测试）
+
+    GET /api/backtest/real-run?start=2024-06-01&end=2026-06-09&top_n=20&rebalance=monthly
+    """
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from backtest_engine.real_backtest import RealBacktest
+    from data_engine.kline_parquet import get_kline_engine
+
+    engine = get_kline_engine()
+    codes = engine.get_available_stocks()[:300]
+
+    bt = RealBacktest(
+        codes=codes,
+        start=start,
+        end=end,
+        cash=cash,
+        top_n=top_n,
+        rebalance=rebalance,
+        commission=0.0003,
+        slippage=0.0002,
+        stop_loss=-0.08,
+    )
+    result = bt.run()
+
+    if result.get("error"):
+        raise HTTPException(500, result["error"])
+
+    result["strategy_id"] = f"quick-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+    result["created_at"] = datetime.now().isoformat()
+    _ensure_dir(RESULTS_DIR)
+    _save_json(os.path.join(RESULTS_DIR, f"{result['strategy_id']}.json"), result)
+
+    return result
