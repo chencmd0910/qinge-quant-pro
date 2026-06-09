@@ -41,7 +41,7 @@ def get_summary():
         "total_pnl_pct": round((s["total_value"] / runner.initial_cash - 1) * 100, 2),
         "daily_pnl": round(daily_pnl, 0),
         "daily_pnl_pct": round((daily_pnl / prev * 100) if prev else 0, 2),
-        "win_rate": 0,
+        "win_rate": round(runner._calc_win_rate() * 100, 0),
         "trade_days": len(eq),
         "sharpe": s.get("sharpe", 0),
         "max_dd": s.get("max_drawdown", 0),
@@ -96,9 +96,10 @@ def get_equity():
     runner.load_state()
     curve = runner.equity_curve or []
     equity = [e["value"] for e in curve]
+    dates = [e.get("date", "") for e in curve]
     initial = runner.initial_cash
     benchmark = [round(initial * (1 + 0.05 / 252) ** i, 0) for i in range(len(equity))]
-    return {"equity": equity, "benchmark": benchmark}
+    return {"equity": equity, "benchmark": benchmark, "dates": dates}
 
 
 @router.get("/strategies")

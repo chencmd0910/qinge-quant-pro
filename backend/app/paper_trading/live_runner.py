@@ -462,6 +462,24 @@ class LivePaperRunner:
                 stop_out.append(code)
         return stop_out
 
+    def _calc_win_rate(self) -> float:
+        """计算已平仓交易的胜率（正收益 / 总平仓数）"""
+        # 按代码聚合平仓交易
+        closed = {}
+        for t in self.trades:
+            code = t.code if hasattr(t, 'code') else t.get('code', '')
+            action = t.action if hasattr(t, 'action') else t.get('action', '')
+            value = t.value if hasattr(t, 'value') else t.get('value', 0)
+            if action in ('BUY', '买入'):
+                closed[code] = closed.get(code, 0) - value
+            elif action in ('SELL', '卖出', 'STOP_LOSS', 'REBALANCE_SELL'):
+                closed[code] = closed.get(code, 0) + value
+        profits = [v for v in closed.values() if v != 0]
+        if not profits:
+            return 0
+        wins = sum(1 for v in profits if v > 0)
+        return wins / len(profits)
+
     def _mark_to_market(self, date_str: str):
         """按市价估值所有持仓"""
         all_codes = [p.code for p in self.positions.values()]

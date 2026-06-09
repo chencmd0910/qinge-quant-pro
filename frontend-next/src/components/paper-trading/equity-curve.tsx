@@ -8,12 +8,23 @@ import api from "@/lib/axios";
 export default function EquityCurve() {
   const [equity, setEquity] = useState<number[]>([]);
   const [benchmark, setBenchmark] = useState<number[]>([]);
+  const [dates, setDates] = useState<string[]>([]);
 
   useEffect(() => {
     api.get("/api/paper-trading/equity")
       .then(({ data }) => {
         setEquity(data.equity || []);
         setBenchmark(data.benchmark || []);
+        // 优先用后端返回的日期，否则回退到硬编码
+        if (data.dates && data.dates.length === data.equity.length) {
+          setDates(data.dates.map((d: string) => d.slice(5, 10)));
+        } else {
+          setDates(equity.map((_, i) => {
+            const d = new Date();
+            d.setDate(d.getDate() - equity.length + i + 1);
+            return d.toISOString().slice(5, 10);
+          }));
+        }
       })
       .catch(() => {});
   }, []);
@@ -22,9 +33,9 @@ export default function EquityCurve() {
     return <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 flex-1 flex items-center justify-center"><span className="text-xs text-slate-500">暂无数据</span></div>;
   }
 
-  const dates = equity.map((_, i) => {
-    const d = new Date(2026, 3, 1);
-    d.setDate(d.getDate() + i);
+  const displayDates = dates.length ? dates : equity.map((_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - equity.length + i + 1);
     return d.toISOString().slice(5, 10);
   });
 
@@ -33,7 +44,7 @@ export default function EquityCurve() {
     tooltip: { trigger: "axis", backgroundColor: "#1e293b", borderColor: "#334155", textStyle: { color: "#e2e8f0", fontSize: 11 } },
     legend: { data: ["组合", "基准"], top: 0, right: 0, textStyle: { color: "#64748b", fontSize: 10 }, itemWidth: 12, itemHeight: 8 },
     grid: { top: 30, right: 10, bottom: 20, left: 55 },
-    xAxis: { type: "category", data: dates, axisLine: { lineStyle: { color: "#1e293b" } }, axisLabel: { color: "#475569", fontSize: 9 } },
+    xAxis: { type: "category", data: displayDates, axisLine: { lineStyle: { color: "#1e293b" } }, axisLabel: { color: "#475569", fontSize: 9 } },
     yAxis: { type: "value", axisLabel: { color: "#475569", fontSize: 9, formatter: (v: number) => (v/10000).toFixed(0)+"万" }, splitLine: { lineStyle: { color: "#0f172a" } } },
     series: [
       { name: "组合", data: equity, type: "line", smooth: true, symbol: "none", lineStyle: { color: "#22d3ee", width: 1.5 }, areaStyle: { color: { type: "linear", x:0,y:0,x2:0,y2:1, colorStops: [{offset:0,color:"rgba(34,211,238,0.1)"},{offset:1,color:"rgba(34,211,238,0)"}] } } },

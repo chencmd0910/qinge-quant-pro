@@ -7,8 +7,9 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "strategies"))
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from app.core.config import get_settings
 from app.core.database import init_db
 from app.api.dashboard import router as dashboard_router
@@ -30,6 +31,29 @@ from app.websocket.market_ws import market_websocket
 settings = get_settings()
 
 
+class SimpleAuthMiddleware(BaseHTTPMiddleware):
+    """简易API Key认证 — 仅保护 /api/ 路径，允许 OPTIONS 和 /api/health 无认证"""
+    SKIP = {b"/api/health", b"/api/paper-trading/summary"}  # summary 给前端首屏用
+    
+    async def dispatch(self, request: Request, call_next):
+        if request.method == "OPTIONS" or not request.url.path.startswith("/api/"):
+            return await call_next(request)
+        # 跳过白名单
+        for skip_path in self.SKIP:
+            if request.url.path.encode() == skip_path:
+                return await call_next(request)
+        # API_KEY 环境变量未设置 = 不启用认证
+        api_key = os.environ.get("API_KEY", "")
+        if not api_key:
+            return await call_next(request)
+        auth = request.headers.get("Authorization", "")
+        if auth != f"Bearer {api_key}":
+            raise HTTPException(status_code=401, detail="Missing or invalid API key")
+        return await call_next(request)
+
+import os
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print(f"[{settings.APP_NAME}] v{settings.APP_VERSION} starting...")
@@ -42,6 +66,7 @@ app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION, lifespan=li
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
                    allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(SimpleAuthMiddleware)
 
 app.include_router(dashboard_router)
 app.include_router(portfolio_router)
