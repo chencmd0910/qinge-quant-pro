@@ -50,7 +50,7 @@ class RealBacktest:
         commission: float = 0.0003,
         slippage: float = 0.0002,
         stop_loss: float = -0.08,
-        ranking_factor: str = "momentum_20d",
+        ranking_factor: str = "v25_multi",  # v25 多因子评分
     ):
         self.codes = codes
         self.start = start
@@ -119,49 +119,84 @@ class RealBacktest:
         for i, date in enumerate(dates):
             date_str = str(date)[:10]
 
-            # 调仓日：先卖后买
+            # 调仓日：等权重再平衡
             if date_str in rebalance_dates or i == 0:
-                # ── 卖出不在新持仓中的股票 ──
                 new_positions = self._select_top(date, dates, closes_full)
 
-                for code in list(holdings.keys()):
-                    if code not in new_positions:
+                if new_positions:
+                    # ── 先算当前总权益，确定目标仓位金额 ──
+                    pos_val = 0.0
+                    for code, h in holdings.items():
                         price = self._get_price(closes, code, date)
                         if price and price > 0:
-                            shares = holdings[code]["shares"]
-                            sell_amount = shares * price * (1 - self.slippage - self.commission)
-                            cash += sell_amount
-                            trades.append({
-                                "date": date_str, "side": "SELL",
-                                "symbol": code, "price": round(price, 2),
-                                "quantity": shares, "amount": round(sell_amount, 2),
-                                "reason": "调仓卖出",
-                            })
-                        del holdings[code]
+                            pos_val += h["shares"] * price
+                    nav_before = cash + pos_val
+                    target_per_stock = nav_before * 0.95 / len(new_positions)
 
-                # ── 等权买入新持仓 ──
-                if new_positions:
-                    # 总投资额 = 可用现金 × 95%（留5%现金缓冲）
-                    total_invest = cash * 0.95
-                    per_stock = total_invest / len(new_positions)
+                    # ── 1. 卖出不在新持仓中的股票 ──
+                    for code in list(holdings.keys()):
+                        if code not in new_positions:
+                            price = self._get_price(closes, code, date)
+                            if price and price > 0:
+                                shares = holdings[code]["shares"]
+                                sell_amount = shares * price * (1 - self.slippage - self.commission)
+                                cash += sell_amount
+                                trades.append({
+                                    "date": date_str, "side": "SELL",
+                                    "symbol": code, "price": round(price, 2),
+                                    "quantity": shares, "amount": round(sell_amount, 2),
+                                    "reason": "调仓卖出",
+                                })
+                            del holdings[code]
 
+                    # ── 2. 调整目标仓位到等权重 ──
                     for code in new_positions:
                         price = self._get_price(closes, code, date)
-                        if price and price > 0:
-                            shares = int(per_stock / price / 100) * 100  # 整百股
-                            if shares >= 100:
-                                buy_amount = shares * price * (1 + self.slippage + self.commission)
+                        if not price or price <= 0:
+                            continue
+
+                        current_val = 0.0
+                        if code in holdings:
+                            current_val = holdings[code]["shares"] * price
+
+                        diff = target_per_stock - current_val
+
+                        # 需要减仓（超配超过15%）
+                        if diff < -target_per_stock * 0.15:
+                            sell_shares = int(abs(diff) / price / 100) * 100
+                            if sell_shares >= 100 and sell_shares <= holdings[code]["shares"]:
+                                sell_amount = sell_shares * price * (1 - self.slippage - self.commission)
+                                cash += sell_amount
+                                holdings[code]["shares"] -= sell_shares
+                                trades.append({
+                                    "date": date_str, "side": "SELL",
+                                    "symbol": code, "price": round(price, 2),
+                                    "quantity": sell_shares, "amount": round(sell_amount, 2),
+                                    "reason": "调仓减仓",
+                                })
+
+                        # 需要加仓（低配超过15%）
+                        elif diff > target_per_stock * 0.15:
+                            buy_shares = int(diff / price / 100) * 100
+                            if buy_shares < 100 and diff >= price * 100:
+                                buy_shares = 100
+                            if buy_shares >= 100:
+                                buy_amount = buy_shares * price * (1 + self.slippage + self.commission)
                                 if buy_amount <= cash:
                                     cash -= buy_amount
-                                    holdings[code] = {
-                                        "shares": shares,
-                                        "avg_cost": price,  # 建仓成本价
-                                    }
+                                    if code in holdings:
+                                        old_s = holdings[code]["shares"]
+                                        old_c = holdings[code]["avg_cost"]
+                                        new_s = old_s + buy_shares
+                                        holdings[code]["avg_cost"] = (old_c * old_s + price * buy_shares) / new_s
+                                        holdings[code]["shares"] = new_s
+                                    else:
+                                        holdings[code] = {"shares": buy_shares, "avg_cost": price}
                                     trades.append({
                                         "date": date_str, "side": "BUY",
                                         "symbol": code, "price": round(price, 2),
-                                        "quantity": shares, "amount": round(buy_amount, 2),
-                                        "reason": "调仓买入",
+                                        "quantity": buy_shares, "amount": round(buy_amount, 2),
+                                        "reason": "调仓加仓",
                                     })
 
                 current_positions = list(holdings.keys())
@@ -246,32 +281,133 @@ class RealBacktest:
 
         return set(str(d)[:10] for d in rebalance)
 
-    def _select_top(self, date, dates, closes) -> List[str]:
-        """按排名因子选 top_n 股票"""
-        date_str = str(date)[:10]
-        codes_available = closes.columns.tolist()
+    # ── v25 多因子权重（基于网格搜索最优，去掉 mom_20d/volume/money_flow 后重归一化）──
+    FACTOR_WEIGHTS = {
+        'mom_5d': 0.286,       # 短期动量
+        'mom_10d': 0.221,      # 中短期动量
+        'ma_dev_20d': 0.130,   # 均线偏离
+        'consistency': 0.130,  # 动量一致性（连涨天数占比）
+        'money_flow': 0.130,   # 简化MFI（涨跌幅度比）
+        'vol_20d': 0.065,      # 低波动偏好
+        'boll_pos': 0.039,     # 布林带位置
+    }
 
-        # 计算动量排名因子（默认：20日动量）
-        rankings = []
-        for code in codes_available:
+    # 选股过滤器
+    MIN_PRICE = 3.0
+    MAX_PRICE = 100.0
+    MAX_CHG_5D = 0.15          # 5日最大涨幅（防追高）
+    MAX_CHG_10D_DROP = -0.20   # 10日最大跌幅（防接飞刀）
+
+    def _select_top(self, date, dates, closes) -> List[str]:
+        """v25 多因子评分选股 + 质量过滤
+        
+        两步法：
+        1. 逐个计算原始因子值 + 基础过滤
+        2. 跨股票百分位归一化 + 加权打分
+        """
+        weights = self.FACTOR_WEIGHTS
+
+        # ── Step 1: 逐个计算原始因子 ──
+        raw_results = []  # [(code, {factor: val}), ...]
+        for code in closes.columns:
             series = closes[code].dropna()
             if len(series) < 25:
                 continue
-
-            idx = series.index.get_loc(date) if date in series.index else -1
+            if date not in series.index:
+                continue
+            idx = series.index.get_loc(date)
             if idx < 25:
                 continue
 
-            # 计算20日动量
-            mom_20d = series.iloc[idx] / series.iloc[idx - 20] - 1 if idx >= 20 else 0
+            values = series.values[:idx + 1]
 
-            # 综合因子打分（可扩展）
-            score = mom_20d
+            # 基础过滤
+            price = values[-1]
+            if price < self.MIN_PRICE or price > self.MAX_PRICE:
+                continue
+
+            # 5日涨幅过滤
+            if len(values) >= 6:
+                chg_5d = values[-1] / values[-6] - 1
+                if chg_5d > self.MAX_CHG_5D:
+                    continue
+
+            # 10日跌幅过滤
+            if len(values) >= 11:
+                chg_10d = values[-1] / values[-11] - 1
+                if chg_10d < self.MAX_CHG_10D_DROP:
+                    continue
+
+            # 计算7个因子（从收盘价序列）
+            factors = {}
+
+            if len(values) >= 6:
+                factors['mom_5d'] = values[-1] / values[-6] - 1
+            if len(values) >= 11:
+                factors['mom_10d'] = values[-1] / values[-11] - 1
+            if len(values) >= 21:
+                ma20 = np.mean(values[-20:])
+                std20 = np.std(values[-20:])
+                factors['ma_dev_20d'] = values[-1] / ma20 - 1
+                factors['boll_pos'] = (values[-1] - ma20) / (2.0 * max(std20, 1e-10))
+            if len(values) >= 20:
+                rets = np.diff(values[-20:]) / (values[-20:-1] + 1e-10)
+                factors['vol_20d'] = 1.0 / (1.0 + np.std(rets))  # 低波偏好
+                up_days = np.sum(rets > 0)
+                factors['consistency'] = up_days / max(len(rets), 1)
+                up_sum = np.sum(np.maximum(rets, 0))
+                dn_sum = np.sum(np.abs(np.minimum(rets, 0)))
+                factors['money_flow'] = up_sum / max(dn_sum, 1e-10) - 1.0
+
+            if factors:
+                raw_results.append((code, factors))
+
+        if not raw_results:
+            return []
+
+        # ── Step 2: 百分位归一化 + 加权打分 ──
+        factor_names = list(weights.keys())
+        # 收集每个因子的所有值
+        factor_vals = {f: [] for f in factor_names}
+        for _, factors in raw_results:
+            for f in factor_names:
+                v = factors.get(f)
+                if v is not None:
+                    factor_vals[f].append(v)
+
+        # 计算每个因子的5%-95%分位数
+        factor_range = {}
+        for f in factor_names:
+            vals = factor_vals[f]
+            if len(vals) >= 10:
+                p5 = np.percentile(vals, 5)
+                p95 = np.percentile(vals, 95)
+                if p95 > p5:
+                    factor_range[f] = (p5, p95)
+                else:
+                    factor_range[f] = None
+            else:
+                factor_range[f] = None
+
+        # 加权打分
+        rankings = []
+        for code, factors in raw_results:
+            score = 0.0
+            for f in factor_names:
+                v = factors.get(f)
+                if v is None:
+                    continue
+                rng = factor_range[f]
+                if rng:
+                    # 归一化到 0-1
+                    v_norm = np.clip((v - rng[0]) / (rng[1] - rng[0]), 0.0, 1.0)
+                else:
+                    v_norm = 0.5
+                score += weights[f] * v_norm
             rankings.append((code, score))
 
         rankings.sort(key=lambda x: x[1], reverse=True)
-        selected = [code for code, _ in rankings[:self.top_n]]
-        return selected
+        return [code for code, _ in rankings[:self.top_n]]
 
     def _get_price(self, closes, code, date):
         """安全获取某日收盘价"""

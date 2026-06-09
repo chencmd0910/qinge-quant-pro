@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import ReactECharts from "echarts-for-react";
 import api from "@/lib/axios";
+import RealBacktestRunner from "@/components/real-backtest/runner";
 
 // ── Types ──
 
@@ -330,6 +331,9 @@ export default function BacktestPage() {
                 <h1 className="text-sm font-semibold text-white">回测中心</h1>
                 <p className="text-[10px] text-slate-500">{strategies.length} 个策略</p>
               </div>
+            </div>
+            <div className="mb-3">
+              <RealBacktestRunner />
             </div>
 
             <div className="relative mb-3">
