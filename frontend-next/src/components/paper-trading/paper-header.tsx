@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CandlestickChart, Play, Pause, RotateCcw, Settings, SkipForward } from "lucide-react";
+import { CandlestickChart, RotateCcw, Settings, SkipForward } from "lucide-react";
 import api from "@/lib/axios";
 import { toast } from "@/lib/toast";
 
@@ -10,7 +10,6 @@ interface PaperHeaderProps {
 }
 
 export default function PaperHeader({ onRefresh }: PaperHeaderProps) {
-  const [running, setRunning] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const handleDailyUpdate = async () => {
@@ -60,22 +59,6 @@ export default function PaperHeader({ onRefresh }: PaperHeaderProps) {
         >
           <SkipForward size={12} />
           <span className="text-xs font-medium">{loading ? "推进中..." : "每日推进"}</span>
-        </button>
-
-        {/* Pause/Resume */}
-        <button
-          onClick={() => {
-            setRunning(!running);
-            toast(running ? "info" : "success", running ? "模拟交易已暂停" : "模拟交易已恢复");
-          }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-colors ${
-            running
-              ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
-              : "bg-amber-500/10 border-amber-500/20 text-amber-400"
-          }`}
-        >
-          {running ? <Play size={12} /> : <Pause size={12} />}
-          <span className="text-xs">{running ? "运行中" : "已暂停"}</span>
         </button>
 
         {/* Reset */}

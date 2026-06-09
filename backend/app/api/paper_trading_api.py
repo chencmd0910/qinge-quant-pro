@@ -125,13 +125,25 @@ def daily_update(payload: dict = None):
     runner = LivePaperRunner()
     runner.load_state()
     target_date = (payload or {}).get("date", None)
+    
+    # 记录前值
+    prev_value = runner.initial_cash
+    if runner.equity_curve:
+        prev_value = runner.equity_curve[-1].total_value
+    
     summary = runner.run_daily(target_date)
+    
+    # 计算当日盈亏
+    new_value = summary["total_value"]
+    daily_pnl = new_value - prev_value
+    daily_pnl_pct = round(daily_pnl / prev_value * 100, 2) if prev_value else 0
+    
     return {
         "success": True,
         "date": target_date or runner.current_date,
-        "total_value": round(summary["total_value"], 0),
-        "daily_pnl": 0,
-        "daily_pnl_pct": 0,
+        "total_value": round(new_value, 0),
+        "daily_pnl": round(daily_pnl, 0),
+        "daily_pnl_pct": daily_pnl_pct,
         "trade_count": summary.get("trade_count", 0),
     }
 
