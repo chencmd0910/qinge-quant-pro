@@ -260,3 +260,115 @@ def reset_paper_trading():
         os.remove(STATE_FILE)
     state = _init_state()
     return {"success": True, "message": "模拟交易已重置", "date": state["current_date"]}
+
+
+# ════════════════════════════════════════════════════
+# 新版：实盘模拟交易（接基因库+真K线）
+# ════════════════════════════════════════════════════
+
+@router.post("/live/run-daily")
+def live_run_daily(payload: dict = None):
+    """推进一个交易日（实盘模式，用真K线+基因库策略）
+
+    POST /api/paper-trading/live/run-daily
+    {"date": "2026-06-09"}   // 可选，默认今天
+    """
+    from app.paper_trading.live_runner import LivePaperRunner
+
+    target_date = (payload or {}).get("date", None)
+    runner = LivePaperRunner()
+    runner.load_state()  # 从上次状态恢复
+    summary = runner.run_daily(target_date)
+    return summary
+
+
+@router.post("/live/run")
+def live_run(payload: dict = None):
+    """运行从上次停止日期到今天的所有交易日
+
+    POST /api/paper-trading/live/run
+    {"start": "2025-01-01", "end": "2026-06-09"}  // 可选
+    """
+    from app.paper_trading.live_runner import LivePaperRunner
+
+    start = (payload or {}).get("start", None)
+    end = (payload or {}).get("end", None)
+    resume = (payload or {}).get("resume", True)
+
+    runner = LivePaperRunner()
+    return runner.run(start_date=start, end_date=end, resume=resume)
+
+
+@router.get("/live/state")
+def live_get_state():
+    """获取当前实盘模拟状态"""
+    from app.paper_trading.live_runner import LivePaperRunner
+
+    runner = LivePaperRunner()
+    has_state = runner.load_state()
+    if not has_state:
+        return {
+            "initialized": False,
+            "message": "尚未开始模拟交易，请先调用 POST /live/run",
+        }
+    return runner.get_summary()
+
+
+@router.post("/live/reset")
+def live_reset(payload: dict = None):
+    """重置实盘模拟（可选参数：初始资金）"""
+    import os
+    from app.paper_trading.live_runner import STATE_FILE as LIVE_STATE_FILE, LivePaperRunner
+
+    cash = (payload or {}).get("cash", 1_000_000)
+    if os.path.exists(LIVE_STATE_FILE):
+        os.remove(LIVE_STATE_FILE)
+
+    runner = LivePaperRunner(initial_cash=cash)
+    runner.save_state()
+    return {"success": True, "message": f"实盘模拟已重置，初始资金 ¥{cash:,}"}
+
+
+# ════════════════════════════════════════════════════
+# 行情数据更新
+# ════════════════════════════════════════════════════
+
+@router.post("/market/update")
+def market_data_update(payload: dict = None):
+    """更新行情数据（akshare拉取最新K线）
+
+    POST /api/paper-trading/market/update
+    {"date": "2026-06-09", "codes": "000001,600519"}  // codes可选
+    """
+    from app.market_data.akshare_fetcher import update_all_stocks
+
+    target_date = (payload or {}).get("date", None)
+    codes_str = (payload or {}).get("codes", None)
+    codes = codes_str.split(",") if codes_str else None
+
+    result = update_all_stocks(target_date=target_date, codes=codes)
+    return result
+
+
+@router.get("/market/status")
+def market_data_status():
+    """查看行情数据状态"""
+    from app.market_data.akshare_fetcher import get_parquet_files, last_date_for_code
+    import os
+
+    codes = get_parquet_files()
+    if not codes:
+        return {"files": 0, "message": "无本地K线数据"}
+
+    # 抽样检查最新日期
+    sample = codes[:10]
+    dates = {}
+    for c in sample:
+        dates[c] = last_date_for_code(c)
+
+    return {
+        "total_stocks": len(codes),
+        "sample_dates": dates,
+        "data_dir": os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                   "data", "klines", "parquet"),
+    }
