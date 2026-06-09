@@ -1,0 +1,122 @@
+[
+  {
+    "strategy_id": "etf_rotation_v1_20260606",
+    "strategy_name": "ETF Rotation V1",
+    "strategy_type": "etf_rotation",
+    "version": "1.0",
+    "market": "A股",
+    "period": "2018-01-01 ~ 2026-06-05",
+    "params": {
+      "lookback": 60,
+      "commission": 0.0003,
+      "slippage": 0.001
+    },
+    "annual_return": 2.36,
+    "total_return": 20.78,
+    "max_drawdown": -59.16,
+    "sharpe_ratio": 0.22,
+    "sortino_ratio": 0.35,
+    "win_rate": 100.0,
+    "trade_count": 108,
+    "benchmark_return": 0,
+    "alpha": 0,
+    "excess_return": 0,
+    "created_at": "2026-06-06T17:06:43.113720",
+    "score": 28.1,
+    "rank": 4,
+    "tags": [
+      "etf",
+      "rotation",
+      "momentum"
+    ]
+  },
+  {
+    "strategy_id": "multi_factor_v25_20260606",
+    "strategy_name": "Multi-Factor V25",
+    "strategy_type": "multi_factor",
+    "version": "25.0",
+    "market": "A股",
+    "period": "2018-01-01 ~ 2026-06-05",
+    "params": {
+      "factors": 16,
+      "northbound": true,
+      "margin": true
+    },
+    "annual_return": 12.5,
+    "total_return": 168.0,
+    "max_drawdown": -18.5,
+    "sharpe_ratio": 1.15,
+    "sortino_ratio": 1.8,
+    "win_rate": 58.0,
+    "trade_count": 240,
+    "benchmark_return": 2.5,
+    "alpha": 10.0,
+    "excess_return": 147.2,
+    "created_at": "2026-06-06T17:06:43.114450",
+    "score": 59.8,
+    "rank": 1,
+    "tags": [
+      "multi-factor",
+      "v25",
+      "northbound"
+    ]
+  },
+  {
+    "strategy_id": "industry_rotation_v1_20260606",
+    "strategy_name": "Industry Rotation V1",
+    "strategy_type": "industry_rotation",
+    "version": "1.0",
+    "market": "A股",
+    "period": "2018-01-01 ~ 2026-06-05",
+    "params": {
+      "lookback": 20,
+      "top_n": 3
+    },
+    "annual_return": 8.7,
+    "total_return": 95.0,
+    "max_drawdown": -22.0,
+    "sharpe_ratio": 0.72,
+    "sortino_ratio": 1.1,
+    "win_rate": 52.0,
+    "trade_count": 180,
+    "benchmark_return": 2.5,
+    "alpha": 6.2,
+    "excess_return": 92.5,
+    "created_at": "2026-06-06T17:06:43.115129",
+    "score": 48.4,
+    "rank": 2,
+    "tags": [
+      "industry",
+      "rotation"
+    ]
+  },
+  {
+    "strategy_id": "dividend_v1_20260606",
+    "strategy_name": "Dividend Aristocrat V1",
+    "strategy_type": "dividend",
+    "version": "1.0",
+    "market": "A股",
+    "period": "2018-01-01 ~ 2026-06-05",
+    "params": {
+      "min_yield": 0.03,
+      "top_n": 20
+    },
+    "annual_return": 6.2,
+    "total_return": 62.0,
+    "max_drawdown": -15.0,
+    "sharpe_ratio": 0.55,
+    "sortino_ratio": 0.85,
+    "win_rate": 65.0,
+    "trade_count": 60,
+    "benchmark_return": 2.5,
+    "alpha": 3.7,
+    "excess_return": 59.5,
+    "created_at": "2026-06-06T17:06:43.115788",
+    "score": 47.4,
+    "rank": 3,
+    "tags": [
+      "dividend",
+      "value"
+    ]
+  }
+]

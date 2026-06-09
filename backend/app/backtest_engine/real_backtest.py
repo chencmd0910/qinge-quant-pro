@@ -87,11 +87,16 @@ class RealBacktest:
         """
         t0 = datetime.now()
 
-        # 1. 加载全池收盘价
+        # 1. 加载全池收盘价（含回溯窗口用于因子计算）
+        #    需要往前多拉 60 个交易日保证动量/均线等因子有足够历史
+        lookback_start = str(pd.to_datetime(self.start) - pd.Timedelta(days=90))
         print(f"[RealBacktest] Loading {len(self.codes)} stocks from Parquet...")
-        closes = self.engine.get_closes(self.codes, self.start, self.end)
-        if closes.empty:
+        closes_full = self.engine.get_closes(self.codes, lookback_start, self.end)
+        if closes_full.empty:
             return {"error": "No data loaded", "metrics": {}}
+
+        # 只在回测区间内交易
+        closes = closes_full[closes_full.index >= self.start]
 
         dates = closes.index.tolist()
         print(f"[RealBacktest] {len(dates)} trading days, {len(closes.columns)} stocks")
@@ -117,7 +122,7 @@ class RealBacktest:
             # 调仓日：先卖后买
             if date_str in rebalance_dates or i == 0:
                 # ── 卖出不在新持仓中的股票 ──
-                new_positions = self._select_top(date, dates, closes)
+                new_positions = self._select_top(date, dates, closes_full)
 
                 for code in list(holdings.keys()):
                     if code not in new_positions:

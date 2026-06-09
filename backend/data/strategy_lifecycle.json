@@ -1,0 +1,52 @@
+{
+  "etf_rotation_v1": {
+    "strategy_id": "etf_rotation_v1",
+    "name": "ETF Rotation V1",
+    "type": "etf_rotation",
+    "status": "RESEARCH",
+    "created_at": "2026-06-06T20:03:46.814160",
+    "updated_at": "2026-06-06T20:03:46.814165",
+    "history": [
+      {
+        "status": "RESEARCH",
+        "at": "2026-06-06T20:03:46.814167",
+        "reason": "created"
+      }
+    ]
+  },
+  "multi_factor_v25": {
+    "strategy_id": "multi_factor_v25",
+    "name": "Multi-Factor V25",
+    "type": "multi_factor",
+    "status": "VALIDATED",
+    "created_at": "2026-06-06T20:03:46.814824",
+    "updated_at": "2026-06-06T20:03:46.816179",
+    "history": [
+      {
+        "status": "RESEARCH",
+        "at": "2026-06-06T20:03:46.814829",
+        "reason": "created"
+      },
+      {
+        "status": "VALIDATED",
+        "at": "2026-06-06T20:03:46.816184",
+        "reason": "WF=100%, Alpha=10%, Sharpe=1.15"
+      }
+    ]
+  },
+  "industry_rotation_v1": {
+    "strategy_id": "industry_rotation_v1",
+    "name": "Industry Rotation V1",
+    "type": "industry_rotation",
+    "status": "RESEARCH",
+    "created_at": "2026-06-06T20:03:46.815465",
+    "updated_at": "2026-06-06T20:03:46.815468",
+    "history": [
+      {
+        "status": "RESEARCH",
+        "at": "2026-06-06T20:03:46.815469",
+        "reason": "created"
+      }
+    ]
+  }
+}

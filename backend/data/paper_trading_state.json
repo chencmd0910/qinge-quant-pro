@@ -1,0 +1,90 @@
+{
+  "initial_capital": 1000000,
+  "cash": 150777.0,
+  "positions": [
+    {
+      "symbol": "159919.SZ",
+      "name": "沪深300ETF",
+      "qty": 32800,
+      "avg_cost": 4.308,
+      "current": 4.646,
+      "pnl": -3763.0,
+      "pnl_pct": -3.1
+    },
+    {
+      "symbol": "510050.SH",
+      "name": "上证50ETF",
+      "qty": 62400,
+      "avg_cost": 2.269,
+      "current": 2.409,
+      "pnl": 3969.0,
+      "pnl_pct": -6.7
+    },
+    {
+      "symbol": "515080.SH",
+      "name": "中证红利ETF",
+      "qty": 95600,
+      "avg_cost": 1.481,
+      "current": 1.52,
+      "pnl": 5928.0,
+      "pnl_pct": 0.8
+    },
+    {
+      "symbol": "512100.SH",
+      "name": "1000ETF",
+      "qty": 87500,
+      "avg_cost": 1.619,
+      "current": 1.636,
+      "pnl": 4368.0,
+      "pnl_pct": -3.1
+    },
+    {
+      "symbol": "159845.SZ",
+      "name": "中证1000ETF",
+      "qty": 60400,
+      "avg_cost": 2.344,
+      "current": 2.218,
+      "pnl": 6263.0,
+      "pnl_pct": 2.6
+    },
+    {
+      "symbol": "159949.SZ",
+      "name": "创业板50",
+      "qty": 76700,
+      "avg_cost": 1.845,
+      "current": 1.943,
+      "pnl": -3231.0,
+      "pnl_pct": 2.4
+    }
+  ],
+  "current_date": "2026-06-09",
+  "start_date": "2024-01-01",
+  "trade_count": 0,
+  "trades": [],
+  "equity_curve": [
+    {
+      "date": "2024-01-01",
+      "value": 1000000,
+      "dd": 0
+    }
+  ],
+  "daily_pnl": 0,
+  "daily_pnl_pct": 0,
+  "active_strategies": [
+    {
+      "id": "multi_factor_v25_20260606",
+      "name": "多因子V25",
+      "weight": 0.4
+    },
+    {
+      "id": "industry_rotation_v1_20260606",
+      "name": "行业轮动V1",
+      "weight": 0.35
+    },
+    {
+      "id": "etf_rotation_v1_20260606",
+      "name": "ETF轮动V1",
+      "weight": 0.25
+    }
+  ]
+}
