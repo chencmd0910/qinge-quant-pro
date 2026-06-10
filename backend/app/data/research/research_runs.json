@@ -1,3702 +1,2884 @@
 [
   {
-    "strategy_id": "AUTO_0057_1fed67f6",
-    "strategy_name": "Gen0_量价_5F_monthly",
+    "strategy_id": "AUTO_0052_f867cc86",
+    "strategy_name": "Gen0_量价_3F_biweekly",
     "strategy_type": "auto_generated",
     "factors": [
       [
         "northbound_net_buy",
-        0.2762
+        0.3374
+      ],
+      [
+        "volume_ratio",
+        0.3389
       ],
       [
         "margin_balance_chg",
-        0.1546
-      ],
-      [
-        "consistency",
-        0.0923
-      ],
-      [
-        "turnover_mom",
-        0.3309
-      ],
-      [
-        "daily_sharpe",
-        0.146
+        0.3237
       ]
     ],
-    "top_n": 15,
-    "rebalance_freq": "monthly",
+    "top_n": 10,
+    "rebalance_freq": "biweekly",
     "factor_categories": [
       "量价",
-      "动量",
-      "波动率",
       "北向资金",
       "融资余额"
     ],
     "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 8.74,
-    "total_return": 95.55,
-    "max_drawdown": -11.8,
-    "sharpe": 0.728,
-    "sortino": 0.946,
-    "win_rate": 51.8,
-    "trade_count": 56,
-    "positions": 15,
+    "status": "FILTERED",
+    "annual_return": 6.63,
+    "total_return": 67.17,
+    "max_drawdown": -22.02,
+    "sharpe": 0.269,
+    "sortino": 0.35,
+    "win_rate": 60.5,
+    "trade_count": 75,
+    "positions": 10,
     "benchmark_return": 2.5,
-    "alpha": 6.48,
+    "alpha": 5.248,
     "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 53.2,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860041"
+    "filter_reasons": [
+      "夏普 0.269 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495226"
   },
   {
-    "strategy_id": "AUTO_0058_3251fcb1",
+    "strategy_id": "AUTO_0053_8d077ade",
+    "strategy_name": "Gen0_行业景气_3F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_revenue_growth",
+        0.3771
+      ],
+      [
+        "pb_ttm",
+        0.1097
+      ],
+      [
+        "money_flow",
+        0.5132
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "行业景气",
+      "基本面",
+      "资金流"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 8.48,
+    "total_return": 91.84,
+    "max_drawdown": -7.3,
+    "sharpe": 1.295,
+    "sortino": 1.684,
+    "win_rate": 60.7,
+    "trade_count": 113,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 4.491,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 61.8,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495227"
+  },
+  {
+    "strategy_id": "AUTO_0054_b20fc185",
+    "strategy_name": "Gen0_波动率_4F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.3016
+      ],
+      [
+        "pe_ttm",
+        0.1147
+      ],
+      [
+        "mom_10d",
+        0.3031
+      ],
+      [
+        "daily_sharpe",
+        0.2806
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "波动率",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 15.25,
+    "total_return": 211.33,
+    "max_drawdown": -11.67,
+    "sharpe": 1.231,
+    "sortino": 1.6,
+    "win_rate": 62.0,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 13.528,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 71.9,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495228"
+  },
+  {
+    "strategy_id": "AUTO_0055_64a7dd7b",
+    "strategy_name": "Gen0_北向资金_8F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.1546
+      ],
+      [
+        "margin_buy_ratio",
+        0.1084
+      ],
+      [
+        "pb_ttm",
+        0.0515
+      ],
+      [
+        "industry_revenue_growth",
+        0.1921
+      ],
+      [
+        "consistency",
+        0.0436
+      ],
+      [
+        "daily_sharpe",
+        0.1791
+      ],
+      [
+        "northbound_net_buy",
+        0.2009
+      ],
+      [
+        "volume_ratio",
+        0.0698
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 8.31,
+    "total_return": 89.37,
+    "max_drawdown": -16.02,
+    "sharpe": 0.638,
+    "sortino": 0.829,
+    "win_rate": 61.9,
+    "trade_count": 37,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 6.987,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 50.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495229"
+  },
+  {
+    "strategy_id": "AUTO_0056_e53e4978",
+    "strategy_name": "Gen0_北向资金_8F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_pmi",
+        0.0929
+      ],
+      [
+        "daily_sharpe",
+        0.1588
+      ],
+      [
+        "northbound_net_buy",
+        0.1255
+      ],
+      [
+        "pe_ttm",
+        0.0574
+      ],
+      [
+        "margin_balance_chg",
+        0.1938
+      ],
+      [
+        "turnover_mom",
+        0.0603
+      ],
+      [
+        "money_flow",
+        0.1034
+      ],
+      [
+        "mom_5d",
+        0.2079
+      ]
+    ],
+    "top_n": 20,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 6.35,
+    "total_return": 63.59,
+    "max_drawdown": -29.0,
+    "sharpe": 0.185,
+    "sortino": 0.241,
+    "win_rate": 60.2,
+    "trade_count": 75,
+    "positions": 20,
+    "benchmark_return": 2.5,
+    "alpha": 4.64,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.185 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495230"
+  },
+  {
+    "strategy_id": "AUTO_0057_80d32b13",
+    "strategy_name": "Gen0_北向资金_7F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "northbound_net_buy",
+        0.168
+      ],
+      [
+        "consistency",
+        0.1154
+      ],
+      [
+        "pe_ttm",
+        0.0725
+      ],
+      [
+        "volatility_20d",
+        0.0725
+      ],
+      [
+        "volume_ratio",
+        0.1855
+      ],
+      [
+        "margin_buy_ratio",
+        0.2157
+      ],
+      [
+        "money_flow",
+        0.1704
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 9.55,
+    "total_return": 107.38,
+    "max_drawdown": -9.77,
+    "sharpe": 1.179,
+    "sortino": 1.532,
+    "win_rate": 69.1,
+    "trade_count": 94,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 7.589,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 62.6,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495231"
+  },
+  {
+    "strategy_id": "AUTO_0058_54db6cff",
+    "strategy_name": "Gen0_北向资金_5F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_pmi",
+        0.1824
+      ],
+      [
+        "money_flow",
+        0.1845
+      ],
+      [
+        "volume_ratio",
+        0.1373
+      ],
+      [
+        "northbound_holding_chg",
+        0.1343
+      ],
+      [
+        "daily_sharpe",
+        0.3615
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "量价",
+      "波动率",
+      "行业景气",
+      "资金流"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 6.51,
+    "total_return": 65.56,
+    "max_drawdown": -20.13,
+    "sharpe": 0.279,
+    "sortino": 0.362,
+    "win_rate": 61.7,
+    "trade_count": 151,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 6.11,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.279 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495233"
+  },
+  {
+    "strategy_id": "AUTO_0059_198e60e6",
+    "strategy_name": "Gen0_北向资金_4F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "margin_buy_ratio",
+        0.3388
+      ],
+      [
+        "northbound_net_buy",
+        0.3016
+      ],
+      [
+        "industry_profit_growth",
+        0.2814
+      ],
+      [
+        "pb_ttm",
+        0.0781
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "基本面",
+      "行业景气"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 9.43,
+    "total_return": 105.62,
+    "max_drawdown": -16.62,
+    "sharpe": 0.738,
+    "sortino": 0.959,
+    "win_rate": 50.5,
+    "trade_count": 378,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 5.583,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 50.5,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495234"
+  },
+  {
+    "strategy_id": "AUTO_0060_8da59a36",
+    "strategy_name": "Gen0_北向资金_5F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "daily_sharpe",
+        0.1721
+      ],
+      [
+        "mom_10d",
+        0.223
+      ],
+      [
+        "northbound_net_buy",
+        0.2767
+      ],
+      [
+        "money_flow",
+        0.096
+      ],
+      [
+        "industry_revenue_growth",
+        0.2322
+      ]
+    ],
+    "top_n": 15,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "波动率",
+      "行业景气",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 11.68,
+    "total_return": 141.95,
+    "max_drawdown": -29.42,
+    "sharpe": 0.531,
+    "sortino": 0.69,
+    "win_rate": 50.7,
+    "trade_count": 226,
+    "positions": 15,
+    "benchmark_return": 2.5,
+    "alpha": 8.769,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 45.6,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495235"
+  },
+  {
+    "strategy_id": "AUTO_0061_37e82500",
+    "strategy_name": "Gen0_北向资金_7F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "volume_ratio",
+        0.2194
+      ],
+      [
+        "mom_5d",
+        0.093
+      ],
+      [
+        "money_flow",
+        0.2343
+      ],
+      [
+        "pe_ttm",
+        0.0395
+      ],
+      [
+        "margin_balance_chg",
+        0.1248
+      ],
+      [
+        "industry_pmi",
+        0.1101
+      ],
+      [
+        "northbound_holding_chg",
+        0.1788
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 3.67,
+    "total_return": 33.41,
+    "max_drawdown": -33.13,
+    "sharpe": 0.096,
+    "sortino": 0.124,
+    "win_rate": 66.7,
+    "trade_count": 151,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 1.283,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.096 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495236"
+  },
+  {
+    "strategy_id": "AUTO_0062_2d06e3f1",
+    "strategy_name": "Gen0_量价_5F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.2005
+      ],
+      [
+        "industry_profit_growth",
+        0.222
+      ],
+      [
+        "turnover_mom",
+        0.0521
+      ],
+      [
+        "mom_5d",
+        0.3174
+      ],
+      [
+        "daily_sharpe",
+        0.2079
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "量价",
+      "波动率",
+      "行业景气",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 7.84,
+    "total_return": 82.85,
+    "max_drawdown": -16.66,
+    "sharpe": 0.621,
+    "sortino": 0.808,
+    "win_rate": 68.0,
+    "trade_count": 226,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 7.608,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 49.7,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495237"
+  },
+  {
+    "strategy_id": "AUTO_0063_6eb69e77",
+    "strategy_name": "Gen0_融资余额_6F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "margin_buy_ratio",
+        0.0827
+      ],
+      [
+        "money_flow",
+        0.1725
+      ],
+      [
+        "volume_ratio",
+        0.2539
+      ],
+      [
+        "industry_revenue_growth",
+        0.2124
+      ],
+      [
+        "pb_ttm",
+        0.0692
+      ],
+      [
+        "volatility_20d",
+        0.2093
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 6.37,
+    "total_return": 63.89,
+    "max_drawdown": -23.24,
+    "sharpe": 0.409,
+    "sortino": 0.531,
+    "win_rate": 53.1,
+    "trade_count": 226,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 5.377,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 40.1,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495238"
+  },
+  {
+    "strategy_id": "AUTO_0064_eecbb857",
+    "strategy_name": "Gen0_融资余额_6F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_revenue_growth",
+        0.2773
+      ],
+      [
+        "turnover_mom",
+        0.1113
+      ],
+      [
+        "daily_sharpe",
+        0.1424
+      ],
+      [
+        "margin_buy_ratio",
+        0.1302
+      ],
+      [
+        "consistency",
+        0.2217
+      ],
+      [
+        "pb_ttm",
+        0.1172
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 13.67,
+    "total_return": 178.81,
+    "max_drawdown": -20.48,
+    "sharpe": 0.763,
+    "sortino": 0.992,
+    "win_rate": 48.6,
+    "trade_count": 378,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 12.377,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 58.4,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495239"
+  },
+  {
+    "strategy_id": "AUTO_0065_9ef86e43",
+    "strategy_name": "Gen0_行业景气_3F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "mom_20d",
+        0.301
+      ],
+      [
+        "pe_ttm",
+        0.2582
+      ],
+      [
+        "industry_profit_growth",
+        0.4408
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "行业景气",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 7.57,
+    "total_return": 79.28,
+    "max_drawdown": -30.92,
+    "sharpe": 0.228,
+    "sortino": 0.297,
+    "win_rate": 62.9,
+    "trade_count": 75,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 4.94,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.228 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495240"
+  },
+  {
+    "strategy_id": "AUTO_0066_107edfb8",
+    "strategy_name": "Gen0_北向资金_7F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.201
+      ],
+      [
+        "volatility_20d",
+        0.1232
+      ],
+      [
+        "pb_ttm",
+        0.0912
+      ],
+      [
+        "margin_buy_ratio",
+        0.1511
+      ],
+      [
+        "mom_5d",
+        0.2007
+      ],
+      [
+        "northbound_holding_chg",
+        0.1701
+      ],
+      [
+        "volume_ratio",
+        0.0627
+      ]
+    ],
+    "top_n": 20,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 10.29,
+    "total_return": 118.88,
+    "max_drawdown": -19.99,
+    "sharpe": 0.494,
+    "sortino": 0.642,
+    "win_rate": 62.1,
+    "trade_count": 302,
+    "positions": 20,
+    "benchmark_return": 2.5,
+    "alpha": 7.813,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 47.9,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495241"
+  },
+  {
+    "strategy_id": "AUTO_0067_18be2151",
+    "strategy_name": "Gen0_波动率_4F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "margin_balance_chg",
+        0.2823
+      ],
+      [
+        "daily_sharpe",
+        0.2834
+      ],
+      [
+        "northbound_net_buy",
+        0.1844
+      ],
+      [
+        "mom_10d",
+        0.2499
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "波动率",
+      "北向资金",
+      "融资余额",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 14.44,
+    "total_return": 194.25,
+    "max_drawdown": -20.66,
+    "sharpe": 0.827,
+    "sortino": 1.075,
+    "win_rate": 54.6,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 13.639,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 61.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495242"
+  },
+  {
+    "strategy_id": "AUTO_0068_524d2ce1",
+    "strategy_name": "Gen0_北向资金_6F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.1415
+      ],
+      [
+        "northbound_net_buy",
+        0.2778
+      ],
+      [
+        "volatility_20d",
+        0.1063
+      ],
+      [
+        "industry_pmi",
+        0.0879
+      ],
+      [
+        "mom_5d",
+        0.151
+      ],
+      [
+        "volume_ratio",
+        0.2355
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "北向资金",
+      "量价",
+      "波动率",
+      "行业景气",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 9.07,
+    "total_return": 100.35,
+    "max_drawdown": -18.17,
+    "sharpe": 0.618,
+    "sortino": 0.803,
+    "win_rate": 59.7,
+    "trade_count": 75,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 6.577,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 48.7,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495243"
+  },
+  {
+    "strategy_id": "AUTO_0069_55807a65",
+    "strategy_name": "Gen0_北向资金_6F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "northbound_net_buy",
+        0.2863
+      ],
+      [
+        "mom_10d",
+        0.1782
+      ],
+      [
+        "money_flow",
+        0.1728
+      ],
+      [
+        "volatility_20d",
+        0.1156
+      ],
+      [
+        "industry_revenue_growth",
+        0.2021
+      ],
+      [
+        "pe_ttm",
+        0.045
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 13.44,
+    "total_return": 174.16,
+    "max_drawdown": -5,
+    "sharpe": 2.278,
+    "sortino": 2.962,
+    "win_rate": 48.0,
+    "trade_count": 378,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 10.46,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 82.6,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495244"
+  },
+  {
+    "strategy_id": "AUTO_0070_7ac0c3c8",
     "strategy_name": "Gen0_量价_4F_biweekly",
     "strategy_type": "auto_generated",
     "factors": [
       [
-        "pb_ttm",
-        0.1244
+        "volatility_20d",
+        0.2352
       ],
       [
-        "volume_ratio",
-        0.5387
+        "consistency",
+        0.2242
       ],
       [
-        "money_flow",
-        0.1805
+        "northbound_net_buy",
+        0.3706
       ],
       [
-        "industry_pmi",
-        0.1564
+        "turnover_mom",
+        0.17
       ]
     ],
     "top_n": 25,
     "rebalance_freq": "biweekly",
     "factor_categories": [
       "量价",
-      "资金流",
-      "基本面",
-      "行业景气"
+      "波动率",
+      "北向资金",
+      "动量"
     ],
     "generation": 0,
     "status": "VALIDATED",
-    "annual_return": 8.81,
-    "total_return": 96.52,
-    "max_drawdown": -16.53,
-    "sharpe": 0.634,
-    "sortino": 0.824,
-    "win_rate": 63.0,
+    "annual_return": 7.82,
+    "total_return": 82.63,
+    "max_drawdown": -5,
+    "sharpe": 2.345,
+    "sortino": 3.048,
+    "win_rate": 68.9,
     "trade_count": 189,
     "positions": 25,
     "benchmark_return": 2.5,
-    "alpha": 7.783,
+    "alpha": 5.875,
     "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 50.8,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860042"
+    "validation_score": 74.5,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495245"
   },
   {
-    "strategy_id": "AUTO_0059_22e9b6de",
-    "strategy_name": "Gen0_波动率_4F_biweekly",
+    "strategy_id": "AUTO_0071_b6a4588a",
+    "strategy_name": "Gen0_行业景气_3F_biweekly",
     "strategy_type": "auto_generated",
     "factors": [
       [
-        "daily_sharpe",
-        0.1204
+        "mom_5d",
+        0.3661
+      ],
+      [
+        "industry_profit_growth",
+        0.4041
       ],
       [
         "pe_ttm",
-        0.0889
+        0.2298
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "行业景气",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 2.79,
+    "total_return": 24.62,
+    "max_drawdown": -25.07,
+    "sharpe": 0.099,
+    "sortino": 0.129,
+    "win_rate": 62.3,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 1.225,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.099 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495246"
+  },
+  {
+    "strategy_id": "AUTO_0072_9c4993a0",
+    "strategy_name": "Gen0_北向资金_8F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_pmi",
+        0.0619
       ],
       [
-        "margin_balance_chg",
-        0.3201
+        "volatility_20d",
+        0.0589
+      ],
+      [
+        "mom_20d",
+        0.0843
       ],
       [
         "northbound_holding_chg",
-        0.4705
+        0.2115
+      ],
+      [
+        "money_flow",
+        0.0911
+      ],
+      [
+        "volume_ratio",
+        0.2487
+      ],
+      [
+        "margin_balance_chg",
+        0.1699
+      ],
+      [
+        "pe_ttm",
+        0.0737
       ]
     ],
-    "top_n": 10,
-    "rebalance_freq": "biweekly",
+    "top_n": 30,
+    "rebalance_freq": "monthly",
     "factor_categories": [
-      "波动率",
-      "基本面",
+      "北向资金",
       "融资余额",
-      "北向资金"
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
     ],
     "generation": 0,
     "status": "VALIDATED",
-    "annual_return": 7.21,
-    "total_return": 74.53,
-    "max_drawdown": -14.44,
-    "sharpe": 0.618,
-    "sortino": 0.803,
+    "annual_return": 10.57,
+    "total_return": 123.42,
+    "max_drawdown": -5,
+    "sharpe": 2.5,
+    "sortino": 3.25,
+    "win_rate": 53.1,
+    "trade_count": 113,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 9.636,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 80.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495247"
+  },
+  {
+    "strategy_id": "AUTO_0073_0e9f3f37",
+    "strategy_name": "Gen0_北向资金_6F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_profit_growth",
+        0.1781
+      ],
+      [
+        "northbound_holding_chg",
+        0.1707
+      ],
+      [
+        "daily_sharpe",
+        0.1586
+      ],
+      [
+        "margin_buy_ratio",
+        0.0818
+      ],
+      [
+        "volume_ratio",
+        0.3089
+      ],
+      [
+        "mom_20d",
+        0.102
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 17.56,
+    "total_return": 264.89,
+    "max_drawdown": -12.41,
+    "sharpe": 1.991,
+    "sortino": 2.589,
+    "win_rate": 61.8,
+    "trade_count": 37,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 14.215,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 85.1,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495248"
+  },
+  {
+    "strategy_id": "AUTO_0074_7ed69b3f",
+    "strategy_name": "Gen0_北向资金_7F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "turnover_mom",
+        0.1655
+      ],
+      [
+        "consistency",
+        0.0525
+      ],
+      [
+        "margin_balance_chg",
+        0.1873
+      ],
+      [
+        "northbound_net_buy",
+        0.1211
+      ],
+      [
+        "pb_ttm",
+        0.0873
+      ],
+      [
+        "industry_revenue_growth",
+        0.2499
+      ],
+      [
+        "daily_sharpe",
+        0.1365
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 11.2,
+    "total_return": 133.87,
+    "max_drawdown": -23.92,
+    "sharpe": 0.468,
+    "sortino": 0.608,
     "win_rate": 49.1,
-    "trade_count": 75,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 6.169,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 49.0,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860043"
-  },
-  {
-    "strategy_id": "AUTO_0060_112b17c8",
-    "strategy_name": "Gen0_波动率_4F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "money_flow",
-        0.3219
-      ],
-      [
-        "volatility_20d",
-        0.158
-      ],
-      [
-        "industry_profit_growth",
-        0.1468
-      ],
-      [
-        "volume_ratio",
-        0.3733
-      ]
-    ],
-    "top_n": 15,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "波动率",
-      "资金流",
-      "行业景气",
-      "量价"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 4.82,
-    "total_return": 45.73,
-    "max_drawdown": -21.58,
-    "sharpe": 0.306,
-    "sortino": 0.397,
-    "win_rate": 46.6,
-    "trade_count": 56,
-    "positions": 15,
-    "benchmark_return": 2.5,
-    "alpha": 2.473,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 35.5,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860044"
-  },
-  {
-    "strategy_id": "AUTO_0061_3d920195",
-    "strategy_name": "Gen0_基本面_5F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_revenue_growth",
-        0.1093
-      ],
-      [
-        "daily_sharpe",
-        0.2339
-      ],
-      [
-        "northbound_net_buy",
-        0.3259
-      ],
-      [
-        "pe_ttm",
-        0.1532
-      ],
-      [
-        "margin_buy_ratio",
-        0.1777
-      ]
-    ],
-    "top_n": 20,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "基本面",
-      "波动率",
-      "北向资金",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 9.37,
-    "total_return": 104.72,
-    "max_drawdown": -20.71,
-    "sharpe": 0.423,
-    "sortino": 0.549,
-    "win_rate": 45.0,
-    "trade_count": 75,
-    "positions": 20,
-    "benchmark_return": 2.5,
-    "alpha": 8.307,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 46.4,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860045"
-  },
-  {
-    "strategy_id": "AUTO_0062_58462a79",
-    "strategy_name": "Gen0_量价_7F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "margin_buy_ratio",
-        0.1543
-      ],
-      [
-        "money_flow",
-        0.3078
-      ],
-      [
-        "mom_5d",
-        0.1063
-      ],
-      [
-        "turnover_mom",
-        0.0612
-      ],
-      [
-        "industry_profit_growth",
-        0.1821
-      ],
-      [
-        "northbound_holding_chg",
-        0.0983
-      ],
-      [
-        "volatility_20d",
-        0.0899
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 10.36,
-    "total_return": 120.01,
-    "max_drawdown": -21.71,
-    "sharpe": 0.665,
-    "sortino": 0.864,
-    "win_rate": 42.7,
-    "trade_count": 113,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 8.554,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 50.4,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860046"
-  },
-  {
-    "strategy_id": "AUTO_0063_1cca8fc3",
-    "strategy_name": "Gen0_量价_8F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volume_ratio",
-        0.1896
-      ],
-      [
-        "margin_balance_chg",
-        0.1109
-      ],
-      [
-        "pe_ttm",
-        0.0854
-      ],
-      [
-        "consistency",
-        0.0633
-      ],
-      [
-        "industry_profit_growth",
-        0.0885
-      ],
-      [
-        "northbound_net_buy",
-        0.1343
-      ],
-      [
-        "daily_sharpe",
-        0.1578
-      ],
-      [
-        "money_flow",
-        0.1701
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 16.09,
-    "total_return": 229.99,
-    "max_drawdown": -10.11,
-    "sharpe": 2.018,
-    "sortino": 2.623,
-    "win_rate": 63.4,
-    "trade_count": 378,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 13.78,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 85.0,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860047"
-  },
-  {
-    "strategy_id": "AUTO_0064_85e73933",
-    "strategy_name": "Gen0_资金流_3F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_pmi",
-        0.1221
-      ],
-      [
-        "money_flow",
-        0.379
-      ],
-      [
-        "northbound_net_buy",
-        0.4989
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "资金流",
-      "北向资金",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 7.1,
-    "total_return": 73.17,
-    "max_drawdown": -30.6,
-    "sharpe": 0.307,
-    "sortino": 0.399,
-    "win_rate": 47.4,
-    "trade_count": 94,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 4.294,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 34.3,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860048"
-  },
-  {
-    "strategy_id": "AUTO_0065_941bff48",
-    "strategy_name": "Gen0_波动率_3F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "pe_ttm",
-        0.3042
-      ],
-      [
-        "daily_sharpe",
-        0.272
-      ],
-      [
-        "margin_balance_chg",
-        0.4238
-      ]
-    ],
-    "top_n": 10,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "波动率",
-      "基本面",
-      "融资余额"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 7.39,
-    "total_return": 76.85,
-    "max_drawdown": -23.07,
-    "sharpe": 0.352,
-    "sortino": 0.458,
-    "win_rate": 63.7,
-    "trade_count": 75,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 5.332,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 39.9,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860049"
-  },
-  {
-    "strategy_id": "AUTO_0066_72906be5",
-    "strategy_name": "Gen0_量价_7F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "money_flow",
-        0.1336
-      ],
-      [
-        "pe_ttm",
-        0.0492
-      ],
-      [
-        "mom_20d",
-        0.1811
-      ],
-      [
-        "turnover_mom",
-        0.0567
-      ],
-      [
-        "northbound_holding_chg",
-        0.2521
-      ],
-      [
-        "industry_profit_growth",
-        0.2303
-      ],
-      [
-        "margin_balance_chg",
-        0.0969
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 10.09,
-    "total_return": 115.8,
-    "max_drawdown": -16.54,
-    "sharpe": 0.629,
-    "sortino": 0.817,
-    "win_rate": 69.6,
     "trade_count": 453,
     "positions": 30,
     "benchmark_return": 2.5,
-    "alpha": 9.659,
+    "alpha": 7.117,
     "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 53.4,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860050"
+    "validation_score": 45.4,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495249"
   },
   {
-    "strategy_id": "AUTO_0067_5af474c2",
-    "strategy_name": "Gen0_量价_6F_biweekly",
+    "strategy_id": "AUTO_0075_bd040e07",
+    "strategy_name": "Gen0_北向资金_5F_weekly",
     "strategy_type": "auto_generated",
     "factors": [
-      [
-        "volume_ratio",
-        0.1204
-      ],
-      [
-        "industry_revenue_growth",
-        0.1804
-      ],
-      [
-        "northbound_net_buy",
-        0.2156
-      ],
-      [
-        "money_flow",
-        0.1616
-      ],
-      [
-        "pe_ttm",
-        0.0555
-      ],
-      [
-        "mom_5d",
-        0.2665
-      ]
-    ],
-    "top_n": 10,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "北向资金",
-      "资金流",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 13.83,
-    "total_return": 181.93,
-    "max_drawdown": -22.49,
-    "sharpe": 0.604,
-    "sortino": 0.786,
-    "win_rate": 42.5,
-    "trade_count": 75,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 11.604,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 54.3,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860051"
-  },
-  {
-    "strategy_id": "AUTO_0068_d4de2637",
-    "strategy_name": "Gen0_量价_6F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volume_ratio",
-        0.1993
-      ],
-      [
-        "industry_revenue_growth",
-        0.1622
-      ],
       [
         "margin_buy_ratio",
-        0.1154
-      ],
-      [
-        "volatility_20d",
-        0.111
+        0.104
       ],
       [
         "northbound_net_buy",
-        0.2843
-      ],
-      [
-        "money_flow",
-        0.1279
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "FILTERED",
-    "annual_return": 5.96,
-    "total_return": 58.86,
-    "max_drawdown": -20.18,
-    "sharpe": 0.271,
-    "sortino": 0.352,
-    "win_rate": 59.7,
-    "trade_count": 378,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 3.237,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "filter_reasons": [
-      "夏普 0.271 < 0.3"
-    ],
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860053"
-  },
-  {
-    "strategy_id": "AUTO_0069_ba14613a",
-    "strategy_name": "Gen0_波动率_4F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volatility_20d",
-        0.2417
+        0.2962
       ],
       [
         "industry_profit_growth",
-        0.2916
-      ],
-      [
-        "volume_ratio",
-        0.2919
-      ],
-      [
-        "consistency",
-        0.1747
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "波动率",
-      "行业景气",
-      "动量",
-      "量价"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 12.77,
-    "total_return": 161.46,
-    "max_drawdown": -17.57,
-    "sharpe": 1.017,
-    "sortino": 1.322,
-    "win_rate": 59.7,
-    "trade_count": 189,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 11.544,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 62.2,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860055"
-  },
-  {
-    "strategy_id": "AUTO_0070_ce049379",
-    "strategy_name": "Gen0_资金流_3F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_revenue_growth",
-        0.231
-      ],
-      [
-        "northbound_holding_chg",
-        0.3915
+        0.1687
       ],
       [
         "money_flow",
-        0.3774
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "资金流",
-      "北向资金",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 8.9,
-    "total_return": 97.74,
-    "max_drawdown": -7.68,
-    "sharpe": 1.354,
-    "sortino": 1.76,
-    "win_rate": 44.0,
-    "trade_count": 189,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 5.856,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 64.1,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860056"
-  },
-  {
-    "strategy_id": "AUTO_0071_bfc027e0",
-    "strategy_name": "Gen0_量价_8F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "northbound_net_buy",
-        0.1139
-      ],
-      [
-        "daily_sharpe",
-        0.1066
-      ],
-      [
-        "industry_profit_growth",
-        0.1264
-      ],
-      [
-        "volume_ratio",
-        0.1488
-      ],
-      [
-        "margin_balance_chg",
-        0.0733
-      ],
-      [
-        "mom_5d",
-        0.2052
-      ],
-      [
-        "pe_ttm",
-        0.0597
-      ],
-      [
-        "money_flow",
-        0.1661
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 9.41,
-    "total_return": 105.28,
-    "max_drawdown": -18.5,
-    "sharpe": 0.672,
-    "sortino": 0.874,
-    "win_rate": 69.5,
-    "trade_count": 226,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 4.754,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 47.7,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860057"
-  },
-  {
-    "strategy_id": "AUTO_0072_cad4177e",
-    "strategy_name": "Gen0_量价_8F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "northbound_holding_chg",
-        0.1487
-      ],
-      [
-        "turnover_mom",
-        0.0416
-      ],
-      [
-        "daily_sharpe",
-        0.1004
-      ],
-      [
-        "pb_ttm",
-        0.0464
-      ],
-      [
-        "mom_5d",
-        0.2231
-      ],
-      [
-        "industry_profit_growth",
-        0.1842
-      ],
-      [
-        "margin_balance_chg",
-        0.077
-      ],
-      [
-        "money_flow",
-        0.1785
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 15.63,
-    "total_return": 219.57,
-    "max_drawdown": -23.22,
-    "sharpe": 0.539,
-    "sortino": 0.701,
-    "win_rate": 62.2,
-    "trade_count": 189,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 14.105,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 56.6,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860058"
-  },
-  {
-    "strategy_id": "AUTO_0073_bd1470a3",
-    "strategy_name": "Gen0_基本面_7F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_pmi",
-        0.1235
-      ],
-      [
-        "money_flow",
-        0.1591
-      ],
-      [
-        "margin_balance_chg",
-        0.1554
-      ],
-      [
-        "consistency",
-        0.1312
-      ],
-      [
-        "pe_ttm",
-        0.1043
-      ],
-      [
-        "northbound_holding_chg",
-        0.2428
-      ],
-      [
-        "volatility_20d",
-        0.0837
-      ]
-    ],
-    "top_n": 20,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 13.94,
-    "total_return": 184.03,
-    "max_drawdown": -19.63,
-    "sharpe": 0.762,
-    "sortino": 0.99,
-    "win_rate": 43.6,
-    "trade_count": 151,
-    "positions": 20,
-    "benchmark_return": 2.5,
-    "alpha": 10.834,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 57.4,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860059"
-  },
-  {
-    "strategy_id": "AUTO_0074_83c40cb2",
-    "strategy_name": "Gen0_量价_6F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volatility_20d",
-        0.1445
-      ],
-      [
-        "pb_ttm",
-        0.0902
-      ],
-      [
-        "money_flow",
-        0.2839
-      ],
-      [
-        "turnover_mom",
-        0.165
-      ],
-      [
-        "northbound_holding_chg",
-        0.1519
-      ],
-      [
-        "mom_20d",
-        0.1645
-      ]
-    ],
-    "top_n": 15,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 12.69,
-    "total_return": 160.04,
-    "max_drawdown": -20.66,
-    "sharpe": 0.577,
-    "sortino": 0.75,
-    "win_rate": 42.0,
-    "trade_count": 113,
-    "positions": 15,
-    "benchmark_return": 2.5,
-    "alpha": 9.02,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 51.5,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860060"
-  },
-  {
-    "strategy_id": "AUTO_0075_39e89157",
-    "strategy_name": "Gen0_量价_5F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "money_flow",
-        0.1461
-      ],
-      [
-        "industry_revenue_growth",
-        0.2106
-      ],
-      [
-        "volatility_20d",
-        0.2701
-      ],
-      [
-        "consistency",
-        0.1419
-      ],
-      [
-        "turnover_mom",
-        0.2312
-      ]
-    ],
-    "top_n": 15,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "动量",
-      "波动率",
-      "资金流",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 11.12,
-    "total_return": 132.52,
-    "max_drawdown": -14.79,
-    "sharpe": 0.867,
-    "sortino": 1.127,
-    "win_rate": 65.3,
-    "trade_count": 226,
-    "positions": 15,
-    "benchmark_return": 2.5,
-    "alpha": 10.873,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 59.7,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860061"
-  },
-  {
-    "strategy_id": "AUTO_0076_64af6365",
-    "strategy_name": "Gen0_波动率_4F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volatility_20d",
-        0.0947
-      ],
-      [
-        "pb_ttm",
-        0.126
-      ],
-      [
-        "money_flow",
-        0.3017
-      ],
-      [
-        "northbound_net_buy",
-        0.4776
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "波动率",
-      "资金流",
-      "基本面",
-      "北向资金"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 6.87,
-    "total_return": 70.12,
-    "max_drawdown": -18.94,
-    "sharpe": 0.441,
-    "sortino": 0.573,
-    "win_rate": 52.2,
-    "trade_count": 378,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 5.777,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 43.5,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860062"
-  },
-  {
-    "strategy_id": "AUTO_0077_4720abac",
-    "strategy_name": "Gen0_量价_6F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "turnover_mom",
-        0.0866
-      ],
-      [
-        "northbound_net_buy",
-        0.3306
-      ],
-      [
-        "mom_10d",
-        0.2711
-      ],
-      [
-        "daily_sharpe",
-        0.1245
-      ],
-      [
-        "pb_ttm",
-        0.0506
-      ],
-      [
-        "margin_balance_chg",
-        0.1367
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "融资余额"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 8.42,
-    "total_return": 91.0,
-    "max_drawdown": -11.51,
-    "sharpe": 0.809,
-    "sortino": 1.051,
-    "win_rate": 46.6,
-    "trade_count": 226,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 5.704,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 53.6,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860063"
-  },
-  {
-    "strategy_id": "AUTO_0078_c0347346",
-    "strategy_name": "Gen0_量价_4F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_profit_growth",
-        0.1624
-      ],
-      [
-        "money_flow",
-        0.2293
-      ],
-      [
-        "volume_ratio",
-        0.3265
-      ],
-      [
-        "mom_20d",
-        0.2818
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "资金流",
-      "行业景气",
-      "动量"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 4.91,
-    "total_return": 46.75,
-    "max_drawdown": -19.57,
-    "sharpe": 0.351,
-    "sortino": 0.456,
-    "win_rate": 64.7,
-    "trade_count": 378,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 1.452,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 36.3,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860064"
-  },
-  {
-    "strategy_id": "AUTO_0079_9583e23f",
-    "strategy_name": "Gen0_资金流_4F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "northbound_net_buy",
-        0.31
-      ],
-      [
-        "margin_buy_ratio",
-        0.1969
-      ],
-      [
-        "pe_ttm",
-        0.0733
-      ],
-      [
-        "money_flow",
-        0.4199
-      ]
-    ],
-    "top_n": 20,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "资金流",
-      "基本面",
-      "融资余额",
-      "北向资金"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 5.41,
-    "total_return": 52.39,
-    "max_drawdown": -10.11,
-    "sharpe": 0.64,
-    "sortino": 0.831,
-    "win_rate": 54.5,
-    "trade_count": 302,
-    "positions": 20,
-    "benchmark_return": 2.5,
-    "alpha": 3.218,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 47.4,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860065"
-  },
-  {
-    "strategy_id": "AUTO_0080_f2337f6b",
-    "strategy_name": "Gen0_资金流_4F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "margin_balance_chg",
-        0.2768
-      ],
-      [
-        "industry_revenue_growth",
-        0.2118
-      ],
-      [
-        "northbound_holding_chg",
-        0.2777
-      ],
-      [
-        "money_flow",
-        0.2337
-      ]
-    ],
-    "top_n": 10,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "资金流",
-      "融资余额",
-      "北向资金",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 11.73,
-    "total_return": 142.92,
-    "max_drawdown": -9.73,
-    "sharpe": 1.704,
-    "sortino": 2.215,
-    "win_rate": 42.4,
-    "trade_count": 75,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 10.986,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 75.3,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860066"
-  },
-  {
-    "strategy_id": "AUTO_0081_cc843831",
-    "strategy_name": "Gen0_波动率_4F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "money_flow",
-        0.3501
-      ],
-      [
-        "industry_revenue_growth",
-        0.2942
-      ],
-      [
-        "consistency",
-        0.2232
-      ],
-      [
-        "volatility_20d",
-        0.1325
-      ]
-    ],
-    "top_n": 10,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "波动率",
-      "资金流",
-      "行业景气",
-      "动量"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 9.09,
-    "total_return": 100.53,
-    "max_drawdown": -11.29,
-    "sharpe": 0.976,
-    "sortino": 1.269,
-    "win_rate": 49.7,
-    "trade_count": 37,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 6.748,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 57.7,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860067"
-  },
-  {
-    "strategy_id": "AUTO_0082_a234de3f",
-    "strategy_name": "Gen0_量价_5F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "money_flow",
-        0.3017
-      ],
-      [
-        "margin_balance_chg",
-        0.3595
-      ],
-      [
-        "consistency",
-        0.107
-      ],
-      [
-        "turnover_mom",
-        0.0637
-      ],
-      [
-        "pe_ttm",
-        0.1682
-      ]
-    ],
-    "top_n": 20,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "资金流",
-      "融资余额"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 11.06,
-    "total_return": 131.47,
-    "max_drawdown": -10.09,
-    "sharpe": 1.612,
-    "sortino": 2.096,
-    "win_rate": 58.9,
-    "trade_count": 302,
-    "positions": 20,
-    "benchmark_return": 2.5,
-    "alpha": 10.123,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 72.4,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860068"
-  },
-  {
-    "strategy_id": "AUTO_0083_c8513c66",
-    "strategy_name": "Gen0_量价_8F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "money_flow",
-        0.1954
-      ],
-      [
-        "volatility_20d",
-        0.1401
-      ],
-      [
-        "turnover_mom",
-        0.0406
-      ],
-      [
-        "industry_pmi",
-        0.0538
-      ],
-      [
-        "consistency",
-        0.1234
-      ],
-      [
-        "northbound_net_buy",
-        0.2811
-      ],
-      [
-        "margin_balance_chg",
-        0.111
-      ],
-      [
-        "pe_ttm",
-        0.0546
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 12.29,
-    "total_return": 152.78,
-    "max_drawdown": -12.37,
-    "sharpe": 1.006,
-    "sortino": 1.308,
-    "win_rate": 50.7,
-    "trade_count": 94,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 10.127,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 63.0,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860069"
-  },
-  {
-    "strategy_id": "AUTO_0084_c16cceb9",
-    "strategy_name": "Gen0_基本面_6F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "daily_sharpe",
-        0.1772
-      ],
-      [
-        "margin_buy_ratio",
-        0.2014
-      ],
-      [
-        "industry_revenue_growth",
-        0.1459
-      ],
-      [
-        "mom_20d",
-        0.2144
-      ],
-      [
-        "pb_ttm",
-        0.0724
-      ],
-      [
-        "money_flow",
-        0.1887
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "基本面",
-      "动量",
-      "波动率",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 6.72,
-    "total_return": 68.26,
-    "max_drawdown": -17.34,
-    "sharpe": 0.47,
-    "sortino": 0.611,
-    "win_rate": 49.2,
-    "trade_count": 226,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 3.821,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 42.7,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860070"
-  },
-  {
-    "strategy_id": "AUTO_0085_78be9923",
-    "strategy_name": "Gen0_资金流_3F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_profit_growth",
-        0.256
-      ],
-      [
-        "money_flow",
-        0.3135
-      ],
-      [
-        "mom_5d",
-        0.4304
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "资金流",
-      "行业景气",
-      "动量"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 10.55,
-    "total_return": 123.06,
-    "max_drawdown": -18.41,
-    "sharpe": 0.71,
-    "sortino": 0.923,
-    "win_rate": 61.1,
-    "trade_count": 378,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 8.225,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 52.5,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860071"
-  },
-  {
-    "strategy_id": "AUTO_0086_df4e527f",
-    "strategy_name": "Gen0_量价_8F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "northbound_holding_chg",
-        0.2057
-      ],
-      [
-        "pe_ttm",
-        0.0861
-      ],
-      [
-        "money_flow",
-        0.1408
-      ],
-      [
-        "margin_buy_ratio",
-        0.0625
-      ],
-      [
-        "turnover_mom",
-        0.0594
-      ],
-      [
-        "volatility_20d",
-        0.1022
-      ],
-      [
-        "mom_5d",
-        0.142
-      ],
-      [
-        "industry_revenue_growth",
-        0.2012
-      ]
-    ],
-    "top_n": 10,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 7.94,
-    "total_return": 84.22,
-    "max_drawdown": -13.05,
-    "sharpe": 0.619,
-    "sortino": 0.805,
-    "win_rate": 54.0,
-    "trade_count": 37,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 4.337,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 48.3,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860072"
-  },
-  {
-    "strategy_id": "AUTO_0087_7920307c",
-    "strategy_name": "Gen0_量价_4F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "pb_ttm",
-        0.1029
-      ],
-      [
-        "northbound_holding_chg",
-        0.1972
-      ],
-      [
-        "money_flow",
-        0.4795
-      ],
-      [
-        "turnover_mom",
-        0.2204
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "资金流",
-      "基本面",
-      "北向资金"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 12.18,
-    "total_return": 150.79,
-    "max_drawdown": -14.25,
-    "sharpe": 0.792,
-    "sortino": 1.029,
-    "win_rate": 50.6,
-    "trade_count": 94,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 8.921,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 57.5,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860074"
-  },
-  {
-    "strategy_id": "AUTO_0088_6d8a0645",
-    "strategy_name": "Gen0_量价_3F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "turnover_mom",
-        0.2269
-      ],
-      [
-        "industry_revenue_growth",
-        0.3205
-      ],
-      [
-        "money_flow",
-        0.4525
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "资金流",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 14.51,
-    "total_return": 195.69,
-    "max_drawdown": -28.84,
-    "sharpe": 0.489,
-    "sortino": 0.636,
-    "win_rate": 61.2,
-    "trade_count": 378,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 14.368,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 52.6,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860075"
-  },
-  {
-    "strategy_id": "AUTO_0089_09d02f22",
-    "strategy_name": "Gen0_量价_8F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volatility_20d",
-        0.04
-      ],
-      [
-        "northbound_holding_chg",
-        0.1646
-      ],
-      [
-        "pe_ttm",
-        0.0612
-      ],
-      [
-        "margin_balance_chg",
-        0.1911
-      ],
-      [
-        "volume_ratio",
-        0.1642
-      ],
-      [
-        "mom_10d",
-        0.1754
-      ],
-      [
-        "industry_revenue_growth",
-        0.0757
-      ],
-      [
-        "money_flow",
-        0.1278
-      ]
-    ],
-    "top_n": 25,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 13.53,
-    "total_return": 175.9,
-    "max_drawdown": -13.53,
-    "sharpe": 1.437,
-    "sortino": 1.868,
-    "win_rate": 69.9,
-    "trade_count": 94,
-    "positions": 25,
-    "benchmark_return": 2.5,
-    "alpha": 11.268,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 70.8,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860076"
-  },
-  {
-    "strategy_id": "AUTO_0090_d1049019",
-    "strategy_name": "Gen0_量价_6F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "consistency",
-        0.1343
-      ],
-      [
-        "money_flow",
-        0.3652
-      ],
-      [
-        "daily_sharpe",
-        0.0898
-      ],
-      [
-        "pe_ttm",
-        0.0583
-      ],
-      [
-        "volume_ratio",
-        0.1421
-      ],
-      [
-        "northbound_net_buy",
-        0.2103
-      ]
-    ],
-    "top_n": 20,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "资金流"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 4.69,
-    "total_return": 44.32,
-    "max_drawdown": -9.2,
-    "sharpe": 0.755,
-    "sortino": 0.981,
-    "win_rate": 44.3,
-    "trade_count": 75,
-    "positions": 20,
-    "benchmark_return": 2.5,
-    "alpha": 1.05,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 47.0,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860077"
-  },
-  {
-    "strategy_id": "AUTO_0091_aaa276aa",
-    "strategy_name": "Gen0_波动率_4F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "volatility_20d",
-        0.2823
-      ],
-      [
-        "pb_ttm",
-        0.1787
-      ],
-      [
-        "margin_balance_chg",
-        0.4039
-      ],
-      [
-        "industry_pmi",
-        0.1351
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "波动率",
-      "基本面",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 9.05,
-    "total_return": 99.96,
-    "max_drawdown": -38.79,
-    "sharpe": 0.329,
-    "sortino": 0.428,
-    "win_rate": 45.9,
-    "trade_count": 113,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 4.803,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 32.2,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860078"
-  },
-  {
-    "strategy_id": "AUTO_0092_c68652fd",
-    "strategy_name": "Gen0_量价_7F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "pb_ttm",
-        0.0897
-      ],
-      [
-        "mom_10d",
-        0.1462
-      ],
-      [
-        "daily_sharpe",
-        0.1027
-      ],
-      [
-        "industry_pmi",
-        0.1327
-      ],
-      [
-        "volume_ratio",
-        0.1701
-      ],
-      [
-        "northbound_holding_chg",
-        0.181
-      ],
-      [
-        "margin_buy_ratio",
-        0.1775
-      ]
-    ],
-    "top_n": 15,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 11.35,
-    "total_return": 136.31,
-    "max_drawdown": -7.31,
-    "sharpe": 1.314,
-    "sortino": 1.708,
-    "win_rate": 45.4,
-    "trade_count": 113,
-    "positions": 15,
-    "benchmark_return": 2.5,
-    "alpha": 9.105,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 68.5,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860079"
-  },
-  {
-    "strategy_id": "AUTO_0093_f67709fa",
-    "strategy_name": "Gen0_量价_6F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "turnover_mom",
-        0.1163
-      ],
-      [
-        "northbound_holding_chg",
-        0.1536
-      ],
-      [
-        "margin_balance_chg",
-        0.2436
-      ],
-      [
-        "money_flow",
-        0.1791
-      ],
-      [
-        "mom_5d",
-        0.1351
-      ],
-      [
-        "pb_ttm",
-        0.1724
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "北向资金",
-      "资金流",
-      "融资余额"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 14.01,
-    "total_return": 185.41,
-    "max_drawdown": -15.98,
-    "sharpe": 1.152,
-    "sortino": 1.498,
-    "win_rate": 49.2,
-    "trade_count": 226,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 12.735,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 67.0,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860080"
-  },
-  {
-    "strategy_id": "AUTO_0094_38600934",
-    "strategy_name": "Gen0_波动率_4F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "pb_ttm",
-        0.1724
-      ],
-      [
-        "daily_sharpe",
-        0.1726
-      ],
-      [
-        "turnover_mom",
-        0.2262
-      ],
-      [
-        "money_flow",
-        0.4289
-      ]
-    ],
-    "top_n": 15,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "波动率",
-      "资金流",
-      "基本面",
-      "量价"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 4.43,
-    "total_return": 41.41,
-    "max_drawdown": -18.68,
-    "sharpe": 0.344,
-    "sortino": 0.447,
-    "win_rate": 65.5,
-    "trade_count": 226,
-    "positions": 15,
-    "benchmark_return": 2.5,
-    "alpha": 2.472,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 37.3,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860081"
-  },
-  {
-    "strategy_id": "AUTO_0095_e2750731",
-    "strategy_name": "Gen0_量价_7F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "industry_profit_growth",
-        0.1965
-      ],
-      [
-        "pe_ttm",
-        0.0766
-      ],
-      [
-        "northbound_net_buy",
-        0.2303
-      ],
-      [
-        "daily_sharpe",
-        0.1597
-      ],
-      [
-        "mom_10d",
-        0.1231
-      ],
-      [
-        "margin_buy_ratio",
-        0.1568
-      ],
-      [
-        "turnover_mom",
-        0.0569
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "biweekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "北向资金",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "FILTERED",
-    "annual_return": 10.11,
-    "total_return": 116.05,
-    "max_drawdown": -31.22,
-    "sharpe": 0.289,
-    "sortino": 0.376,
-    "win_rate": 61.6,
-    "trade_count": 226,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 9.528,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "filter_reasons": [
-      "夏普 0.289 < 0.3"
-    ],
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860082"
-  },
-  {
-    "strategy_id": "AUTO_0096_7edde7af",
-    "strategy_name": "Gen0_量价_7F_weekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "pb_ttm",
-        0.089
-      ],
-      [
-        "mom_20d",
-        0.097
-      ],
-      [
-        "daily_sharpe",
-        0.098
-      ],
-      [
-        "turnover_mom",
-        0.1067
-      ],
-      [
-        "money_flow",
-        0.2248
-      ],
-      [
-        "industry_revenue_growth",
-        0.1947
-      ],
-      [
-        "margin_buy_ratio",
-        0.1898
-      ]
-    ],
-    "top_n": 30,
-    "rebalance_freq": "weekly",
-    "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "资金流",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 11.84,
-    "total_return": 144.73,
-    "max_drawdown": -27.12,
-    "sharpe": 0.393,
-    "sortino": 0.511,
-    "win_rate": 59.5,
-    "trade_count": 453,
-    "positions": 30,
-    "benchmark_return": 2.5,
-    "alpha": 9.835,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 45.8,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860083"
-  },
-  {
-    "strategy_id": "AUTO_0097_63c669ea",
-    "strategy_name": "Gen0_量价_5F_monthly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "turnover_mom",
-        0.1197
-      ],
-      [
-        "margin_buy_ratio",
-        0.1041
-      ],
-      [
-        "industry_profit_growth",
-        0.1834
-      ],
-      [
-        "mom_5d",
-        0.2231
-      ],
-      [
-        "northbound_holding_chg",
-        0.3697
-      ]
-    ],
-    "top_n": 10,
-    "rebalance_freq": "monthly",
-    "factor_categories": [
-      "量价",
-      "动量",
-      "北向资金",
-      "融资余额",
-      "行业景气"
-    ],
-    "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 7.62,
-    "total_return": 79.93,
-    "max_drawdown": -11.74,
-    "sharpe": 0.853,
-    "sortino": 1.108,
-    "win_rate": 61.4,
-    "trade_count": 37,
-    "positions": 10,
-    "benchmark_return": 2.5,
-    "alpha": 6.783,
-    "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 54.7,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860084"
-  },
-  {
-    "strategy_id": "AUTO_0098_0ecc1642",
-    "strategy_name": "Gen0_量价_6F_biweekly",
-    "strategy_type": "auto_generated",
-    "factors": [
-      [
-        "daily_sharpe",
-        0.1811
-      ],
-      [
-        "volume_ratio",
         0.2727
       ],
       [
         "consistency",
-        0.083
-      ],
-      [
-        "pe_ttm",
-        0.0972
-      ],
-      [
-        "margin_balance_chg",
-        0.1837
-      ],
-      [
-        "industry_revenue_growth",
-        0.1823
+        0.1584
       ]
     ],
-    "top_n": 15,
-    "rebalance_freq": "biweekly",
+    "top_n": 20,
+    "rebalance_freq": "weekly",
     "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
+      "北向资金",
       "融资余额",
-      "行业景气"
+      "行业景气",
+      "资金流",
+      "动量"
     ],
     "generation": 0,
     "status": "VALIDATED",
-    "annual_return": 19.57,
-    "total_return": 317.83,
-    "max_drawdown": -5.0,
-    "sharpe": 2.5,
-    "sortino": 3.25,
-    "win_rate": 62.6,
-    "trade_count": 113,
-    "positions": 15,
+    "annual_return": 12.12,
+    "total_return": 149.8,
+    "max_drawdown": -13.23,
+    "sharpe": 1.246,
+    "sortino": 1.62,
+    "win_rate": 50.4,
+    "trade_count": 302,
+    "positions": 20,
     "benchmark_return": 2.5,
-    "alpha": 16.924,
+    "alpha": 12.083,
     "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 91.0,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860085"
+    "validation_score": 68.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495250"
   },
   {
-    "strategy_id": "AUTO_0099_72458d2f",
-    "strategy_name": "Gen0_量价_7F_biweekly",
+    "strategy_id": "AUTO_0076_6a66152a",
+    "strategy_name": "Gen0_北向资金_7F_weekly",
     "strategy_type": "auto_generated",
     "factors": [
       [
-        "daily_sharpe",
-        0.1281
+        "industry_profit_growth",
+        0.0791
       ],
       [
         "northbound_holding_chg",
-        0.1938
-      ],
-      [
-        "consistency",
-        0.1384
+        0.147
       ],
       [
         "pb_ttm",
-        0.0779
+        0.1176
       ],
       [
-        "volume_ratio",
-        0.2183
+        "margin_balance_chg",
+        0.1441
+      ],
+      [
+        "volatility_20d",
+        0.151
       ],
       [
         "money_flow",
-        0.1242
+        0.1325
       ],
       [
-        "margin_buy_ratio",
-        0.1194
+        "mom_20d",
+        0.2288
       ]
     ],
     "top_n": 15,
-    "rebalance_freq": "biweekly",
+    "rebalance_freq": "weekly",
     "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
       "北向资金",
+      "融资余额",
+      "波动率",
+      "行业景气",
+      "基本面",
       "资金流",
-      "融资余额"
+      "动量"
     ],
     "generation": 0,
-    "status": "VALIDATED",
-    "annual_return": 4.01,
-    "total_return": 36.93,
-    "max_drawdown": -15.12,
-    "sharpe": 0.324,
-    "sortino": 0.421,
-    "win_rate": 67.4,
-    "trade_count": 113,
+    "status": "FILTERED",
+    "annual_return": 6.52,
+    "total_return": 65.79,
+    "max_drawdown": -28.51,
+    "sharpe": 0.231,
+    "sortino": 0.3,
+    "win_rate": 64.9,
+    "trade_count": 226,
     "positions": 15,
     "benchmark_return": 2.5,
-    "alpha": 1.129,
+    "alpha": 4.712,
     "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 37.2,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860086"
+    "filter_reasons": [
+      "夏普 0.231 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495251"
   },
   {
-    "strategy_id": "AUTO_0100_2d44acfd",
-    "strategy_name": "Gen0_量价_7F_biweekly",
+    "strategy_id": "AUTO_0077_980a414d",
+    "strategy_name": "Gen0_北向资金_5F_biweekly",
     "strategy_type": "auto_generated",
     "factors": [
       [
-        "turnover_mom",
-        0.1785
+        "volatility_20d",
+        0.1946
       ],
       [
-        "daily_sharpe",
-        0.1346
+        "consistency",
+        0.1845
       ],
       [
-        "industry_profit_growth",
-        0.1364
+        "volume_ratio",
+        0.3181
       ],
+      [
+        "northbound_net_buy",
+        0.2007
+      ],
+      [
+        "pe_ttm",
+        0.1021
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "北向资金",
+      "量价",
+      "波动率",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 5.42,
+    "total_return": 52.5,
+    "max_drawdown": -12.6,
+    "sharpe": 0.48,
+    "sortino": 0.625,
+    "win_rate": 62.9,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 2.709,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 43.2,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495252"
+  },
+  {
+    "strategy_id": "AUTO_0078_7a54b7fa",
+    "strategy_name": "Gen0_北向资金_8F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
       [
         "margin_buy_ratio",
-        0.2017
-      ],
-      [
-        "money_flow",
-        0.1299
-      ],
-      [
-        "mom_5d",
-        0.0942
+        0.1351
       ],
       [
         "pb_ttm",
-        0.1247
+        0.0639
+      ],
+      [
+        "northbound_net_buy",
+        0.1524
+      ],
+      [
+        "money_flow",
+        0.1246
+      ],
+      [
+        "turnover_mom",
+        0.1196
+      ],
+      [
+        "industry_profit_growth",
+        0.1945
+      ],
+      [
+        "mom_20d",
+        0.0782
+      ],
+      [
+        "daily_sharpe",
+        0.1316
+      ]
+    ],
+    "top_n": 20,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 11.95,
+    "total_return": 146.67,
+    "max_drawdown": -19.59,
+    "sharpe": 0.518,
+    "sortino": 0.674,
+    "win_rate": 46.0,
+    "trade_count": 75,
+    "positions": 20,
+    "benchmark_return": 2.5,
+    "alpha": 9.677,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 51.4,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495253"
+  },
+  {
+    "strategy_id": "AUTO_0079_4bceecce",
+    "strategy_name": "Gen0_波动率_3F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "daily_sharpe",
+        0.3316
+      ],
+      [
+        "pe_ttm",
+        0.2318
+      ],
+      [
+        "industry_revenue_growth",
+        0.4366
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "波动率",
+      "行业景气",
+      "基本面"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 9.87,
+    "total_return": 112.34,
+    "max_drawdown": -14.71,
+    "sharpe": 0.907,
+    "sortino": 1.179,
+    "win_rate": 64.7,
+    "trade_count": 378,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 8.404,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 57.1,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495254"
+  },
+  {
+    "strategy_id": "AUTO_0080_f33bf0e5",
+    "strategy_name": "Gen0_北向资金_6F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.0874
+      ],
+      [
+        "mom_5d",
+        0.3122
+      ],
+      [
+        "industry_pmi",
+        0.0843
+      ],
+      [
+        "turnover_mom",
+        0.1401
+      ],
+      [
+        "northbound_net_buy",
+        0.2794
+      ],
+      [
+        "volatility_20d",
+        0.0966
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "量价",
+      "波动率",
+      "行业景气",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 8.13,
+    "total_return": 86.91,
+    "max_drawdown": -21.26,
+    "sharpe": 0.319,
+    "sortino": 0.415,
+    "win_rate": 40.8,
+    "trade_count": 453,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 7.513,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 43.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495255"
+  },
+  {
+    "strategy_id": "AUTO_0081_f0f59ece",
+    "strategy_name": "Gen0_行业景气_3F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.1815
+      ],
+      [
+        "industry_profit_growth",
+        0.2503
+      ],
+      [
+        "mom_5d",
+        0.5682
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "行业景气",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 10.57,
+    "total_return": 123.38,
+    "max_drawdown": -14.5,
+    "sharpe": 0.776,
+    "sortino": 1.009,
+    "win_rate": 67.1,
+    "trade_count": 378,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 8.138,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 55.4,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495256"
+  },
+  {
+    "strategy_id": "AUTO_0082_8c97c640",
+    "strategy_name": "Gen0_量价_3F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "daily_sharpe",
+        0.4228
+      ],
+      [
+        "pb_ttm",
+        0.1353
+      ],
+      [
+        "volume_ratio",
+        0.4419
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "量价",
+      "波动率",
+      "基本面"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 5.94,
+    "total_return": 58.64,
+    "max_drawdown": -17.85,
+    "sharpe": 0.375,
+    "sortino": 0.487,
+    "win_rate": 56.3,
+    "trade_count": 37,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 4.255,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 40.9,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495257"
+  },
+  {
+    "strategy_id": "AUTO_0083_d653aa4d",
+    "strategy_name": "Gen0_北向资金_5F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "volatility_20d",
+        0.178
+      ],
+      [
+        "turnover_mom",
+        0.1033
+      ],
+      [
+        "mom_20d",
+        0.2122
+      ],
+      [
+        "northbound_holding_chg",
+        0.4255
+      ],
+      [
+        "pe_ttm",
+        0.081
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "量价",
+      "波动率",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 5.54,
+    "total_return": 53.88,
+    "max_drawdown": -12.11,
+    "sharpe": 0.393,
+    "sortino": 0.511,
+    "win_rate": 40.3,
+    "trade_count": 113,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 3.637,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 43.2,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495261"
+  },
+  {
+    "strategy_id": "AUTO_0084_5b2798ea",
+    "strategy_name": "Gen0_融资余额_5F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "margin_buy_ratio",
+        0.2228
+      ],
+      [
+        "money_flow",
+        0.3603
+      ],
+      [
+        "volatility_20d",
+        0.0625
+      ],
+      [
+        "pe_ttm",
+        0.0678
+      ],
+      [
+        "industry_revenue_growth",
+        0.2867
       ]
     ],
     "top_n": 10,
     "rebalance_freq": "biweekly",
     "factor_categories": [
-      "量价",
-      "基本面",
-      "动量",
-      "波动率",
-      "资金流",
       "融资余额",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 11.48,
+    "total_return": 138.47,
+    "max_drawdown": -8.22,
+    "sharpe": 1.783,
+    "sortino": 2.318,
+    "win_rate": 66.3,
+    "trade_count": 75,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 10.177,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 76.2,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495262"
+  },
+  {
+    "strategy_id": "AUTO_0085_c58d94f9",
+    "strategy_name": "Gen0_北向资金_5F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "margin_buy_ratio",
+        0.0955
+      ],
+      [
+        "pb_ttm",
+        0.0748
+      ],
+      [
+        "northbound_net_buy",
+        0.4112
+      ],
+      [
+        "turnover_mom",
+        0.1723
+      ],
+      [
+        "daily_sharpe",
+        0.2462
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "基本面"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 6.28,
+    "total_return": 62.73,
+    "max_drawdown": -7.57,
+    "sharpe": 0.749,
+    "sortino": 0.974,
+    "win_rate": 67.4,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 4.608,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 52.2,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495263"
+  },
+  {
+    "strategy_id": "AUTO_0086_9871f716",
+    "strategy_name": "Gen0_北向资金_4F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.2984
+      ],
+      [
+        "margin_buy_ratio",
+        0.1514
+      ],
+      [
+        "northbound_net_buy",
+        0.4006
+      ],
+      [
+        "industry_pmi",
+        0.1496
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "资金流",
       "行业景气"
     ],
     "generation": 0,
     "status": "VALIDATED",
-    "annual_return": 9.29,
-    "total_return": 103.58,
-    "max_drawdown": -17.6,
-    "sharpe": 0.638,
-    "sortino": 0.829,
-    "win_rate": 58.5,
+    "annual_return": 12.38,
+    "total_return": 154.41,
+    "max_drawdown": -20.46,
+    "sharpe": 0.603,
+    "sortino": 0.783,
+    "win_rate": 53.8,
+    "trade_count": 94,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 9.379,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 52.2,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495264"
+  },
+  {
+    "strategy_id": "AUTO_0087_b8fc301a",
+    "strategy_name": "Gen0_北向资金_8F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "industry_pmi",
+        0.1011
+      ],
+      [
+        "northbound_holding_chg",
+        0.2492
+      ],
+      [
+        "consistency",
+        0.0681
+      ],
+      [
+        "turnover_mom",
+        0.0503
+      ],
+      [
+        "volatility_20d",
+        0.1631
+      ],
+      [
+        "pe_ttm",
+        0.1139
+      ],
+      [
+        "margin_buy_ratio",
+        0.1353
+      ],
+      [
+        "money_flow",
+        0.1191
+      ]
+    ],
+    "top_n": 15,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 7.77,
+    "total_return": 81.96,
+    "max_drawdown": -14.41,
+    "sharpe": 0.73,
+    "sortino": 0.948,
+    "win_rate": 65.0,
+    "trade_count": 56,
+    "positions": 15,
+    "benchmark_return": 2.5,
+    "alpha": 4.189,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 49.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495265"
+  },
+  {
+    "strategy_id": "AUTO_0088_e555fa2e",
+    "strategy_name": "Gen0_北向资金_5F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "mom_20d",
+        0.2106
+      ],
+      [
+        "money_flow",
+        0.2367
+      ],
+      [
+        "turnover_mom",
+        0.1809
+      ],
+      [
+        "margin_balance_chg",
+        0.1687
+      ],
+      [
+        "northbound_net_buy",
+        0.2031
+      ]
+    ],
+    "top_n": 15,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 4.09,
+    "total_return": 37.78,
+    "max_drawdown": -25.82,
+    "sharpe": 0.14,
+    "sortino": 0.182,
+    "win_rate": 51.5,
+    "trade_count": 113,
+    "positions": 15,
+    "benchmark_return": 2.5,
+    "alpha": 3.044,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.140 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495266"
+  },
+  {
+    "strategy_id": "AUTO_0089_0c581805",
+    "strategy_name": "Gen0_北向资金_7F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "pe_ttm",
+        0.0689
+      ],
+      [
+        "margin_buy_ratio",
+        0.1704
+      ],
+      [
+        "daily_sharpe",
+        0.1092
+      ],
+      [
+        "mom_10d",
+        0.0775
+      ],
+      [
+        "volume_ratio",
+        0.1869
+      ],
+      [
+        "northbound_net_buy",
+        0.2746
+      ],
+      [
+        "industry_revenue_growth",
+        0.1124
+      ]
+    ],
+    "top_n": 20,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 15.08,
+    "total_return": 207.55,
+    "max_drawdown": -11.64,
+    "sharpe": 1.395,
+    "sortino": 1.813,
+    "win_rate": 56.6,
     "trade_count": 75,
+    "positions": 20,
+    "benchmark_return": 2.5,
+    "alpha": 14.861,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 75.6,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495267"
+  },
+  {
+    "strategy_id": "AUTO_0090_0b207a53",
+    "strategy_name": "Gen0_波动率_3F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "mom_5d",
+        0.3006
+      ],
+      [
+        "northbound_net_buy",
+        0.5064
+      ],
+      [
+        "volatility_20d",
+        0.193
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "波动率",
+      "北向资金",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 14.59,
+    "total_return": 197.33,
+    "max_drawdown": -26.15,
+    "sharpe": 0.69,
+    "sortino": 0.897,
+    "win_rate": 47.1,
+    "trade_count": 226,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 12.894,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 55.5,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495268"
+  },
+  {
+    "strategy_id": "AUTO_0091_c7ace095",
+    "strategy_name": "Gen0_北向资金_6F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.1598
+      ],
+      [
+        "daily_sharpe",
+        0.1491
+      ],
+      [
+        "margin_balance_chg",
+        0.1231
+      ],
+      [
+        "mom_10d",
+        0.236
+      ],
+      [
+        "pb_ttm",
+        0.0868
+      ],
+      [
+        "northbound_net_buy",
+        0.2452
+      ]
+    ],
+    "top_n": 15,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "波动率",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 13.57,
+    "total_return": 176.8,
+    "max_drawdown": -11.44,
+    "sharpe": 0.989,
+    "sortino": 1.285,
+    "win_rate": 47.9,
+    "trade_count": 226,
+    "positions": 15,
+    "benchmark_return": 2.5,
+    "alpha": 9.384,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 63.2,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495269"
+  },
+  {
+    "strategy_id": "AUTO_0092_b54ce187",
+    "strategy_name": "Gen0_融资余额_6F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "volume_ratio",
+        0.341
+      ],
+      [
+        "pb_ttm",
+        0.0675
+      ],
+      [
+        "volatility_20d",
+        0.168
+      ],
+      [
+        "margin_buy_ratio",
+        0.1939
+      ],
+      [
+        "industry_pmi",
+        0.0747
+      ],
+      [
+        "mom_20d",
+        0.1548
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 12.32,
+    "total_return": 153.35,
+    "max_drawdown": -17.19,
+    "sharpe": 0.652,
+    "sortino": 0.848,
+    "win_rate": 48.3,
+    "trade_count": 453,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 8.507,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 53.6,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495270"
+  },
+  {
+    "strategy_id": "AUTO_0093_09294997",
+    "strategy_name": "Gen0_北向资金_7F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "northbound_net_buy",
+        0.1915
+      ],
+      [
+        "volatility_20d",
+        0.1111
+      ],
+      [
+        "mom_5d",
+        0.1899
+      ],
+      [
+        "pe_ttm",
+        0.0891
+      ],
+      [
+        "margin_buy_ratio",
+        0.0912
+      ],
+      [
+        "money_flow",
+        0.2462
+      ],
+      [
+        "industry_pmi",
+        0.081
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 9.55,
+    "total_return": 107.45,
+    "max_drawdown": -14.83,
+    "sharpe": 0.932,
+    "sortino": 1.212,
+    "win_rate": 69.3,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 8.243,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 57.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495271"
+  },
+  {
+    "strategy_id": "AUTO_0094_a18fb0f2",
+    "strategy_name": "Gen0_北向资金_6F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "money_flow",
+        0.2163
+      ],
+      [
+        "volume_ratio",
+        0.238
+      ],
+      [
+        "industry_profit_growth",
+        0.1961
+      ],
+      [
+        "volatility_20d",
+        0.0555
+      ],
+      [
+        "mom_20d",
+        0.1157
+      ],
+      [
+        "northbound_holding_chg",
+        0.1784
+      ]
+    ],
+    "top_n": 20,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "北向资金",
+      "量价",
+      "波动率",
+      "行业景气",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 10.68,
+    "total_return": 125.18,
+    "max_drawdown": -5,
+    "sharpe": 2.024,
+    "sortino": 2.632,
+    "win_rate": 47.3,
+    "trade_count": 302,
+    "positions": 20,
+    "benchmark_return": 2.5,
+    "alpha": 7.265,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 77.7,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495272"
+  },
+  {
+    "strategy_id": "AUTO_0095_040e26b1",
+    "strategy_name": "Gen0_北向资金_6F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "pb_ttm",
+        0.1123
+      ],
+      [
+        "money_flow",
+        0.2378
+      ],
+      [
+        "northbound_holding_chg",
+        0.1159
+      ],
+      [
+        "industry_revenue_growth",
+        0.1045
+      ],
+      [
+        "mom_10d",
+        0.2946
+      ],
+      [
+        "daily_sharpe",
+        0.1349
+      ]
+    ],
+    "top_n": 20,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "北向资金",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "FILTERED",
+    "annual_return": 4.54,
+    "total_return": 42.6,
+    "max_drawdown": -17.72,
+    "sharpe": 0.247,
+    "sortino": 0.321,
+    "win_rate": 48.4,
+    "trade_count": 151,
+    "positions": 20,
+    "benchmark_return": 2.5,
+    "alpha": 3.72,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "filter_reasons": [
+      "夏普 0.247 < 0.3"
+    ],
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495273"
+  },
+  {
+    "strategy_id": "AUTO_0096_b5aa2625",
+    "strategy_name": "Gen0_量价_3F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "volume_ratio",
+        0.3423
+      ],
+      [
+        "pe_ttm",
+        0.2496
+      ],
+      [
+        "northbound_holding_chg",
+        0.4081
+      ]
+    ],
+    "top_n": 25,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "量价",
+      "北向资金",
+      "基本面"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 8.58,
+    "total_return": 93.22,
+    "max_drawdown": -13.5,
+    "sharpe": 0.582,
+    "sortino": 0.756,
+    "win_rate": 41.6,
+    "trade_count": 189,
+    "positions": 25,
+    "benchmark_return": 2.5,
+    "alpha": 7.82,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 51.4,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495274"
+  },
+  {
+    "strategy_id": "AUTO_0097_6a7e9636",
+    "strategy_name": "Gen0_融资余额_7F_weekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "pb_ttm",
+        0.0721
+      ],
+      [
+        "turnover_mom",
+        0.0496
+      ],
+      [
+        "industry_revenue_growth",
+        0.1565
+      ],
+      [
+        "margin_buy_ratio",
+        0.1681
+      ],
+      [
+        "volatility_20d",
+        0.0747
+      ],
+      [
+        "mom_10d",
+        0.2687
+      ],
+      [
+        "money_flow",
+        0.2103
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "weekly",
+    "factor_categories": [
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 13.66,
+    "total_return": 178.52,
+    "max_drawdown": -27.68,
+    "sharpe": 0.549,
+    "sortino": 0.713,
+    "win_rate": 52.1,
+    "trade_count": 151,
     "positions": 10,
     "benchmark_return": 2.5,
-    "alpha": 4.38,
+    "alpha": 12.377,
     "period": "2018-01-01 ~ 2026-06-05",
-    "validation_score": 47.2,
-    "id": 1,
-    "created_at": "2026-06-06T20:14:39.860087"
+    "validation_score": 51.6,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495275"
   },
   {
-    "run_id": "run_20260609_015538",
-    "generated": 50,
-    "backtested": 50,
-    "validated_count": 42,
-    "filtered": 8,
-    "failed": 0,
-    "top10": [
-      {
-        "rank": 1,
-        "strategy_id": "AUTO_0027_f0bc7baa",
-        "name": "Gen0_波动率_6F_monthly",
-        "annual_return": 20.02,
-        "max_drawdown": -10.96,
-        "sharpe": 2.5,
-        "alpha": 16.667,
-        "validation_score": 88.3,
-        "factors": [
-          "margin_buy_ratio",
-          "northbound_holding_chg",
-          "money_flow",
-          "pe_ttm",
-          "daily_sharpe",
-          "industry_pmi"
-        ],
-        "factor_count": 6,
-        "top_n": 15,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 2,
-        "strategy_id": "AUTO_0012_76211e3a",
-        "name": "Gen0_资金流_6F_biweekly",
-        "annual_return": 14.78,
-        "max_drawdown": -9.92,
-        "sharpe": 1.891,
-        "alpha": 13.474,
-        "validation_score": 82.4,
-        "factors": [
-          "industry_pmi",
-          "money_flow",
-          "northbound_net_buy",
-          "volatility_20d",
-          "margin_buy_ratio",
-          "volume_ratio"
-        ],
-        "factor_count": 6,
-        "top_n": 20,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 3,
-        "strategy_id": "AUTO_0046_bfb341f0",
-        "name": "Gen0_资金流_6F_weekly",
-        "annual_return": 11.28,
-        "max_drawdown": -5,
-        "sharpe": 2.378,
-        "alpha": 9.332,
-        "validation_score": 80.1,
-        "factors": [
-          "industry_profit_growth",
-          "northbound_holding_chg",
-          "daily_sharpe",
-          "volume_ratio",
-          "pb_ttm",
-          "money_flow"
-        ],
-        "factor_count": 6,
-        "top_n": 25,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 4,
-        "strategy_id": "AUTO_0048_d2aeec22",
-        "name": "Gen0_量价_6F_biweekly",
-        "annual_return": 10.73,
-        "max_drawdown": -7.49,
-        "sharpe": 1.836,
-        "alpha": 8.898,
-        "validation_score": 75.6,
-        "factors": [
-          "turnover_mom",
-          "industry_profit_growth",
-          "northbound_holding_chg",
-          "mom_10d",
-          "pb_ttm",
-          "margin_balance_chg"
-        ],
-        "factor_count": 6,
-        "top_n": 25,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 5,
-        "strategy_id": "AUTO_0011_17918e3f",
-        "name": "Gen0_波动率_4F_biweekly",
-        "annual_return": 8.35,
-        "max_drawdown": -5.83,
-        "sharpe": 1.605,
-        "alpha": 7.986,
-        "validation_score": 70.6,
-        "factors": [
-          "northbound_holding_chg",
-          "margin_buy_ratio",
-          "volatility_20d",
-          "volume_ratio"
-        ],
-        "factor_count": 4,
-        "top_n": 10,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 6,
-        "strategy_id": "AUTO_0042_c1c364b0",
-        "name": "Gen0_量价_6F_biweekly",
-        "annual_return": 13.6,
-        "max_drawdown": -14.19,
-        "sharpe": 1.036,
-        "alpha": 11.841,
-        "validation_score": 65.0,
-        "factors": [
-          "turnover_mom",
-          "mom_20d",
-          "volatility_20d",
-          "money_flow",
-          "margin_balance_chg",
-          "northbound_net_buy"
-        ],
-        "factor_count": 6,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 7,
-        "strategy_id": "AUTO_0041_62dc971a",
-        "name": "Gen0_资金流_4F_monthly",
-        "annual_return": 12.29,
-        "max_drawdown": -12.3,
-        "sharpe": 1.106,
-        "alpha": 10.349,
-        "validation_score": 64.7,
-        "factors": [
-          "money_flow",
-          "industry_pmi",
-          "volatility_20d",
-          "northbound_net_buy"
-        ],
-        "factor_count": 4,
-        "top_n": 10,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 8,
-        "strategy_id": "AUTO_0043_88b23937",
-        "name": "Gen0_资金流_5F_monthly",
-        "annual_return": 19.73,
-        "max_drawdown": -30.98,
-        "sharpe": 0.835,
-        "alpha": 16.999,
-        "validation_score": 60.6,
-        "factors": [
-          "industry_profit_growth",
-          "northbound_net_buy",
-          "margin_buy_ratio",
-          "pe_ttm",
-          "money_flow"
-        ],
-        "factor_count": 5,
-        "top_n": 20,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 9,
-        "strategy_id": "AUTO_0004_9fd4b554",
-        "name": "Pure_基本面_Gen0",
-        "annual_return": 9.19,
-        "max_drawdown": -9.45,
-        "sharpe": 1.001,
-        "alpha": 6.878,
-        "validation_score": 59.2,
-        "factors": [
-          "pb_ttm",
-          "pe_ttm"
-        ],
-        "factor_count": 2,
-        "top_n": 10,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 10,
-        "strategy_id": "AUTO_0018_c024face",
-        "name": "Gen0_量价_6F_monthly",
-        "annual_return": 16.97,
-        "max_drawdown": -25.78,
-        "sharpe": 0.624,
-        "alpha": 15.301,
-        "validation_score": 58.3,
-        "factors": [
-          "pb_ttm",
-          "northbound_net_buy",
-          "volume_ratio",
-          "money_flow",
-          "mom_10d",
-          "industry_revenue_growth"
-        ],
-        "factor_count": 6,
-        "top_n": 10,
-        "rebalance_freq": "monthly"
-      }
-    ],
-    "summary": {
-      "avg_annual": 10.84,
-      "avg_sharpe": 0.751,
-      "best_sharpe": 2.5,
-      "best_annual": 20.02,
-      "categories_covered": [
-        "动量",
-        "北向资金",
-        "基本面",
-        "波动率",
-        "融资余额",
-        "行业景气",
-        "资金流",
-        "量价"
+    "strategy_id": "AUTO_0098_0714f394",
+    "strategy_name": "Gen0_波动率_3F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "margin_buy_ratio",
+        0.1247
+      ],
+      [
+        "volatility_20d",
+        0.2653
+      ],
+      [
+        "northbound_net_buy",
+        0.61
       ]
-    },
+    ],
+    "top_n": 30,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "波动率",
+      "北向资金",
+      "融资余额"
+    ],
     "generation": 0,
-    "created_at": "2026-06-09T01:55:38.125120"
+    "status": "VALIDATED",
+    "annual_return": 9.45,
+    "total_return": 105.9,
+    "max_drawdown": -21.57,
+    "sharpe": 0.594,
+    "sortino": 0.773,
+    "win_rate": 48.9,
+    "trade_count": 226,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 8.635,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 48.9,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495276"
   },
   {
-    "run_id": "run_20260609_015550",
+    "strategy_id": "AUTO_0099_77616c69",
+    "strategy_name": "Gen0_波动率_4F_biweekly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "northbound_holding_chg",
+        0.3618
+      ],
+      [
+        "pb_ttm",
+        0.0884
+      ],
+      [
+        "daily_sharpe",
+        0.2396
+      ],
+      [
+        "margin_buy_ratio",
+        0.3102
+      ]
+    ],
+    "top_n": 30,
+    "rebalance_freq": "biweekly",
+    "factor_categories": [
+      "波动率",
+      "北向资金",
+      "融资余额",
+      "基本面"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 9.11,
+    "total_return": 100.92,
+    "max_drawdown": -5.85,
+    "sharpe": 1.44,
+    "sortino": 1.872,
+    "win_rate": 57.5,
+    "trade_count": 226,
+    "positions": 30,
+    "benchmark_return": 2.5,
+    "alpha": 6.778,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 67.4,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495277"
+  },
+  {
+    "strategy_id": "AUTO_0100_35927d4e",
+    "strategy_name": "Gen0_北向资金_8F_monthly",
+    "strategy_type": "auto_generated",
+    "factors": [
+      [
+        "pb_ttm",
+        0.0415
+      ],
+      [
+        "mom_10d",
+        0.1531
+      ],
+      [
+        "money_flow",
+        0.1564
+      ],
+      [
+        "margin_balance_chg",
+        0.1367
+      ],
+      [
+        "volume_ratio",
+        0.1062
+      ],
+      [
+        "volatility_20d",
+        0.0991
+      ],
+      [
+        "industry_pmi",
+        0.096
+      ],
+      [
+        "northbound_net_buy",
+        0.2111
+      ]
+    ],
+    "top_n": 10,
+    "rebalance_freq": "monthly",
+    "factor_categories": [
+      "北向资金",
+      "融资余额",
+      "量价",
+      "波动率",
+      "行业景气",
+      "基本面",
+      "资金流",
+      "动量"
+    ],
+    "generation": 0,
+    "status": "VALIDATED",
+    "annual_return": 11.95,
+    "total_return": 146.69,
+    "max_drawdown": -8.58,
+    "sharpe": 1.75,
+    "sortino": 2.276,
+    "win_rate": 42.4,
+    "trade_count": 37,
+    "positions": 10,
+    "benchmark_return": 2.5,
+    "alpha": 10.344,
+    "period": "2018-01-01 ~ 2026-06-05",
+    "validation_score": 76.0,
+    "id": 51,
+    "created_at": "2026-06-10T10:18:15.495279"
+  },
+  {
     "generated": 100,
     "backtested": 100,
-    "validated_count": 87,
-    "filtered": 13,
+    "validated": 80,
+    "filtered": 20,
     "failed": 0,
     "top10": [
       {
         "rank": 1,
-        "strategy_id": "AUTO_0071_f60048bc",
-        "name": "Gen0_资金流_8F_biweekly",
-        "annual_return": 15.24,
-        "max_drawdown": -5,
-        "sharpe": 2.5,
-        "alpha": 13.83,
-        "validation_score": 87.1,
-        "factors": [
-          "northbound_holding_chg",
-          "turnover_mom",
-          "pb_ttm",
-          "daily_sharpe",
-          "mom_5d",
-          "margin_buy_ratio",
-          "industry_pmi",
-          "money_flow"
-        ],
-        "factor_count": 8,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 2,
-        "strategy_id": "AUTO_0005_917c85b4",
-        "name": "Pure_北向资金_Gen0",
-        "annual_return": 13.66,
-        "max_drawdown": -5,
-        "sharpe": 2.294,
-        "alpha": 12.799,
+        "strategy_id": "AUTO_0073_0e9f3f37",
+        "name": "Gen0_北向资金_6F_monthly",
+        "annual_return": 17.56,
+        "max_drawdown": -12.41,
+        "sharpe": 1.991,
+        "alpha": 14.215,
         "validation_score": 85.1,
         "factors": [
+          "industry_profit_growth",
           "northbound_holding_chg",
-          "northbound_net_buy"
-        ],
-        "factor_count": 2,
-        "top_n": 20,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 3,
-        "strategy_id": "AUTO_0023_94dd6a43",
-        "name": "Gen0_量价_7F_weekly",
-        "annual_return": 13.23,
-        "max_drawdown": -5,
-        "sharpe": 2.5,
-        "alpha": 10.734,
-        "validation_score": 82.8,
-        "factors": [
-          "northbound_holding_chg",
+          "daily_sharpe",
           "margin_buy_ratio",
           "volume_ratio",
-          "pb_ttm",
-          "money_flow",
-          "industry_pmi",
-          "volatility_20d"
-        ],
-        "factor_count": 7,
-        "top_n": 15,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 4,
-        "strategy_id": "AUTO_0065_0ec80d25",
-        "name": "Gen0_量价_7F_weekly",
-        "annual_return": 12.59,
-        "max_drawdown": -5,
-        "sharpe": 2.158,
-        "alpha": 10.612,
-        "validation_score": 82.2,
-        "factors": [
-          "money_flow",
-          "volatility_20d",
-          "mom_20d",
-          "turnover_mom",
-          "northbound_holding_chg",
-          "margin_buy_ratio",
-          "industry_revenue_growth"
-        ],
-        "factor_count": 7,
-        "top_n": 30,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 5,
-        "strategy_id": "AUTO_0056_f3720cee",
-        "name": "Gen0_量价_7F_biweekly",
-        "annual_return": 10.48,
-        "max_drawdown": -5.41,
-        "sharpe": 2.003,
-        "alpha": 9.39,
-        "validation_score": 79.5,
-        "factors": [
-          "volume_ratio",
-          "margin_buy_ratio",
-          "money_flow",
-          "pe_ttm",
-          "mom_10d",
-          "daily_sharpe",
-          "industry_pmi"
-        ],
-        "factor_count": 7,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 6,
-        "strategy_id": "AUTO_0028_b5433f20",
-        "name": "Gen0_量价_5F_biweekly",
-        "annual_return": 11.21,
-        "max_drawdown": -5,
-        "sharpe": 2.5,
-        "alpha": 7.96,
-        "validation_score": 78.7,
-        "factors": [
-          "northbound_holding_chg",
-          "mom_5d",
-          "margin_buy_ratio",
-          "turnover_mom",
-          "money_flow"
-        ],
-        "factor_count": 5,
-        "top_n": 10,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 7,
-        "strategy_id": "AUTO_0032_ae62a2c0",
-        "name": "Gen0_资金流_4F_monthly",
-        "annual_return": 9.82,
-        "max_drawdown": -5.67,
-        "sharpe": 2.5,
-        "alpha": 7.198,
-        "validation_score": 76.8,
-        "factors": [
-          "money_flow",
-          "industry_pmi",
-          "turnover_mom",
-          "northbound_net_buy"
-        ],
-        "factor_count": 4,
-        "top_n": 25,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 8,
-        "strategy_id": "AUTO_0036_2d4f8d40",
-        "name": "Gen0_资金流_8F_biweekly",
-        "annual_return": 9.56,
-        "max_drawdown": -5,
-        "sharpe": 2.319,
-        "alpha": 6.653,
-        "validation_score": 76.4,
-        "factors": [
-          "pe_ttm",
-          "margin_buy_ratio",
-          "daily_sharpe",
-          "industry_pmi",
-          "consistency",
-          "northbound_net_buy",
-          "turnover_mom",
-          "money_flow"
-        ],
-        "factor_count": 8,
-        "top_n": 20,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 9,
-        "strategy_id": "AUTO_0090_f0459962",
-        "name": "Gen0_量价_5F_weekly",
-        "annual_return": 10.58,
-        "max_drawdown": -5,
-        "sharpe": 1.929,
-        "alpha": 6.866,
-        "validation_score": 76.2,
-        "factors": [
-          "volume_ratio",
-          "margin_balance_chg",
-          "industry_pmi",
-          "volatility_20d",
-          "mom_10d"
-        ],
-        "factor_count": 5,
-        "top_n": 10,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 10,
-        "strategy_id": "AUTO_0094_b9c33090",
-        "name": "Gen0_行业景气_4F_weekly",
-        "annual_return": 17.69,
-        "max_drawdown": -17.16,
-        "sharpe": 1.437,
-        "alpha": 16.26,
-        "validation_score": 75.3,
-        "factors": [
-          "industry_pmi",
-          "pb_ttm",
-          "turnover_mom",
-          "daily_sharpe"
-        ],
-        "factor_count": 4,
-        "top_n": 15,
-        "rebalance_freq": "weekly"
-      }
-    ],
-    "summary": {
-      "avg_annual": 10.23,
-      "avg_sharpe": 0.871,
-      "best_sharpe": 2.5,
-      "best_annual": 18.05,
-      "categories_covered": [
-        "动量",
-        "北向资金",
-        "基本面",
-        "波动率",
-        "融资余额",
-        "行业景气",
-        "资金流",
-        "量价"
-      ]
-    },
-    "generation": 0,
-    "created_at": "2026-06-09T01:55:50.832396"
-  },
-  {
-    "run_id": "run_20260609_015600",
-    "generated": 100,
-    "backtested": 100,
-    "validated_count": 86,
-    "filtered": 14,
-    "failed": 0,
-    "top10": [
-      {
-        "rank": 1,
-        "strategy_id": "AUTO_0067_415a09de",
-        "name": "Gen0_资金流_6F_weekly",
-        "annual_return": 15.77,
-        "max_drawdown": -8.27,
-        "sharpe": 2.5,
-        "alpha": 14.95,
-        "validation_score": 86.9,
-        "factors": [
-          "volume_ratio",
-          "margin_balance_chg",
-          "industry_profit_growth",
-          "pe_ttm",
-          "northbound_net_buy",
-          "money_flow"
-        ],
-        "factor_count": 6,
-        "top_n": 25,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 2,
-        "strategy_id": "AUTO_0020_4d6fe149",
-        "name": "Gen0_动量_6F_biweekly",
-        "annual_return": 16.17,
-        "max_drawdown": -8.59,
-        "sharpe": 2.047,
-        "alpha": 12.505,
-        "validation_score": 84.6,
-        "factors": [
-          "pe_ttm",
-          "money_flow",
-          "industry_profit_growth",
-          "mom_20d",
-          "margin_balance_chg",
-          "northbound_holding_chg"
-        ],
-        "factor_count": 6,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 3,
-        "strategy_id": "AUTO_0064_c2878e0f",
-        "name": "Gen0_行业景气_3F_biweekly",
-        "annual_return": 18.13,
-        "max_drawdown": -13.44,
-        "sharpe": 1.877,
-        "alpha": 17.515,
-        "validation_score": 84.0,
-        "factors": [
-          "volatility_20d",
-          "pb_ttm",
-          "industry_revenue_growth"
-        ],
-        "factor_count": 3,
-        "top_n": 10,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 4,
-        "strategy_id": "AUTO_0079_c4a992f9",
-        "name": "Gen0_量价_8F_monthly",
-        "annual_return": 13.21,
-        "max_drawdown": -6.2,
-        "sharpe": 2.5,
-        "alpha": 10.147,
-        "validation_score": 81.6,
-        "factors": [
-          "northbound_net_buy",
-          "pb_ttm",
-          "margin_buy_ratio",
-          "money_flow",
-          "volatility_20d",
-          "consistency",
-          "volume_ratio",
-          "industry_pmi"
-        ],
-        "factor_count": 8,
-        "top_n": 10,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 5,
-        "strategy_id": "AUTO_0003_deb5b533",
-        "name": "Pure_动量_Gen0",
-        "annual_return": 15.9,
-        "max_drawdown": -12.55,
-        "sharpe": 1.823,
-        "alpha": 13.576,
-        "validation_score": 80.8,
-        "factors": [
-          "mom_10d",
-          "mom_20d",
-          "mom_5d"
-        ],
-        "factor_count": 3,
-        "top_n": 20,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 6,
-        "strategy_id": "AUTO_0062_826c8cd3",
-        "name": "Gen0_资金流_7F_biweekly",
-        "annual_return": 10.36,
-        "max_drawdown": -6.16,
-        "sharpe": 2.5,
-        "alpha": 9.563,
-        "validation_score": 79.2,
-        "factors": [
-          "industry_profit_growth",
-          "pb_ttm",
-          "money_flow",
-          "northbound_net_buy",
-          "margin_balance_chg",
-          "daily_sharpe",
-          "turnover_mom"
-        ],
-        "factor_count": 7,
-        "top_n": 20,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 7,
-        "strategy_id": "AUTO_0071_bb1c36fe",
-        "name": "Gen0_资金流_8F_biweekly",
-        "annual_return": 12.73,
-        "max_drawdown": -10.6,
-        "sharpe": 1.785,
-        "alpha": 11.278,
-        "validation_score": 77.0,
-        "factors": [
-          "northbound_holding_chg",
-          "turnover_mom",
-          "pb_ttm",
-          "daily_sharpe",
-          "mom_5d",
-          "margin_buy_ratio",
-          "industry_pmi",
-          "money_flow"
-        ],
-        "factor_count": 8,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 8,
-        "strategy_id": "AUTO_0054_c3f1b4ba",
-        "name": "Gen0_量价_5F_monthly",
-        "annual_return": 8.08,
-        "max_drawdown": -5,
-        "sharpe": 2.16,
-        "alpha": 6.145,
-        "validation_score": 74.9,
-        "factors": [
-          "industry_pmi",
-          "margin_balance_chg",
-          "daily_sharpe",
-          "pb_ttm",
-          "volume_ratio"
-        ],
-        "factor_count": 5,
-        "top_n": 15,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 9,
-        "strategy_id": "AUTO_0040_595ace74",
-        "name": "Gen0_资金流_7F_biweekly",
-        "annual_return": 15.03,
-        "max_drawdown": -14.45,
-        "sharpe": 1.328,
-        "alpha": 13.143,
-        "validation_score": 71.5,
-        "factors": [
-          "margin_buy_ratio",
-          "industry_revenue_growth",
-          "pe_ttm",
-          "money_flow",
-          "mom_5d",
-          "volatility_20d",
-          "turnover_mom"
-        ],
-        "factor_count": 7,
-        "top_n": 25,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 10,
-        "strategy_id": "AUTO_0072_8785740a",
-        "name": "Gen0_波动率_6F_biweekly",
-        "annual_return": 14.78,
-        "max_drawdown": -13.46,
-        "sharpe": 1.198,
-        "alpha": 14.703,
-        "validation_score": 71.4,
-        "factors": [
-          "margin_balance_chg",
-          "money_flow",
-          "industry_profit_growth",
-          "mom_5d",
-          "daily_sharpe",
-          "northbound_net_buy"
-        ],
-        "factor_count": 6,
-        "top_n": 15,
-        "rebalance_freq": "biweekly"
-      }
-    ],
-    "summary": {
-      "avg_annual": 10.62,
-      "avg_sharpe": 0.895,
-      "best_sharpe": 2.5,
-      "best_annual": 18.13,
-      "categories_covered": [
-        "动量",
-        "北向资金",
-        "基本面",
-        "波动率",
-        "融资余额",
-        "行业景气",
-        "资金流",
-        "量价"
-      ]
-    },
-    "generation": 0,
-    "created_at": "2026-06-09T01:56:00.511792"
-  },
-  {
-    "run_id": "run_20260609_015611",
-    "generated": 100,
-    "backtested": 100,
-    "validated_count": 88,
-    "filtered": 12,
-    "failed": 0,
-    "top10": [
-      {
-        "rank": 1,
-        "strategy_id": "AUTO_0079_8155437f",
-        "name": "Gen0_量价_8F_monthly",
-        "annual_return": 12.68,
-        "max_drawdown": -5,
-        "sharpe": 2.35,
-        "alpha": 11.351,
-        "validation_score": 83.0,
-        "factors": [
-          "northbound_net_buy",
-          "pb_ttm",
-          "margin_buy_ratio",
-          "money_flow",
-          "volatility_20d",
-          "consistency",
-          "volume_ratio",
-          "industry_pmi"
-        ],
-        "factor_count": 8,
-        "top_n": 10,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 2,
-        "strategy_id": "AUTO_0081_7420a69e",
-        "name": "Gen0_资金流_5F_weekly",
-        "annual_return": 12.87,
-        "max_drawdown": -5,
-        "sharpe": 2.277,
-        "alpha": 10.235,
-        "validation_score": 82.0,
-        "factors": [
-          "daily_sharpe",
-          "industry_pmi",
-          "pb_ttm",
-          "money_flow",
-          "northbound_net_buy"
-        ],
-        "factor_count": 5,
-        "top_n": 15,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 3,
-        "strategy_id": "AUTO_0012_cd2c2a74",
-        "name": "Gen0_资金流_6F_biweekly",
-        "annual_return": 14.51,
-        "max_drawdown": -8.35,
-        "sharpe": 1.825,
-        "alpha": 12.5,
-        "validation_score": 81.0,
-        "factors": [
-          "industry_pmi",
-          "money_flow",
-          "northbound_net_buy",
-          "volatility_20d",
-          "margin_buy_ratio",
-          "volume_ratio"
-        ],
-        "factor_count": 6,
-        "top_n": 20,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 4,
-        "strategy_id": "AUTO_0043_076551fa",
-        "name": "Gen0_资金流_5F_monthly",
-        "annual_return": 11.82,
-        "max_drawdown": -7.42,
-        "sharpe": 2.382,
-        "alpha": 10.395,
-        "validation_score": 80.3,
-        "factors": [
-          "industry_profit_growth",
-          "northbound_net_buy",
-          "margin_buy_ratio",
-          "pe_ttm",
-          "money_flow"
-        ],
-        "factor_count": 5,
-        "top_n": 20,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 5,
-        "strategy_id": "AUTO_0076_776eca32",
-        "name": "Gen0_资金流_6F_weekly",
-        "annual_return": 9.5,
-        "max_drawdown": -5,
-        "sharpe": 2.339,
-        "alpha": 8.112,
-        "validation_score": 77.8,
-        "factors": [
-          "turnover_mom",
-          "industry_pmi",
-          "daily_sharpe",
-          "margin_balance_chg",
-          "northbound_net_buy",
-          "money_flow"
-        ],
-        "factor_count": 6,
-        "top_n": 30,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 6,
-        "strategy_id": "AUTO_0038_e621045b",
-        "name": "Gen0_资金流_5F_biweekly",
-        "annual_return": 8.66,
-        "max_drawdown": -5,
-        "sharpe": 2.177,
-        "alpha": 5.986,
-        "validation_score": 75.1,
-        "factors": [
-          "industry_profit_growth",
-          "pe_ttm",
-          "consistency",
-          "money_flow",
-          "margin_buy_ratio"
-        ],
-        "factor_count": 5,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 7,
-        "strategy_id": "AUTO_0035_2b8d2f05",
-        "name": "Gen0_量价_7F_biweekly",
-        "annual_return": 12.81,
-        "max_drawdown": -13.11,
-        "sharpe": 1.426,
-        "alpha": 11.917,
-        "validation_score": 71.0,
-        "factors": [
-          "money_flow",
-          "pb_ttm",
-          "northbound_holding_chg",
-          "volume_ratio",
-          "mom_5d",
-          "margin_balance_chg",
-          "industry_revenue_growth"
-        ],
-        "factor_count": 7,
-        "top_n": 30,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 8,
-        "strategy_id": "AUTO_0007_4fe42be5",
-        "name": "Pure_融资余额_Gen0",
-        "annual_return": 8.54,
-        "max_drawdown": -7.02,
-        "sharpe": 1.697,
-        "alpha": 6.206,
-        "validation_score": 69.7,
-        "factors": [
-          "margin_buy_ratio",
-          "margin_balance_chg"
-        ],
-        "factor_count": 2,
-        "top_n": 20,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 9,
-        "strategy_id": "AUTO_0040_af468164",
-        "name": "Gen0_资金流_7F_biweekly",
-        "annual_return": 14.74,
-        "max_drawdown": -14.36,
-        "sharpe": 1.303,
-        "alpha": 11.347,
-        "validation_score": 69.2,
-        "factors": [
-          "margin_buy_ratio",
-          "industry_revenue_growth",
-          "pe_ttm",
-          "money_flow",
-          "mom_5d",
-          "volatility_20d",
-          "turnover_mom"
-        ],
-        "factor_count": 7,
-        "top_n": 25,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 10,
-        "strategy_id": "AUTO_0072_9f6fb167",
-        "name": "Gen0_波动率_6F_biweekly",
-        "annual_return": 9.56,
-        "max_drawdown": -7.95,
-        "sharpe": 1.609,
-        "alpha": 6.28,
-        "validation_score": 68.7,
-        "factors": [
-          "margin_balance_chg",
-          "money_flow",
-          "industry_profit_growth",
-          "mom_5d",
-          "daily_sharpe",
-          "northbound_net_buy"
-        ],
-        "factor_count": 6,
-        "top_n": 15,
-        "rebalance_freq": "biweekly"
-      }
-    ],
-    "summary": {
-      "avg_annual": 10.25,
-      "avg_sharpe": 0.829,
-      "best_sharpe": 2.382,
-      "best_annual": 16.96,
-      "categories_covered": [
-        "动量",
-        "北向资金",
-        "基本面",
-        "波动率",
-        "融资余额",
-        "行业景气",
-        "资金流",
-        "量价"
-      ]
-    },
-    "generation": 0,
-    "created_at": "2026-06-09T01:56:11.701822"
-  },
-  {
-    "run_id": "run_20260609_021450",
-    "generated": 10,
-    "backtested": 10,
-    "validated_count": 6,
-    "filtered": 4,
-    "failed": 0,
-    "top10": [
-      {
-        "rank": 1,
-        "strategy_id": "AUTO_0005_4122d983",
-        "name": "Pure_行业景气_Gen0",
-        "annual_return": 12.43,
-        "max_drawdown": -5,
-        "sharpe": 2.5,
-        "alpha": 11.144,
-        "validation_score": 82.7,
-        "factors": [
-          "industry_profit_growth",
-          "industry_pmi",
-          "industry_revenue_growth"
-        ],
-        "factor_count": 3,
-        "top_n": 10,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 2,
-        "strategy_id": "AUTO_0010_46ef50ae",
-        "name": "Gen0_北向资金_5F_monthly",
-        "annual_return": 12.1,
-        "max_drawdown": -12.95,
-        "sharpe": 1.166,
-        "alpha": 10.554,
-        "validation_score": 65.4,
-        "factors": [
-          "northbound_holding_chg",
-          "mom_20d",
-          "volatility_20d",
-          "volume_ratio",
-          "pb_ttm"
-        ],
-        "factor_count": 5,
-        "top_n": 25,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 3,
-        "strategy_id": "AUTO_0006_ff4e3a44",
-        "name": "Pure_动量_Gen0",
-        "annual_return": 9.18,
-        "max_drawdown": -12.81,
-        "sharpe": 0.858,
-        "alpha": 5.751,
-        "validation_score": 54.2,
-        "factors": [
-          "mom_5d",
-          "mom_10d",
           "mom_20d"
         ],
-        "factor_count": 3,
-        "top_n": 10,
-        "rebalance_freq": "biweekly"
-      },
-      {
-        "rank": 4,
-        "strategy_id": "AUTO_0002_76d3bd2f",
-        "name": "Pure_融资余额_Gen0",
-        "annual_return": 11.04,
-        "max_drawdown": -22.4,
-        "sharpe": 0.486,
-        "alpha": 9.047,
-        "validation_score": 48.3,
-        "factors": [
-          "margin_balance_chg",
-          "margin_buy_ratio"
-        ],
-        "factor_count": 2,
-        "top_n": 10,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 5,
-        "strategy_id": "AUTO_0003_92af4c50",
-        "name": "Pure_波动率_Gen0",
-        "annual_return": 6.51,
-        "max_drawdown": -22.03,
-        "sharpe": 0.372,
-        "alpha": 4.704,
-        "validation_score": 39.6,
-        "factors": [
-          "volatility_20d",
-          "daily_sharpe"
-        ],
-        "factor_count": 2,
-        "top_n": 20,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 6,
-        "strategy_id": "AUTO_0004_7bac9baf",
-        "name": "Pure_基本面_Gen0",
-        "annual_return": 5.34,
-        "max_drawdown": -21.84,
-        "sharpe": 0.346,
-        "alpha": 4.204,
-        "validation_score": 38.1,
-        "factors": [
-          "pb_ttm",
-          "pe_ttm"
-        ],
-        "factor_count": 2,
         "top_n": 10,
         "rebalance_freq": "monthly"
-      }
-    ],
-    "summary": {
-      "avg_annual": 9.43,
-      "avg_sharpe": 0.955,
-      "best_sharpe": 2.5,
-      "best_annual": 12.43,
-      "categories_covered": [
-        "动量",
-        "北向资金",
-        "基本面",
-        "波动率",
-        "融资余额",
-        "行业景气",
-        "量价"
-      ]
-    },
-    "generation": 0,
-    "created_at": "2026-06-09T02:14:50.930453"
-  },
-  {
-    "run_id": "run_20260609_080241",
-    "generated": 100,
-    "backtested": 100,
-    "validated_count": 85,
-    "filtered": 15,
-    "failed": 0,
-    "top10": [
-      {
-        "rank": 1,
-        "strategy_id": "AUTO_0036_c8d0fd7c",
-        "name": "Gen0_北向资金_6F_biweekly",
-        "annual_return": 14.74,
-        "max_drawdown": -6.52,
-        "sharpe": 2.349,
-        "alpha": 14.342,
-        "validation_score": 86.5,
-        "factors": [
-          "volatility_20d",
-          "northbound_holding_chg",
-          "margin_buy_ratio",
-          "money_flow",
-          "pb_ttm",
-          "industry_pmi"
-        ],
-        "factor_count": 6,
-        "top_n": 20,
-        "rebalance_freq": "biweekly"
       },
       {
         "rank": 2,
-        "strategy_id": "AUTO_0093_132e915e",
-        "name": "Gen0_北向资金_5F_weekly",
-        "annual_return": 10.34,
+        "strategy_id": "AUTO_0069_55807a65",
+        "name": "Gen0_北向资金_6F_weekly",
+        "annual_return": 13.44,
         "max_drawdown": -5,
-        "sharpe": 2.5,
-        "alpha": 8.629,
-        "validation_score": 78.8,
+        "sharpe": 2.278,
+        "alpha": 10.46,
+        "validation_score": 82.6,
         "factors": [
-          "money_flow",
-          "industry_revenue_growth",
           "northbound_net_buy",
-          "margin_buy_ratio",
-          "daily_sharpe"
-        ],
-        "factor_count": 5,
-        "top_n": 15,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 3,
-        "strategy_id": "AUTO_0017_f665cb1b",
-        "name": "Gen0_融资余额_6F_weekly",
-        "annual_return": 14.96,
-        "max_drawdown": -11.82,
-        "sharpe": 1.778,
-        "alpha": 11.739,
-        "validation_score": 78.1,
-        "factors": [
-          "volume_ratio",
-          "pe_ttm",
-          "margin_buy_ratio",
-          "industry_revenue_growth",
-          "mom_5d",
-          "money_flow"
-        ],
-        "factor_count": 6,
-        "top_n": 30,
-        "rebalance_freq": "weekly"
-      },
-      {
-        "rank": 4,
-        "strategy_id": "AUTO_0052_bece5270",
-        "name": "Gen0_北向资金_8F_monthly",
-        "annual_return": 9.16,
-        "max_drawdown": -7.33,
-        "sharpe": 1.834,
-        "alpha": 8.156,
-        "validation_score": 74.0,
-        "factors": [
-          "daily_sharpe",
-          "turnover_mom",
-          "margin_balance_chg",
-          "industry_revenue_growth",
-          "money_flow",
           "mom_10d",
-          "northbound_net_buy",
+          "money_flow",
+          "volatility_20d",
+          "industry_revenue_growth",
           "pe_ttm"
         ],
-        "factor_count": 8,
-        "top_n": 20,
-        "rebalance_freq": "monthly"
-      },
-      {
-        "rank": 5,
-        "strategy_id": "AUTO_0009_6c037319",
-        "name": "Gen0_北向资金_8F_weekly",
-        "annual_return": 7.4,
-        "max_drawdown": -5,
-        "sharpe": 2.013,
-        "alpha": 5.047,
-        "validation_score": 73.4,
-        "factors": [
-          "money_flow",
-          "daily_sharpe",
-          "northbound_net_buy",
-          "mom_20d",
-          "volume_ratio",
-          "industry_revenue_growth",
-          "pe_ttm",
-          "margin_buy_ratio"
-        ],
-        "factor_count": 8,
         "top_n": 25,
         "rebalance_freq": "weekly"
       },
       {
-        "rank": 6,
-        "strategy_id": "AUTO_0005_69a9edaa",
-        "name": "Pure_行业景气_Gen0",
-        "annual_return": 9.37,
-        "max_drawdown": -5.71,
-        "sharpe": 1.572,
-        "alpha": 9.269,
-        "validation_score": 72.1,
+        "rank": 3,
+        "strategy_id": "AUTO_0072_9c4993a0",
+        "name": "Gen0_北向资金_8F_monthly",
+        "annual_return": 10.57,
+        "max_drawdown": -5,
+        "sharpe": 2.5,
+        "alpha": 9.636,
+        "validation_score": 80.0,
         "factors": [
-          "industry_profit_growth",
           "industry_pmi",
+          "volatility_20d",
+          "mom_20d",
+          "northbound_holding_chg",
+          "money_flow",
+          "volume_ratio",
+          "margin_balance_chg",
+          "pe_ttm"
+        ],
+        "top_n": 30,
+        "rebalance_freq": "monthly"
+      },
+      {
+        "rank": 4,
+        "strategy_id": "AUTO_0050_133639cc",
+        "name": "Gen0_北向资金_7F_weekly",
+        "annual_return": 13.87,
+        "max_drawdown": -11.27,
+        "sharpe": 1.693,
+        "alpha": 13.677,
+        "validation_score": 78.4,
+        "factors": [
+          "northbound_net_buy",
+          "pe_ttm",
+          "margin_buy_ratio",
+          "volatility_20d",
+          "industry_profit_growth",
+          "money_flow",
+          "turnover_mom"
+        ],
+        "top_n": 25,
+        "rebalance_freq": "weekly"
+      },
+      {
+        "rank": 5,
+        "strategy_id": "AUTO_0094_a18fb0f2",
+        "name": "Gen0_北向资金_6F_weekly",
+        "annual_return": 10.68,
+        "max_drawdown": -5,
+        "sharpe": 2.024,
+        "alpha": 7.265,
+        "validation_score": 77.7,
+        "factors": [
+          "money_flow",
+          "volume_ratio",
+          "industry_profit_growth",
+          "volatility_20d",
+          "mom_20d",
+          "northbound_holding_chg"
+        ],
+        "top_n": 20,
+        "rebalance_freq": "weekly"
+      },
+      {
+        "rank": 6,
+        "strategy_id": "AUTO_0084_5b2798ea",
+        "name": "Gen0_融资余额_5F_biweekly",
+        "annual_return": 11.48,
+        "max_drawdown": -8.22,
+        "sharpe": 1.783,
+        "alpha": 10.177,
+        "validation_score": 76.2,
+        "factors": [
+          "margin_buy_ratio",
+          "money_flow",
+          "volatility_20d",
+          "pe_ttm",
           "industry_revenue_growth"
         ],
-        "factor_count": 3,
         "top_n": 10,
         "rebalance_freq": "biweekly"
       },
       {
         "rank": 7,
-        "strategy_id": "AUTO_0045_17d7b3cc",
-        "name": "Gen0_北向资金_8F_monthly",
-        "annual_return": 13.84,
-        "max_drawdown": -13.21,
-        "sharpe": 1.518,
-        "alpha": 10.938,
-        "validation_score": 72.0,
+        "strategy_id": "AUTO_0018_9dc1b96c",
+        "name": "Gen0_北向资金_6F_monthly",
+        "annual_return": 16.9,
+        "max_drawdown": -10.93,
+        "sharpe": 1.349,
+        "alpha": 14.476,
+        "validation_score": 76.1,
         "factors": [
-          "northbound_holding_chg",
-          "industry_pmi",
+          "daily_sharpe",
+          "industry_revenue_growth",
+          "northbound_net_buy",
           "pb_ttm",
-          "volatility_20d",
-          "money_flow",
           "volume_ratio",
-          "mom_20d",
-          "margin_buy_ratio"
+          "money_flow"
         ],
-        "factor_count": 8,
-        "top_n": 15,
+        "top_n": 10,
         "rebalance_freq": "monthly"
       },
       {
         "rank": 8,
-        "strategy_id": "AUTO_0007_c5377c49",
-        "name": "Pure_量价_Gen0",
-        "annual_return": 16.12,
-        "max_drawdown": -16.52,
-        "sharpe": 1.36,
-        "alpha": 13.415,
-        "validation_score": 71.9,
+        "strategy_id": "AUTO_0100_35927d4e",
+        "name": "Gen0_北向资金_8F_monthly",
+        "annual_return": 11.95,
+        "max_drawdown": -8.58,
+        "sharpe": 1.75,
+        "alpha": 10.344,
+        "validation_score": 76.0,
         "factors": [
+          "pb_ttm",
+          "mom_10d",
+          "money_flow",
+          "margin_balance_chg",
           "volume_ratio",
-          "turnover_mom"
+          "volatility_20d",
+          "industry_pmi",
+          "northbound_net_buy"
         ],
-        "factor_count": 2,
-        "top_n": 20,
+        "top_n": 10,
         "rebalance_freq": "monthly"
       },
       {
         "rank": 9,
-        "strategy_id": "AUTO_0051_8192dd46",
-        "name": "Gen0_北向资金_6F_weekly",
-        "annual_return": 16.38,
-        "max_drawdown": -14.91,
-        "sharpe": 1.109,
-        "alpha": 14.952,
-        "validation_score": 70.6,
+        "strategy_id": "AUTO_0089_0c581805",
+        "name": "Gen0_北向资金_7F_monthly",
+        "annual_return": 15.08,
+        "max_drawdown": -11.64,
+        "sharpe": 1.395,
+        "alpha": 14.861,
+        "validation_score": 75.6,
         "factors": [
-          "industry_profit_growth",
-          "consistency",
-          "margin_balance_chg",
+          "pe_ttm",
+          "margin_buy_ratio",
+          "daily_sharpe",
+          "mom_10d",
+          "volume_ratio",
           "northbound_net_buy",
-          "volatility_20d",
-          "turnover_mom"
+          "industry_revenue_growth"
         ],
-        "factor_count": 6,
-        "top_n": 25,
-        "rebalance_freq": "weekly"
+        "top_n": 20,
+        "rebalance_freq": "monthly"
       },
       {
         "rank": 10,
-        "strategy_id": "AUTO_0088_2b7e454b",
-        "name": "Gen0_北向资金_8F_monthly",
-        "annual_return": 12.18,
-        "max_drawdown": -7.96,
-        "sharpe": 1.342,
-        "alpha": 10.109,
-        "validation_score": 70.1,
+        "strategy_id": "AUTO_0070_7ac0c3c8",
+        "name": "Gen0_量价_4F_biweekly",
+        "annual_return": 7.82,
+        "max_drawdown": -5,
+        "sharpe": 2.345,
+        "alpha": 5.875,
+        "validation_score": 74.5,
         "factors": [
           "volatility_20d",
-          "pb_ttm",
-          "margin_balance_chg",
-          "mom_5d",
+          "consistency",
           "northbound_net_buy",
-          "money_flow",
-          "volume_ratio",
-          "industry_profit_growth"
+          "turnover_mom"
         ],
-        "factor_count": 8,
         "top_n": 25,
-        "rebalance_freq": "monthly"
+        "rebalance_freq": "biweekly"
       }
     ],
-    "summary": {
-      "avg_annual": 10.32,
-      "avg_sharpe": 0.81,
+    "db_summary": {
+      "total": 150,
+      "by_status": {
+        "unknown": 0,
+        "FILTERED": 22,
+        "VALIDATED": 122
+      },
+      "avg_sharpe": 0.714,
+      "avg_alpha": 7.209,
       "best_sharpe": 2.5,
-      "best_annual": 18.02,
-      "categories_covered": [
-        "动量",
-        "北向资金",
-        "基本面",
-        "波动率",
-        "融资余额",
-        "行业景气",
-        "资金流",
-        "量价"
-      ]
+      "best_alpha": 16.924
     },
-    "generation": 0,
-    "created_at": "2026-06-09T08:02:41.760873"
+    "run_at": "2026-06-10T10:18:15.507059",
+    "run_id": "run_20260610_101815"
   }
 ]
