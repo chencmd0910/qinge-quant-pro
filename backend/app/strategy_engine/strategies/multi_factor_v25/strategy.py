@@ -73,7 +73,7 @@ V25_FACTORS = [
     # === 融资余额因子 ===
     Factor("margin_balance_chg", FactorCategory.MARGIN, 0.08,
            "融资余额5日变化率", "B"),
-    Factor("margin_buy_ratio", FactorCategory.MARGIN, 0.06,
+    Factor("margin_buy_ratio", FactorCategory.MARGIN, 0.05,
            "融资买入额/总成交额", "B"),
 
     # === 行业景气度因子 ===
@@ -81,7 +81,7 @@ V25_FACTORS = [
            "行业营收同比增速(季度)", "A"),
     Factor("industry_profit_growth", FactorCategory.INDUSTRY, 0.07,
            "行业利润同比增速(季度)", "A"),
-    Factor("industry_pmi", FactorCategory.INDUSTRY, 0.04,
+    Factor("industry_pmi", FactorCategory.INDUSTRY, 0.03,
            "行业PMI指数", "B"),
 
     # === 动量因子 ===
@@ -101,18 +101,18 @@ V25_FACTORS = [
     # === 波动率+技术因子 ===
     Factor("volatility_20d", FactorCategory.VOLATILITY, 0.04,
            "20日波动率", "B"),
-    Factor("daily_sharpe", FactorCategory.VOLATILITY, 0.03,
+    Factor("daily_sharpe", FactorCategory.VOLATILITY, 0.02,
            "20日日度夏普", "B"),
-    Factor("boll_pos", FactorCategory.VOLATILITY, 0.02,
+    Factor("boll_pos", FactorCategory.VOLATILITY, 0.01,
            "布林带位置(均值回归)", "B"),
-    Factor("rsi_14", FactorCategory.VOLATILITY, 0.03,
+    Factor("rsi_14", FactorCategory.VOLATILITY, 0.02,
            "RSI-14超买超卖", "B"),
 
     # === 基本面因子 (原有) ===
-    Factor("pe_ttm", FactorCategory.FUNDAMENTAL, 0.02,
-           "PE-TTM倒数估值(EP)", "C"),
-    Factor("pb_ttm", FactorCategory.FUNDAMENTAL, 0.02,
-           "PB-TTM倒数估值(BP)", "C"),
+    Factor("pe_ttm", FactorCategory.FUNDAMENTAL, 0.01,
+           "PE-TTM倒数估值(EP)火种", "C"),
+    Factor("pb_ttm", FactorCategory.FUNDAMENTAL, 0.01,
+           "PB-TTM倒数估值(BP)火种", "C"),
     Factor("long_term_mom_60d", FactorCategory.MOMENTUM, 0.02,
            "60日长期反转(均值回归)", "B"),
     Factor("size_factor", FactorCategory.FUNDAMENTAL, 0.02,
@@ -123,10 +123,20 @@ V25_FACTORS = [
            "5日大单净买入强度", "A"),
     Factor("fund_flow_buy_ratio", FactorCategory.FUND_FLOW, 0.03,
            "5日大单买入笔数占比", "B"),
-    Factor("fund_flow_streak", FactorCategory.FUND_FLOW, 0.02,
+    Factor("fund_flow_streak", FactorCategory.FUND_FLOW, 0.01,
            "大单连续买入趋势强度", "B"),
     Factor("fund_flow_avg_size_5d", FactorCategory.FUND_FLOW, 0.01,
            "均笔大单成交额(大资金偏好)", "C"),
+
+    # === 学术因子 (OHLCV计算, 零API) ===
+    Factor("amihud_illiq", FactorCategory.VOLUME_PRICE, 0.02,
+           "Amihud非流动性(|r|/成交额)", "B"),
+    Factor("max_drawdown_60d", FactorCategory.VOLATILITY, 0.02,
+           "60日最大回撤(风险信号)", "B"),
+    Factor("skewness_20d", FactorCategory.VOLATILITY, 0.02,
+           "20日收益偏度(崩盘风险)", "B"),
+    Factor("kurtosis_20d", FactorCategory.VOLATILITY, 0.02,
+           "20日收益峰度(厚尾事件)", "B"),
 ]
 
 
@@ -443,6 +453,43 @@ class MultiFactorV25:
             avg_vol_20d_val = np.mean(volume[-20:]) if len(volume) >= 20 else volume[-1]
             factors["size_factor"] = np.log(avg_price * avg_vol_20d_val + 1)
 
+            # amihud_illiq: Amihud非流动性 = avg(|r|/(P*V)) 越小流动性越好
+            if len(close) >= 21:
+                daily_r = np.abs(np.diff(close[-21:]) / close[-21:-1])
+                daily_dvol = close[-21:-1] * volume[-21:-1]
+                daily_illiq = np.divide(daily_r, daily_dvol, out=np.zeros_like(daily_r), where=daily_dvol > 0)
+                factors["amihud_illiq"] = float(np.mean(daily_illiq) * 1e8)  # 放大
+            else:
+                factors["amihud_illiq"] = 0
+
+            # max_drawdown_60d: 60日最大回撤
+            if len(close) >= 61:
+                peak = np.maximum.accumulate(close[-61:])
+                dd = (close[-61:] - peak) / peak
+                factors["max_drawdown_60d"] = float(np.min(dd))  # 负值, 越小回撤越大
+            elif len(close) >= 20:
+                peak = np.maximum.accumulate(close[-20:])
+                dd = (close[-20:] - peak) / peak
+                factors["max_drawdown_60d"] = float(np.min(dd))
+            else:
+                factors["max_drawdown_60d"] = 0
+
+            # skewness_20d + kurtosis_20d: 收益分布形态 (纯numpy)
+            if len(close) >= 22:
+                rets = np.diff(close[-22:]) / close[-22:-1]
+                n, mu, sigma = len(rets), np.mean(rets), np.std(rets)
+                if sigma > 0 and n >= 3:
+                    factors["skewness_20d"] = float(np.mean(((rets - mu) / sigma) ** 3))
+                else:
+                    factors["skewness_20d"] = 0
+                if sigma > 0 and n >= 4:
+                    factors["kurtosis_20d"] = float(np.mean(((rets - mu) / sigma) ** 4)) - 3  # 超额峰度
+                else:
+                    factors["kurtosis_20d"] = 0
+            else:
+                factors["skewness_20d"] = 0
+                factors["kurtosis_20d"] = 0
+
             # --- 另类数据因子（由调用方批量注入，此处跳过）---
             # 保留为占位，实际值在 generate_signals 中注入
 
@@ -455,7 +502,9 @@ class MultiFactorV25:
             tech_names = ["mom_10d", "mom_20d", "consistency",
                          "volume_ratio", "money_flow", "volatility_20d",
                          "daily_sharpe", "boll_pos", "rsi_14",
-                         "turnover_mom", "long_term_mom_60d", "size_factor"]
+                         "turnover_mom", "long_term_mom_60d", "size_factor",
+                         "amihud_illiq", "max_drawdown_60d",
+                         "skewness_20d", "kurtosis_20d"]
 
             # 截尾/缩放，防极端值
             factors["mom_10d"] = np.clip(factors["mom_10d"] * 3, -3, 3)
@@ -470,6 +519,10 @@ class MultiFactorV25:
             factors["turnover_mom"] = np.clip(factors["turnover_mom"] * 3, -3, 3)
             factors["long_term_mom_60d"] = np.clip(factors["long_term_mom_60d"] * 2, -3, 3)  # 反转因子: 涨太多=负
             factors["size_factor"] = np.clip((15 - factors["size_factor"]) / 3, -3, 3)  # 小盘偏好
+            factors["amihud_illiq"] = np.clip((0.5 - factors["amihud_illiq"]) * 5, -3, 3)  # 低非流动性=好
+            factors["max_drawdown_60d"] = np.clip((1 + factors["max_drawdown_60d"]) * 3, -3, 3)  # 回撤小=好
+            factors["skewness_20d"] = np.clip(factors["skewness_20d"], -3, 3)  # 偏度高=好(右偏)
+            factors["kurtosis_20d"] = np.clip(-factors["kurtosis_20d"] * 0.5, -3, 3)  # 厚尾=坏(极端事件)
 
             return factors
 

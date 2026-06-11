@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { LiveIndicator } from "@/components/dashboard/live-market";
 
 const pageTitles: Record<string, string> = {
   "/": "工作台",
@@ -11,6 +12,9 @@ const pageTitles: Record<string, string> = {
   "/risk": "风险中心",
   "/backtest": "回测中心",
   "/paper-trading": "模拟交易",
+  "/signals": "信号追踪",
+  "/marketplace": "行情中心",
+  "/compare": "策略对比",
 };
 
 export default function Header() {
@@ -29,6 +33,7 @@ export default function Header() {
           A股
         </span>
       </div>
+      <LiveIndicator />
     </header>
   );
 }

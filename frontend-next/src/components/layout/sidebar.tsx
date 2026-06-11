@@ -11,6 +11,9 @@ import {
   Shield,
   PieChart,
   Gamepad2,
+  Radio,
+  TrendingUp,
+  Trophy,
 } from "lucide-react";
 
 const menus = [
@@ -20,6 +23,9 @@ const menus = [
   { icon: BarChart3, label: "回测中心", href: "/backtest" },
   { icon: Gamepad2, label: "模拟交易", href: "/paper-trading" },
   { icon: Factory, label: "Alpha工厂", href: "/alpha-factory" },
+  { icon: Trophy, label: "策略对比", href: "/compare" },
+  { icon: Radio, label: "信号追踪", href: "/signals" },
+  { icon: TrendingUp, label: "行情中心", href: "/marketplace" },
   { icon: PieChart, label: "投资组合", href: "/portfolio" },
   { icon: Shield, label: "风险中心", href: "/risk" },
 ];
@@ -37,7 +43,7 @@ export default function Sidebar() {
       className="w-44 border-r flex flex-col flex-shrink-0"
       style={{ borderColor: "var(--border-color)", backgroundColor: "var(--bg-sidebar)" }}
     >
-      {/* 品牌区: 盾标 + 青鳄量化（横向，对齐右侧 header） */}
+      {/* 品牌区 */}
       <div
         className="h-16 flex items-center gap-2.5 px-4 border-b"
         style={{ borderColor: "var(--border-color)" }}
@@ -67,7 +73,6 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* 导航菜单 */}
       <nav className="flex-1 py-3">
         {menus.map((item) => {
           const active = isActive(item.href);
