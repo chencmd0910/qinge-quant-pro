@@ -64,6 +64,10 @@ class RealBacktest:
         self.ranking_factor = ranking_factor
 
         self._engine = None
+        self.funda_data = None  # PE/PB fundamentals, loaded in run()
+        self.northbound_data = None  # 北向资金
+        self.margin_data = None  # 融资融券
+        self.big_deal_data = None  # 大单交易
 
     @property
     def engine(self):
@@ -94,6 +98,21 @@ class RealBacktest:
         closes_full = self.engine.get_closes(self.codes, lookback_start, self.end)
         if closes_full.empty:
             return {"error": "No data loaded", "metrics": {}}
+
+        # 加载基本面数据 (PE/PB)
+        self.funda_data = self._load_fundamentals()
+        print(f"[RealBacktest] Fundamentals: {len(self.funda_data) if self.funda_data is not None else 0} rows")
+
+        # 加载北向资金/融资融券/大单数据 (2026-06-12 新增)
+        self.northbound_data = self._load_northbound()
+        self.margin_data = self._load_margin()
+        self.big_deal_data = self._load_big_deal()
+        if self.northbound_data is not None:
+            print(f"[RealBacktest] Northbound data loaded: {len(self.northbound_data)} rows")
+        if self.margin_data is not None:
+            print(f"[RealBacktest] Margin data loaded: {len(self.margin_data)} rows")
+        if self.big_deal_data is not None:
+            print(f"[RealBacktest] Big deal data loaded: {len(self.big_deal_data)} rows")
 
         # 只在回测区间内交易
         closes = closes_full[closes_full.index >= self.start]
@@ -283,13 +302,34 @@ class RealBacktest:
 
     # ── v25 多因子权重（基于网格搜索最优，去掉 mom_20d/volume/money_flow 后重归一化）──
     FACTOR_WEIGHTS = {
-        'mom_5d': 0.286,       # 短期动量
-        'mom_10d': 0.221,      # 中短期动量
-        'ma_dev_20d': 0.130,   # 均线偏离
-        'consistency': 0.130,  # 动量一致性（连涨天数占比）
-        'money_flow': 0.130,   # 简化MFI（涨跌幅度比）
-        'vol_20d': 0.065,      # 低波动偏好
-        'boll_pos': 0.039,     # 布林带位置
+        # 动量因子 (4个, 合计32%)
+        'mom_5d':      0.12,   # 5日动量
+        'mom_10d':     0.10,   # 10日动量
+        'mom_3d':      0.05,   # 3日动量
+        'mom_20d':     0.05,   # 20日动量
+        # 趋势因子 (3个, 合计18%)
+        'ma_dev_20d':  0.06,   # 均线偏离
+        'boll_pos':    0.06,   # 布林带位置
+        'price_accel': 0.06,   # 价格加速度
+        # 质量因子 (3个, 合计15%)
+        'consistency': 0.05,   # 动量一致性
+        'daily_sharpe':0.05,   # 日频夏普
+        'vol_20d':     0.05,   # 低波动偏好
+        # 资金/情绪因子 (3个, 合计9%)
+        'money_flow':  0.04,   # 简化MFI
+        'rsi_14':      0.02,   # RSI
+        'macd_hist':   0.03,   # MACD柱
+        # 基本面因子 (2个, 合计10%) — 2026-06-11 新增
+        'pe_ttm':      0.05,   # PE_TTM (低估值偏好)
+        'pb_ttm':      0.05,   # PB (低市净率偏好)
+        # 北向资金/融资/大单因子 (合计10%, 2026-06-12 新增)
+        'northbound_flow':0.03,   # 北向资金近5日净买入
+        'margin_change': 0.03,   # 融资余额变化率
+        'big_deal_net':  0.04,   # 大单净买入强度
+        # 预留位 (暂无数据源, 合计6%)
+        'turnover_mom':0.02,   # 换手率变化
+        'volume_ratio':0.02,   # 量比
+        'atr_14':      0.02,   # 平均真实波幅
     }
 
     # 选股过滤器
@@ -297,6 +337,113 @@ class RealBacktest:
     MAX_PRICE = 100.0
     MAX_CHG_5D = 0.15          # 5日最大涨幅（防追高）
     MAX_CHG_10D_DROP = -0.20   # 10日最大跌幅（防接飞刀）
+
+    def _load_fundamentals(self):
+        """加载PE/PB基本面数据。返回DataFrame或None"""
+        funda_file = Path(__file__).parent.parent.parent / "data" / "fundamentals" / "fundamentals.parquet"
+        if not funda_file.exists():
+            return None
+        try:
+            df = pd.read_parquet(funda_file)
+            df['date'] = pd.to_datetime(df['date'])
+            # 过滤极端值：PE在 1~500 之间，PB在 0.1~50 之间
+            bad_pe = (df['pe_ttm'] <= 0) | (df['pe_ttm'] > 500) | (~np.isfinite(df['pe_ttm']))
+            bad_pb = (df['pb'] <= 0) | (df['pb'] > 50) | (~np.isfinite(df['pb']))
+            df.loc[bad_pe, 'pe_ttm'] = np.nan
+            df.loc[bad_pb, 'pb'] = np.nan
+            return df
+        except Exception as e:
+            print(f"[RealBacktest] WARN: Failed to load fundamentals: {e}")
+            return None
+
+    def _load_northbound(self):
+        """加载北向资金数据，计算近5日净买入强度"""
+        nb_file = Path(__file__).parent.parent.parent / "data" / "alternative" / "northbound.parquet"
+        if not nb_file.exists():
+            return None
+        try:
+            df = pd.read_parquet(nb_file)
+            df['date'] = pd.to_datetime(df['date'])
+            df = df.sort_values('date')
+            # 近5日净买入强度: net_buy_amt / buy_amt 的5日滚动均值
+            buy_5d = df['buy_amt'].rolling(5, min_periods=1).mean()
+            net_5d = df['net_buy_amt'].rolling(5, min_periods=1).mean()
+            df['northbound_flow'] = net_5d / (buy_5d + 1e-10)
+            # 累积净买入（缩放到合理范围）
+            df['northbound_cumulative'] = df['cumulative_net'] / 1e8
+            df = df.set_index('date')
+            return df[['northbound_flow', 'northbound_cumulative']]
+        except Exception as e:
+            print(f"[RealBacktest] WARN: Failed to load northbound: {e}")
+            return None
+
+    def _load_margin(self):
+        """加载融资融券数据，计算融资余额5日变化率"""
+        mg_file = Path(__file__).parent.parent.parent / "data" / "alternative" / "margin.parquet"
+        if not mg_file.exists():
+            return None
+        try:
+            df = pd.read_parquet(mg_file)
+            df['date'] = pd.to_datetime(df['date'])
+            # 检测融资余额列名
+            bal_col = None
+            for col in ['margin_balance', '融资余额']:
+                if col in df.columns:
+                    bal_col = col
+                    break
+            if bal_col is None:
+                # 找含"余额"的列
+                for col in df.columns:
+                    if '余额' in col:
+                        bal_col = col
+                        break
+            if bal_col is None:
+                print("[RealBacktest] WARN: margin data has no balance column")
+                return None
+            df = df.sort_values(['symbol', 'date'])
+            df['margin_change'] = df.groupby('symbol')[bal_col].transform(
+                lambda x: x.pct_change(5)
+            )
+            df = df.dropna(subset=['margin_change'])
+            # 过滤极端值
+            df.loc[np.abs(df['margin_change']) > 2, 'margin_change'] = np.nan
+            df = df.dropna(subset=['margin_change'])
+            df = df.set_index(['symbol', 'date'])
+            return df[['margin_change']]
+        except Exception as e:
+            print(f"[RealBacktest] WARN: Failed to load margin: {e}")
+            return None
+
+    def _load_big_deal(self):
+        """加载大单交易数据，计算近5日大单净买入强度"""
+        bd_file = Path(__file__).parent.parent.parent / "data" / "fund_flow" / "big_deal.parquet"
+        if not bd_file.exists():
+            return None
+        try:
+            df = pd.read_parquet(bd_file)
+            df['date'] = pd.to_datetime(df['date'])
+            # 计算每笔的净买入金额 (side_value: 1=买, -1=卖)
+            df['net_amount'] = df['side_value'] * df['amount']
+            # 按股票和日期聚合
+            daily = df.groupby(['code', 'date']).agg(
+                net_buy_amt=('net_amount', 'sum'),
+                total_amt=('amount', 'sum')
+            ).reset_index()
+            daily = daily.sort_values(['code', 'date'])
+            # 近5日滚动聚合
+            daily['net_buy_5d'] = daily.groupby('code')['net_buy_amt'].transform(
+                lambda x: x.rolling(5, min_periods=1).sum()
+            )
+            daily['total_5d'] = daily.groupby('code')['total_amt'].transform(
+                lambda x: x.rolling(5, min_periods=1).sum()
+            )
+            daily['big_deal_net'] = daily['net_buy_5d'] / (daily['total_5d'] + 1e-10)
+            daily = daily.dropna(subset=['big_deal_net'])
+            daily = daily.set_index(['code', 'date'])
+            return daily[['big_deal_net']]
+        except Exception as e:
+            print(f"[RealBacktest] WARN: Failed to load big deal: {e}")
+            return None
 
     def _select_top(self, date, dates, closes) -> List[str]:
         """v25 多因子评分选股 + 质量过滤
@@ -338,8 +485,23 @@ class RealBacktest:
                 if chg_10d < self.MAX_CHG_10D_DROP:
                     continue
 
-            # 计算7个因子（从收盘价序列）
+            # 计算因子（从收盘价序列 + 基本面数据）
             factors = {}
+
+            # ── 基本面因子 (从fundamentals.parquet加载) ──
+            if self.funda_data is not None:
+                funda_row = self.funda_data[
+                    (self.funda_data['code'] == code) &
+                    (self.funda_data['date'] <= str(date)[:10])
+                ]
+                if len(funda_row) > 0:
+                    latest = funda_row.iloc[-1]
+                    pe_val = latest.get('pe_ttm')
+                    pb_val = latest.get('pb')
+                    if pd.notna(pe_val) and pe_val > 0:
+                        factors['pe_ttm'] = 1.0 / (1.0 + pe_val)  # 低PE=高得分
+                    if pd.notna(pb_val) and pb_val > 0:
+                        factors['pb_ttm'] = 1.0 / (1.0 + pb_val)  # 低PB=高得分
 
             if len(values) >= 6:
                 factors['mom_5d'] = values[-1] / values[-6] - 1
@@ -358,6 +520,85 @@ class RealBacktest:
                 up_sum = np.sum(np.maximum(rets, 0))
                 dn_sum = np.sum(np.abs(np.minimum(rets, 0)))
                 factors['money_flow'] = up_sum / max(dn_sum, 1e-10) - 1.0
+
+
+            # ── 新增因子 (2026-06-11 真校准) ──
+            # 3日动量
+            if len(values) >= 4:
+                factors['mom_3d'] = values[-1] / values[-4] - 1
+            # 20日动量
+            if len(values) >= 21:
+                factors['mom_20d'] = values[-1] / values[-21] - 1
+            # RSI_14
+            if len(values) >= 15:
+                deltas = np.diff(values[-15:])
+                gains = np.sum(np.maximum(deltas, 0))
+                losses = np.sum(np.abs(np.minimum(deltas, 0)))
+                factors['rsi_14'] = 100.0 * gains / (gains + losses) if losses > 1e-10 else (100.0 if gains > 0 else 50.0)
+            # Price acceleration
+            if len(values) >= 41:
+                mom_now = values[-1] / values[-21] - 1
+                mom_prev = values[-21] / values[-41] - 1
+                factors['price_accel'] = mom_now - mom_prev
+            elif len(values) >= 31:
+                mom_now = values[-1] / values[-21] - 1
+                mom_prev = values[-11] / values[-31] - 1
+                factors['price_accel'] = mom_now - mom_prev
+            # Daily Sharpe
+            if len(values) >= 21:
+                rets = np.diff(values[-21:]) / (values[-21:-1] + 1e-10)
+                avg_ret = np.mean(rets)
+                std_ret = np.std(rets)
+                factors['daily_sharpe'] = avg_ret / max(std_ret, 1e-10)
+            # MACD hist (简化版: close变化率替代EMA)
+            if len(values) >= 26:
+                fast = np.mean(values[-12:])
+                slow = np.mean(values[-26:])
+                macd_line = fast / max(slow, 1e-10) - 1
+                macd_vals = []
+                for i in range(9, len(values)):
+                    f12 = np.mean(values[i-11:i+1]) if i >= 11 else np.mean(values[:i+1])
+                    f26 = np.mean(values[i-25:i+1]) if i >= 25 else np.mean(values[:i+1])
+                    macd_vals.append(f12 / max(f26, 1e-10) - 1)
+                if len(macd_vals) >= 9:
+                    signal = np.mean(macd_vals[-9:])
+                    factors['macd_hist'] = macd_vals[-1] - signal
+                elif macd_vals:
+                    factors['macd_hist'] = macd_vals[-1]
+
+            # ── 北向资金/融资/大单因子 (2026-06-12 新增) ──
+            dt_str = str(date)[:10]
+            target_dt = pd.to_datetime(dt_str)
+            # 北向资金 (市场级，所有股票同值——用于市场择时参考)
+            if self.northbound_data is not None:
+                try:
+                    nb_slice = self.northbound_data[self.northbound_data.index <= target_dt]
+                    if len(nb_slice) > 0:
+                        factors['northbound_flow'] = float(nb_slice.iloc[-1]['northbound_flow'])
+                except:
+                    pass
+            # 融资余额变化率 (个股级)
+            if self.margin_data is not None:
+                try:
+                    dates_idx = self.margin_data.index.get_level_values('date')
+                    symbols_idx = self.margin_data.index.get_level_values('symbol')
+                    mask = (symbols_idx == code) & (dates_idx <= target_dt)
+                    matching = self.margin_data[mask]
+                    if len(matching) > 0:
+                        factors['margin_change'] = float(matching.iloc[-1]['margin_change'])
+                except:
+                    pass
+            # 大单净买入 (个股级)
+            if self.big_deal_data is not None:
+                try:
+                    dates_idx = self.big_deal_data.index.get_level_values('date')
+                    codes_idx = self.big_deal_data.index.get_level_values('code')
+                    mask = (codes_idx == code) & (dates_idx <= target_dt)
+                    matching = self.big_deal_data[mask]
+                    if len(matching) > 0:
+                        factors['big_deal_net'] = float(matching.iloc[-1]['big_deal_net'])
+                except:
+                    pass
 
             if factors:
                 raw_results.append((code, factors))

@@ -89,7 +89,7 @@ def _run_pipeline_background(count: int, generation: int):
                     "status": "VALIDATED" if is_valid else "FILTERED",
                     "validation_score": round(val_score, 1),
                     "filter_reasons": reasons if not is_valid else [],
-                    **{k: v for k, v in metrics.items()},
+                                    **{k: v for k, v in metrics.items() if k !=  status},
                 })
             except Exception as e:
                 results.append({
@@ -214,7 +214,7 @@ def run_research(payload: dict, background_tasks: BackgroundTasks):
     return {
         "ok": True,
         "message": f"研究流水线已启动: 生成 {count} 个策略, 代数 {generation}",
-        "estimated_seconds": count * 0.05,
+        "estimated_seconds": count * 35,  # 真K线回测 ~30-40s/策略
     }
 
 
